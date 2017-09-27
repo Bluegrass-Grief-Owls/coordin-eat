@@ -1,0 +1,19 @@
+{
+  "name": "coordin-eat",
+  "version": "1.0.0",
+  "description": "eat with your friends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bluegrass-Grief-Owls/coordin-eat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bluegrass-Grief-Owls/coordin-eat/issues"
+  },
+  "homepage": "https://github.com/Bluegrass-Grief-Owls/coordin-eat#readme"
+}
