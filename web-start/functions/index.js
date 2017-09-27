@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Google Inc. All Rights Reserved.
+ * Copyright 2017 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-html, body {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
-}
-.mdl-grid {
-  max-width: 1024px;
-  margin: auto;
-}
-.mdl-layout__header-row {
-  padding: 0;
-}
-h3 {
-  background: url('firebase-logo.png') no-repeat;
-  background-size: 40px;
-  padding-left: 50px;
-}
+// Note: You will edit this file in the follow up codelab about the Cloud Functions for Firebase.
+
+// TODO(DEVELOPER): Import the Cloud Functions for Firebase and the Firebase Admin modules here.
+
+// TODO(DEVELOPER): Write the addWelcomeMessages Function here.
+
+// TODO(DEVELOPER): Write the blurOffensiveImages Function here.
+
+// TODO(DEVELOPER): Write the sendNotifications Function here.
