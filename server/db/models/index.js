@@ -1,4 +1,10 @@
 const User = require('./user')
+const Location = require('./location')
+
+User.hasMany(Location)
+Location.belongsTo(User, {foreignKey: { allowNull: false }, onDelete: 'CASCADE'})
+
+User.belongsToMany(User, {as: 'friend', through: 'friends'})
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -14,5 +20,6 @@ const User = require('./user')
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User
+	User,
+	Location
 }
