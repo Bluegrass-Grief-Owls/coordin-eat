@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Bluegrass-Grief-Owls/coordin-eat/issues"
   },
-  "homepage": "https://github.com/Bluegrass-Grief-Owls/coordin-eat#readme"
+  "homepage": "https://github.com/Bluegrass-Grief-Owls/coordin-eat#readme",
+  "dependencies": {
+    "@google/maps": "^0.4.3"
+  }
 }
