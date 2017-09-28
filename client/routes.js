@@ -4,7 +4,8 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, TripBuild, YelpTest} from './components'
+import {Main, Login, Signup, UserHome, TripBuild} from './components'
+import YelpTest from './components/YelpTest.jsx'
 import {me} from './store'
 
 
