@@ -5,7 +5,7 @@
  */
 export {default as Main} from './main'
 export {default as UserHome} from './user-home'
-export {default as TripBuild} from './TripBuild'
 export {default as Results} from './Results'
 export {Login, Signup} from './auth-form'
+export {default as TripBuild} from './TripBuild'
 
