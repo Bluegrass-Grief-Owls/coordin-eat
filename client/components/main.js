@@ -23,6 +23,7 @@ const Main = (props) => {
 						? <div>
 							{/* The navbar will show these links after you log in */}
 							<Link to='/home'>Home</Link>
+							<Link to='/yelpTest'>Yelp Test</Link>
 							<a href='#' onClick={handleClick}>Logout</a>
 							<Link to='/TripBuild' onClick={handleClick}>Build a Trip</Link>
 						</div>
@@ -30,6 +31,7 @@ const Main = (props) => {
 							{/* The navbar will show these links before you log in */}
 							<Link to='/login'>Login</Link>
 							<Link to='/signup'>Sign Up</Link>
+							<Link to='/yelpTest'>Yelp Test</Link>
 						</div>
 				}
 			</nav>
