@@ -11,6 +11,12 @@ const Location = db.define('location', {
 	yCoordinate: {
 		type: Sequelize.FLOAT
 	}
+}, {
+	getterMethods: {
+		coordinateSet() {
+			return [this.xCoordinate, this.yCoordinate]
+		}
+	}
 })
 
 module.exports = Location
