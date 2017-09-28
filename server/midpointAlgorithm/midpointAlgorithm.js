@@ -30,16 +30,14 @@ const midpointAlgorithm = (places, point = averageCoords(places)) => {
 				}
 			})
 
-			console.log(originsWithTimes)
+			return point
 		})
-
+		.catch(console.error)
 	//get longest and second longest times
 	//move point towards the person with longest travel time to point
 	//the distance to move it could be  (1 - secondLongest / longestTravel) * 
 	//the distance between the furthes person and the current point
 	//if the change is sufficiently small, we're done
 }
-//barclays center, williamsburg bridge
-midpointAlgorithm([[40.683785, -73.977005], [40.712385, -73.967655]])
 
 module.exports = midpointAlgorithm

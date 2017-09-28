@@ -11,7 +11,7 @@ const getTravelTime = (origin, dest, mode) => {
 	}
 	return client.distanceMatrix(query).asPromise()
 		.then(res => res.json.rows[0].elements[0].duration.value / 60.0)
-
+		.catch(console.error)
 	// 	, (res, status) => {
 	// 	const tTime = res.rows.elements[0].duration.value / 60.0
 	// 	console.log('time is', tTime)
