@@ -30,7 +30,7 @@ export const Results = (props) => {
  */
 const mapState = (state) => {
 	return {
-		results: state.results//SAM: this is going to be an array of the results
+		resultsArray: state.resultsArray//SAM: this is going to be an array of the results
 	}
 }
 
@@ -40,5 +40,5 @@ export default connect(mapState)(Results)
  * PROP TYPES
  */
 Results.propTypes = {
-	results: PropTypes.array
+	resultsArray: PropTypes.array
 }

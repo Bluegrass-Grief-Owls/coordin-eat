@@ -30,7 +30,7 @@ export const TripBuild = (props) => {
  */
 const mapState = (state) => {
 	return {
-		origins: state.origins//SAM: this is going to be an array of the points of origin
+		originArray: state.originArray//SAM: this is going to be an array of the points of origin
 	}
 }
 
@@ -40,5 +40,5 @@ export default connect(mapState)(TripBuild)
  * PROP TYPES
  */
 TripBuild.propTypes = {
-	origins: PropTypes.array
+	originArray: PropTypes.array
 }
