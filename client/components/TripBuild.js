@@ -16,6 +16,7 @@ export const TripBuild = (props) => {
 	const Map = ReactMapboxGl({accessToken:'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w' })
 
 
+	}
 
 	return (
 		<div>
@@ -30,7 +31,8 @@ export const TripBuild = (props) => {
 					containerStyle={{
 						height: "50vh",
 						width: "50vw"
-					}}>
+					}}
+					>
 					<Layer
 						type="symbol"
 						id="marker"
