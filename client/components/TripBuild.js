@@ -35,7 +35,7 @@ export const TripBuild = (props) => {
 						type="symbol"
 						id="marker"
 						layout={{ "icon-image": "marker-15" }}>
-						<Feature coordinates={[-0.481747846041145, 51.3233379650232]}/>
+						<Feature coordinates={[ 40.763434614755994, -73.976086754748 ]}/>
 					</Layer>
 				</Map>
 
