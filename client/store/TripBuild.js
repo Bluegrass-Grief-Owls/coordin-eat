@@ -12,14 +12,16 @@ const REMOVE_FRIEND = 'REMOVE_FRIEND'
 /**
  * INITIAL STATE
  */
-const friendArray = [[23,45]]
+const friendArray = []
 
 /**
  * ACTION CREATORS
  */
-const getFriends = () => ({type: GET_FRIENDS})
-const addFriend = friend => ({type: ADD_FRIEND, friend})
-const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
+export const getFriends = () => ({type: GET_FRIENDS})
+
+export const addFriend = friend => ({type: ADD_FRIEND, friend})
+
+export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 
 
 
@@ -31,7 +33,7 @@ export default function (state = friendArray, action) {
 	case GET_FRIENDS:
 		return state
 	case ADD_FRIEND:
-		return action.friend
+		return [...state, action.friend]
 	case REMOVE_FRIEND:
 		return friendArray
 	default:

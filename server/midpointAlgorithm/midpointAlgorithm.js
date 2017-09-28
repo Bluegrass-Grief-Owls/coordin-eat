@@ -37,7 +37,7 @@ const midpointAlgorithm = (places, ) => {//point = averageCoords(places)) => {
 	// 	.catch(console.error)
 	//get longest and second longest times
 	//move point towards the person with longest travel time to point
-	//the distance to move it could be  (1 - secondLongest / longestTravel) * 
+	//the distance to move it could be  (1 - secondLongest / longestTravel) *
 	//the distance between the furthes person and the current point
 	//if the change is sufficiently small, we're done
 }
