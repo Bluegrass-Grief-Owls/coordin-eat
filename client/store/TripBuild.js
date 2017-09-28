@@ -5,31 +5,35 @@ import history from '../history'
  * ACTION TYPES
  */
 
-const ADD_ORIGIN = 'ADD_ORIGIN'
-const REMOVE_ORIGIN = 'REMOVE_ORIGIN'
+const GET_FRIENDS = 'GET_FRIENDS'
+const ADD_FRIEND = 'ADD_FRIEND'
+const REMOVE_FRIEND = 'REMOVE_FRIEND'
 
 /**
  * INITIAL STATE
  */
-const originArray = []
+const friendArray = [[23,45]]
 
 /**
  * ACTION CREATORS
  */
-const addOrigin = origin => ({type: ADD_ORIGIN, origin})
-const removeOrigin = origin => ({type: REMOVE_ORIGIN, origin})
+const getFriends = () => ({type: GET_FRIENDS})
+const addFriend = friend => ({type: ADD_FRIEND, friend})
+const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 
 
 
 /**
  * REDUCER
  */
-export default function (state = originArray, action) {
+export default function (state = friendArray, action) {
 	switch (action.type) {
-	case ADD_ORIGIN:
-		return action.origin
-	case REMOVE_ORIGIN:
-		return originArray
+	case GET_FRIENDS:
+		return state
+	case ADD_FRIEND:
+		return action.friend
+	case REMOVE_FRIEND:
+		return friendArray
 	default:
 		return state
 	}
