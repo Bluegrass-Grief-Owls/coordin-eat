@@ -23,7 +23,14 @@ export const addFriend = friend => ({type: ADD_FRIEND, friend})
 
 export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 
-
+//THUNKS
+export const calculate = (array) =>
+	dispatch =>
+		axios.post('/api/midpoint', {places: array})
+			.then(res => console.log(res.data)
+				// dispatch(removeUser())//this action will need to put the result in the store
+			)
+			.catch(err => console.log(err))
 
 /**
  * REDUCER
