@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
-import FriendForm from './FriendForm'
+import FriendForm from './FriendForm.jsx'
 import {addFriend, calculate} from '../store'
 
 
