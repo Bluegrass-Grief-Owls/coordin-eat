@@ -33,7 +33,7 @@ export const calculate = (array) =>
 export default function (state = resultsArray, action) {
 	switch (action.type) {
 	case GET_RESULTS:
-		return [...state, action.results]
+		return action.results
 	default:
 		return state
 	}
