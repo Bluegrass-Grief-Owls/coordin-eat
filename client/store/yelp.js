@@ -24,7 +24,6 @@ export const getYelpList = (coords) =>
 	dispatch =>
 		axios.get(`/api/yelp/${coords[0]}/${coords[1]}`)
 			.then(results => {
-				console.log(results.data)
 				dispatch(getYelpListAction(results.data))
 			})
 			.catch(err => console.log(err))

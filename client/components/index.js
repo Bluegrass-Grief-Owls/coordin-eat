@@ -5,7 +5,8 @@
  */
 export {default as Main} from './main'
 export {default as UserHome} from './user-home'
-export {default as Results} from './Results'
 export {Login, Signup} from './auth-form'
 export {default as TripBuild} from './TripBuild'
+export {default as YelpTest} from './YelpTest.jsx'
+export {default as DestinationPage} from './DestinationPage.jsx'
 
