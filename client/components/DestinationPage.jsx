@@ -8,12 +8,16 @@ let testCoords = [40.7061336, -74.0119549]
 //Will use the trip build array, later....
 
 class DestinationPage extends Component {
-	componentDidMount () {
-		//hit yelp api with center point
-		this.props.getYelpData()
+	componentWillMount () {
+		// console.log('ahhhhhhhh')
+		// console.log('========>', this.props.Results)
+		// if(this.props.Results.length){
+			this.props.getYelpData()
+		// }
 	}
 
 	render () {
+		console.log(this.props)
 		if(this.props.yelpList.length){
 			return (
 				<Row>
@@ -70,14 +74,17 @@ class DestinationPage extends Component {
 const mapState = (state) => {
 	return {
 		TripBuild: state.TripBuild,
-		yelpList: state.yelp
+		yelpList: state.yelp,
+		Results: state.Results
 	}
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, ownProps) => {
 	return {
 		getYelpData () {
-			dispatch(getYelpList([testCoords[0], testCoords[1]]))
+			if(ownProps.Results.length){
+				dispatch(getYelpList([ownProps.Results[0], ownProps.Results[1]]))
+			}
 		},
 		handleDestination: (choice) => {
 			console.log('You chose ' + choice + '!')
