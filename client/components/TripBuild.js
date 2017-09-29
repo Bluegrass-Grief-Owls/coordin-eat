@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
 import FriendForm from './FriendForm'
-import {addFriend} from '../store'
+import {addFriend, calculate} from '../store'
 
 
 /**
@@ -85,7 +85,7 @@ export const TripBuild = (props) => {
 				)
 			})}
 
-			<button >Make my trip!</button>
+			<button onClick={() => props.calculateTrip(props.friendArray)}>Make my trip!</button>
 
 		</div>
 
@@ -106,7 +106,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
 	return {
-		addNewFriend: (friend) => dispatch(addFriend(friend))
+		addNewFriend: (friend) => dispatch(addFriend(friend)),
+		calculateTrip: (friendArray) => dispatch(calculate(friendArray))
 	}
 }
 

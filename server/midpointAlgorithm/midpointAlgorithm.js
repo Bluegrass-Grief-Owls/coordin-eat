@@ -2,6 +2,12 @@ const getTravelTime = require('./getTravelTime')
 
 
 const averageCoords = (coords) => {
+	console.log('hit average cords', coords)
+
+	const coordsLength = coords.length
+
+	console.log('coordslength:', coordsLength)
+
 	const sumX = coords
 		.map(coord => coord[0])
 		.reduce((a, b) => a + b, 0)
@@ -10,12 +16,16 @@ const averageCoords = (coords) => {
 		.map(coord => coord[1])
 		.reduce((a, b) => a + b, 0)
 
-	return [sumX / coords.length, sumY / coords.length]
+	console.log('sumx:', sumX, 'sumy', sumY)
+
+	return [(sumX / coordsLength), (sumY / coordsLength)]
 }
 
-const midpointAlgorithm = (places, ) => {//point = averageCoords(places)) => {
+const midpointAlgorithm = (places) => {//point = averageCoords(places)) => {
 	console.log('places:', places)
-	return averageCoords(places)
+	const test1 = averageCoords(places)
+	console.log("return from average cords", test1)
+	return test1
 	// //get travel times to point
 	// const travelTimePromises = places.map((place) => getTravelTime(place, point, 'transit'))
 

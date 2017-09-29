@@ -18,6 +18,15 @@ const resultsArray = []
 
 const getResults = () => {type: GET_RESULTS, results}
 
+//THUNKS
+export const calculate = (array) =>
+	dispatch =>
+		axios.post('/api/midpoint', {places: array})
+		.then(res => console.log(res.data))
+			// .then(res => dispatch(getResults(res)))
+			.catch(err => console.log(err))
+
+
 
 /**
  * REDUCER
