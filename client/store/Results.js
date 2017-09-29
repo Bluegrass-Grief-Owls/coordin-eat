@@ -22,7 +22,8 @@ const getResults = () => {type: GET_RESULTS, results}
 export const calculate = (array) =>
 	dispatch =>
 		axios.post('/api/midpoint', {places: array})
-			.then(res => dispatch(getResults(res)))
+		.then(res => console.log(res.data))
+			// .then(res => dispatch(getResults(res)))
 			.catch(err => console.log(err))
 
 
