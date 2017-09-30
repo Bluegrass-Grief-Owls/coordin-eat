@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
 import FriendForm from './FriendForm.jsx'
 import {addFriend, calculate} from '../store'
+import {Col, Row, Button} from 'react-bootstrap'
+import history from './../history'
 
 
 /**
@@ -25,12 +27,10 @@ import {addFriend, calculate} from '../store'
  * 3. click sumbit button (TODO)
  */
 
+let friendCounter = 0
 
 export const TripBuild = (props) => {
-
-	console.log('propd', props)
-
-	const Map = ReactMapboxGl({accessToken:'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w' })
+	const Map = ReactMapboxGl({accessToken:'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w'})
 
 
 	const {addNewFriend, friendArray } = props
@@ -42,7 +42,6 @@ export const TripBuild = (props) => {
 			const lat = e.transform._center.lat
 			const newCoordinate = [lat,lng]
 			addNewFriend(newCoordinate)
-			console.log("long:", lng, "lat:", lat)
 		},
 	}
 
@@ -50,46 +49,44 @@ export const TripBuild = (props) => {
 
 
 	return (
-		<div>
-			<div id="map">
-				{/*THIS IS WHERE THE MAP GOES*/}
-			</div>
-
-			<div id="friends">
-
-				<h2>CLICK ON THE MAP TO ADD A LOCATION OF A FRIEND</h2>
-
+		<Row>
+			<Col xs={12}>
+				<h2 className='alignCenter'>CLICK ON THE MAP TO ADD THE LOCATION OF A FRIEND</h2>
+			</Col>
+			<Col xs={12}>
 				<Map
 					style="mapbox://styles/mapbox/streets-v9"
+					center={{lng: -74.0119549, lat: 40.7061336}}
 					containerStyle={{
 						height: '50vh',
-						width: '50vw'
+						width: '100%'
 					}}
-					onClick={events.onClick}
-				>
-					<Layer
-						onDrag={events.onDrag}
-						type="symbol"
-						id="marker"
-						layout={{ 'icon-image': 'marker-15' }}>
-						<Feature coordinates={[ 40.763434614755994, -73.976086754748 ]}/>
-					</Layer>
+					onClick={events.onClick}>
+					{//<Layer
+					// 	onDrag={events.onDrag}
+					// 	type="symbol"
+					// 	id="marker"
+					// 	layout={{ 'icon-image': 'marker-15' }}>
+					// 	{/*<Feature coordinates={[ 40.763434614755994, -73.976086754748 ]}/>*/}
+					// </Layer>
+					}
 				</Map>
-
-
-			</div>
-
-			{friendArray.map(origin => {
-				return (
-					<li>{origin}</li>
-				)
-			})}
-
-			<button onClick={() => props.calculateTrip(props.friendArray)}>Make my trip!</button>
-
-		</div>
-
-
+			</Col>
+			<Col xs={1}></Col>
+			<Col xs={10}>
+				{friendArray.map(origin => {
+					friendCounter++
+					return (
+						<li key={friendCounter}>{origin}</li>
+					)
+				})}
+				<Button bsStyle='success' onClick={() => {
+					props.calculateTrip(props.friendArray)
+					history.push('/destinations')
+				}}>Make my trip!</Button>
+			</Col>
+			<Col xs={1}></Col>
+		</Row>
 	)
 }
 

@@ -12,7 +12,7 @@ router.get('/:xcoord/:ycoord', (req, res, next) => {
 		//offset += 50
 		/*if(offset > 1000) */theresMore = false
 		promiseArray.push(fetch('https://api.yelp.com/v3/businesses/search?term=' + term + '&latitude=' + req.params.xcoord + '&longitude=' + req.params.ycoord + '&radius=50&limit=5'/*&offset=' + offset*/,
-			{method: 'GET', headers: {'Authorization': 'Bearer CE30IUOIN3D8-Ipws-4okoFMnjBaTzWjiPeZqZLrLfrst68H_h7jDXJWwJzJ4csFW9C77V1f4suaIJpK1PW7bicPuwFJQl_MEERkKRaIYmnIYamOyfTkgTWpsEvNWXYx'}}
+			{method: 'GET', headers: {'Authorization': 'Bearer ' + process.env.YELP_ACCESS_TOKEN}}
 		)
 			.then(data => data.json())
 			.then(searchResults => {

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 /**
  * ACTION TYPES
@@ -15,18 +14,14 @@ const resultsArray = []
 /**
  * ACTION CREATORS
  */
-
-const getResults = () => {type: GET_RESULTS, results}
+const getResults = (results) => ({type: GET_RESULTS, results})
 
 //THUNKS
 export const calculate = (array) =>
 	dispatch =>
 		axios.post('/api/midpoint', {places: array})
-		.then(res => console.log(res.data))
-			// .then(res => dispatch(getResults(res)))
+			.then(res => dispatch(getResults(res.data)))
 			.catch(err => console.log(err))
-
-
 
 /**
  * REDUCER
