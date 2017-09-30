@@ -16,27 +16,28 @@ const Main = (props) => {
 
 	return (
 		<div>
-			<h1>BOILERMAKER</h1>
-			<nav>
-				{
-					isLoggedIn
-						? <div>
-							{/* The navbar will show these links after you log in */}
-							<Link to='/home'>Home</Link>
-							<Link to='/yelpTest'>Yelp Test</Link>
-							<a href='#' onClick={handleClick}>Logout</a>
-							<Link to='/TripBuild'>Build a Trip</Link>
-						</div>
-						: <div>
-							{/* The navbar will show these links before you log in */}
-							<Link to='/login'>Login</Link>
-							<Link to='/signup'>Sign Up</Link>
-							<Link to='/yelpTest'>Yelp Test</Link>
-						</div>
-				}
-			</nav>
-			<hr />
-			{children}
+			<div className='backgroundMainColor fontAccentColorLight'>
+				<Link className='linkOnNav' to='/home'><h1 className='noMargin marginLeft15'>Coordin-EAT</h1></Link>
+				<nav>
+					{
+						isLoggedIn
+							? <div>
+								{/* The navbar will show these links after you log in */}
+								<a className='linkOnNav' href='#' onClick={handleClick}>Logout</a>
+								<Link className='linkOnNav' to='/TripBuild'>Build a Trip</Link>
+							</div>
+							: <div>
+								{/* The navbar will show these links before you log in */}
+								<Link className='linkOnNav' to='/login'>Login</Link>
+								<Link className='linkOnNav' to='/signup'>Sign Up</Link>
+							</div>
+					}
+				</nav>
+			</div>
+			<hr className='noMargin hrColor'/>
+			<div className='backgroundMainColorLight fontAccentColor contentDiv'>
+				{children}
+			</div>
 		</div>
 	)
 }

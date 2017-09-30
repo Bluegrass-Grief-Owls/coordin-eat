@@ -1,5 +1,44 @@
+//Color Setup
+$colorArray: orange banana pear blueberry;
+$colorChoice: nth($colorArray, 1);
+//colorArray index starts at 1, not 0
+
+$mainColor: null;
+$mainColorLight: null;
+$accentColor: null;
+$accentColorLight: null;
+
+@if $colorChoice == orange {
+  $mainColor: #F6820D;
+  $mainColorLight: #F7BA7C;
+  $accentColor: #61C614;
+  $accentColorLight: #DDF8C7;
+  } @else if $colorChoice == banana {
+    $mainColor: #EBEF0F;
+    $mainColorLight: #EEEF89;
+    $accentColor: #7C4A21;
+    $accentColorLight: #AE8665;
+  } @else if $colorChoice == pear {
+    $mainColor: #98C623;
+    $mainColorLight: #C7E57A;
+    $accentColor: #C58337;
+    $accentColorLight: #F4E3AE;
+  } @else if $colorChoice == blueberry {
+    $mainColor: #563DC3;
+    $mainColorLight: #8D94F2;
+    $accentColor: #63477B;
+    $accentColorLight: #C9BDD4;
+  } @else {
+    //this is a white and blue color pallet
+    $mainColor: #FFFFFF;
+    $mainColorLight: #C6C6C6;
+    $accentColor: #AEEDEE;
+    $accentColorLight: #84CACB;
+  }
+
 body {
   font-family: sans-serif;
+  background-color: $mainColorLight;
 
   a {
     text-decoration: none;
@@ -20,20 +59,101 @@ body {
   }
 }
 
+.row {
+  margin: 0;
+}
+
+.panel-default>.panel-heading {
+  background-color: $mainColor;
+  color: $accentColorLight;
+}
+
+.panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-top-color: $accentColor;
+}
+
+.panel-default {
+  border-color: $accentColor;
+  background-color: $mainColor;
+  color: $accentColorLight;
+}
+
+.panel-body {
+  background-color: $accentColorLight;
+  color: $mainColor;
+}
+
+.backgroundMainColor {
+  background-color: $mainColor;
+}
+
+.backgroundMainColorLight {
+  background-color: $mainColorLight;
+}
+
+.backgroundAccentColorLight {
+  background-color: $accentColorLight;
+}
+
+.fontMainColor {
+  color: $mainColor;
+}
+
+.fontAccentColor {
+  color: $accentColor;
+}
+
+.fontAccentColorLight {
+  color: $accentColorLight;
+}
+
 .buissnessImage {
-  width: 100%
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px $accentColor solid;
+  border-radius: 5px;
 }
 
 .noPaddingLeft {
-  padding-left: 0
+  padding-left: 0;
 }
 
 .noPaddingRight {
-  padding-right: 0
+  padding-right: 0;
+}
+
+.displayBlock {
+  display: block;
+}
+
+.noMargin {
+  margin: 0;
+}
+
+.marginLeft15 {
+  margin-left: 15px;
 }
 
 .alignCenter {
   text-align: center;
+}
+
+.hrColor {
+  border-top: 2px solid $accentColor;
+}
+
+.contentDiv {
+  height: 100vh;
+}
+
+.linkOnNav {
+  margin: 0 0 15px 15px;
+  color: $accentColorLight;
+}
+
+.welcomeUser {
+  margin: 0 0 0 15px;
+  padding-top: 20px;
 }
 
 .destButton {
@@ -41,3 +161,17 @@ body {
   float: right;
   margin: 0 10px 10px 0;
 }
+
+.mapboxgl-canvas {
+  border: 2px $accentColor solid;
+  border-radius: 5px;
+}
+
+.tripButton {
+  margin-top: 15px;
+  border: 2px $accentColor solid;
+  border-radius: 5px;
+  background-color: $accentColorLight;
+  color: $mainColor;
+}
+

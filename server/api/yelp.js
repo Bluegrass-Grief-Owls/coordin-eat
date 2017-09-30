@@ -11,7 +11,7 @@ router.get('/:xcoord/:ycoord', (req, res, next) => {
 	while(theresMore){
 		//offset += 50
 		/*if(offset > 1000) */theresMore = false
-		promiseArray.push(fetch('https://api.yelp.com/v3/businesses/search?term=' + term + '&latitude=' + req.params.xcoord + '&longitude=' + req.params.ycoord + '&radius=50&limit=5'/*&offset=' + offset*/,
+		promiseArray.push(fetch('https://api.yelp.com/v3/businesses/search?term=' + term + '&latitude=' + req.params.xcoord + '&longitude=' + req.params.ycoord + '&radius=200&limit=5'/*&offset=' + offset*/,
 			{method: 'GET', headers: {'Authorization': 'Bearer ' + process.env.YELP_ACCESS_TOKEN}}
 		)
 			.then(data => data.json())
