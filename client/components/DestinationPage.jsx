@@ -4,20 +4,20 @@ import React, {Component} from 'react'
 import {Col, Row, Accordion, Panel, Button} from 'react-bootstrap'
 import {getYelpList} from './../store'
 
+//Prevents multiple Yelp request from componentDidUpdate() loop
+let yelped = false
+
 let testCoords = [40.7061336, -74.0119549]
 //Will use the trip build array, later....
 
 class DestinationPage extends Component {
-	componentWillMount () {
-		// console.log('ahhhhhhhh')
-		// console.log('========>', this.props.Results)
-		// if(this.props.Results.length){
+	componentDidUpdate() {
+		if(!yelped){
 			this.props.getYelpData()
-		// }
+		}
 	}
 
 	render () {
-		console.log(this.props)
 		if(this.props.yelpList.length){
 			return (
 				<Row>
@@ -79,11 +79,13 @@ const mapState = (state) => {
 	}
 }
 
-const mapDispatch = (dispatch, ownProps) => {
+const mapDispatch = (dispatch) => {
 	return {
 		getYelpData () {
-			if(ownProps.Results.length){
-				dispatch(getYelpList([ownProps.Results[0], ownProps.Results[1]]))
+			if(this.Results.length){
+				yelped = true
+				console.log('Yelp search at',this.Results[0].toFixed(6),',', this.Results[1].toFixed(6) )
+				dispatch(getYelpList([this.Results[0].toFixed(6), this.Results[1].toFixed(6)]))
 			}
 		},
 		handleDestination: (choice) => {

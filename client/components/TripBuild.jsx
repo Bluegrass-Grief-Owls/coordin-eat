@@ -27,6 +27,7 @@ import history from './../history'
  * 3. click sumbit button (TODO)
  */
 
+let friendCounter = 0
 
 export const TripBuild = (props) => {
 	const Map = ReactMapboxGl({accessToken:'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w'})
@@ -55,25 +56,28 @@ export const TripBuild = (props) => {
 			<Col xs={12}>
 				<Map
 					style="mapbox://styles/mapbox/streets-v9"
+					center={{lng: -74.0119549, lat: 40.7061336}}
 					containerStyle={{
 						height: '50vh',
 						width: '100%'
 					}}
 					onClick={events.onClick}>
-					<Layer
-						onDrag={events.onDrag}
-						type="symbol"
-						id="marker"
-						layout={{ 'icon-image': 'marker-15' }}>
-						{/*<Feature coordinates={[ 40.763434614755994, -73.976086754748 ]}/>*/}
-					</Layer>
+					{//<Layer
+					// 	onDrag={events.onDrag}
+					// 	type="symbol"
+					// 	id="marker"
+					// 	layout={{ 'icon-image': 'marker-15' }}>
+					// 	{/*<Feature coordinates={[ 40.763434614755994, -73.976086754748 ]}/>*/}
+					// </Layer>
+					}
 				</Map>
 			</Col>
 			<Col xs={1}></Col>
 			<Col xs={10}>
 				{friendArray.map(origin => {
+					friendCounter++
 					return (
-						<li>{origin}</li>
+						<li key={friendCounter}>{origin}</li>
 					)
 				})}
 				<Button bsStyle='success' onClick={() => {
