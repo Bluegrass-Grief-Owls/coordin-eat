@@ -35,20 +35,20 @@ class DestinationPage extends Component {
 									return(
 										<Panel header={buissness.name} key={idx} eventKey={buissness.id}>
 											<Row>
-												<Col className='noPaddingRight' xs={6}>
+												<Col className='noPaddingRight noPaddingLeft' xs={12} sm={6}>
 													<img className='buissnessImage' src={buissness.image_url} alt= {buissness.name + ' image'} />
 												</Col>
-												<Col xs={6} className='noPaddingLeft'>
+												<Col xs={12} sm={6} className='noPaddingLeft'>
 													<ul>
 														<li>Tags: {tagList}</li>
 														<li>Rating: {buissness.rating} | Price: {buissness.price}</li>
 														<li>Phone: {buissness.display_phone}</li>
-														<li>Link: <a href={buissness.url}>{buissness.name}</a></li>
+														<li>Link: <a className='fontAccentColor' href={buissness.url}>{buissness.name}</a></li>
 														<li>Reviews: {buissness.review_count}</li>
 													</ul>
 												</Col>
 											</Row>
-											<Button className='destButton' bsStyle='success' onClick={() => {this.props.handleDestination(buissness.name)}}>I Pick This One!</Button>
+											<Button className='destButton backgroundMainColor fontAccentColorLight' onClick={() => {this.props.handleDestination(buissness.name)}}>I Pick This One!</Button>
 										</Panel>
 									)
 								})
@@ -61,7 +61,7 @@ class DestinationPage extends Component {
 		} else {
 			return (
 				<div>
-					<div>There's nothing here!</div>
+					<div className='marginLeft15'>There's nothing here!</div>
 				</div>
 			)
 		}

@@ -80,7 +80,7 @@ export const TripBuild = (props) => {
 						<li key={friendCounter}>{origin}</li>
 					)
 				})}
-				<Button bsStyle='success' onClick={() => {
+				<Button className='tripButton' onClick={() => {
 					props.calculateTrip(props.friendArray)
 					history.push('/destinations')
 				}}>Make my trip!</Button>
