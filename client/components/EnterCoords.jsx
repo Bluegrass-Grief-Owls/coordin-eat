@@ -41,7 +41,7 @@ export const TripBuild = (props) => {
 			const lng = e.transform._center.lng
 			const lat = e.transform._center.lat
 			const newCoordinate = [lat,lng]
-			addNewFriend(newCoordinate)
+			addNewFriend({location: newCoordinate})
 		},
 	}
 
@@ -74,10 +74,10 @@ export const TripBuild = (props) => {
 			</Col>
 			<Col xs={1}></Col>
 			<Col xs={10}>
-				{friendArray.map(origin => {
+				{friendArray.map(friend => {
 					friendCounter++
 					return (
-						<li key={friendCounter}>{origin}</li>
+						<li key={friendCounter}>{friend.location}</li>
 					)
 				})}
 				<Button className='tripButton' onClick={() => {
