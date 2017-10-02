@@ -4,7 +4,14 @@ module.exports = router
 
 router.post('/', (req, res, next) => {
 	Attendee.create(req.body)
-		.then(trip => res.json(trip))
+		.then(attendee => res.json(attendee))
+		.catch(next)
+})
+
+router.put('/:id', (req, res, next) => {
+	Attendee.findById(req.params.id)
+		.then(attendee => attendee.update(req.body)
+			.then(updated =>res.json(updated)))
 		.catch(next)
 })
 
