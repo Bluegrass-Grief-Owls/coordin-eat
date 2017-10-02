@@ -1,5 +1,6 @@
 const User = require('./user')
 const Location = require('./location')
+const Trip = require('./trip')
 
 User.hasMany(Location)
 Location.belongsTo(User, {foreignKey: { allowNull: false }, onDelete: 'CASCADE'})
@@ -21,5 +22,6 @@ User.belongsToMany(User, {as: 'friend', through: 'friends'})
  */
 module.exports = {
 	User,
-	Location
+	Location,
+	Trip
 }
