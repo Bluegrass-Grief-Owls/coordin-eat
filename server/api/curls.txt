@@ -1,3 +1,5 @@
 curl -H "Content-Type: application/json" -X POST -d '{"name": "our trip", "date":"2017-10-02 14:47:59.741902-04", "ownerId": 1, "meetup": [1.2223, 2.3343]}' http://localhost:8080/api/trip
 
-curl -H "Content-Type: application/json" -X POST -d '{"origin": [1.2223, 2.3343], "userId": 2, "tripId": 1}' http://localhost:8080/api/attendee
+curl -H "Content-Type: application/json" -X PUT -d '{"origin": [1.2223, 2.3343], "vote": 2, "userId": 2, "tripId": 1}' http://localhost:8080/api/attendee/1
+
+curl -H "Content-Type: application/json" -X POST -d '{"userId": 2, "tripId": 1}' http://localhost:8080/api/attendee
