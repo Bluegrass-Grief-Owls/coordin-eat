@@ -14,7 +14,8 @@
     "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
-    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/coordin-eat-test' mocha ./**/*.spec.js --compilers js:babel-register"
+    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/coordin-eat-test' mocha ./**/*.spec.js --compilers js:babel-register",
+    "alg": "node server/midpointAlgorithm/mockGetTravelTime"
   },
   "author": "",
   "license": "ISC",

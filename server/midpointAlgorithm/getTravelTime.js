@@ -18,7 +18,7 @@ const getTravelTime = (origin, dest, mode) => {
 	// })
 }
 
-// 	getTravelTime([40.739999, -73.983083], [40.768007, -74.204254], 'transit')
-// .then(console.log)
+getTravelTime([40.739999, -73.983083], [40.768007, -74.204254], 'transit')
+	.then(console.log)
 
 module.exports = getTravelTime
