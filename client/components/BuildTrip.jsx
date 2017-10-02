@@ -2,30 +2,27 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import FriendForm from './FriendForm.jsx'
-import {addFriend, calculate} from '../store'
+import {postTrip} from '../store'
 import {Col, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
 import history from './../history'
 
 //Lets find a date picker that does this
 let monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-let dayArray = []
-for(var i = 1; i <= 31; i++){
+let monthValArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+let dayArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
+for(var i = 11; i <= 31; i++){
 	dayArray.push(i)
 }
-let hourArray = []
-for(var j = 1; j <= 12; j++){
-	hourArray.push(j)
-}
-let minuiteArray = []
-for(var k = 1; k <= 60; k++){
+let hourArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+let minuiteArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
+for(var k = 11; k <= 60; k++){
 	minuiteArray.push(k)
 }
 let ampm = ['am', 'pm']
-let dateChoice = ''
 
 const BuildTrip = (props) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
+		<form onSubmit={(evt) => {props.handleSubmit(evt, props.user.id)}}>
 			<FormGroup controlId="tripForm">
 				<ControlLabel>Trip Name</ControlLabel>
 				<FormControl
@@ -38,7 +35,7 @@ const BuildTrip = (props) => {
 					{
 						monthArray.map((month, idx) => {
 							return(
-								<option key={idx} value={month}>{month}</option>
+								<option key={idx} value={monthValArray[idx]}>{month}</option>
 							)
 						})
 					}
@@ -102,15 +99,21 @@ const BuildTrip = (props) => {
  */
 const mapState = (state) => {
 	return {
-		friendArray: state.TripBuild
+		user: state.user
 	}
 }
 
 const mapDispatch = (dispatch) => {
 	return {
-		handleSubmit: function(evt) {
+		handleSubmit: function(evt, ownerId) {
 			evt.preventDefault()
-			console.log('Trip name:', evt.target.tripName.value, 'Date:', evt.target.month.value, evt.target.day.value, '2017 at', evt.target.hour.value + ':' + evt.target.minute.value, evt.target.ampm.value)
+			console.log(this)
+			let hour = evt.target.hour.value
+			if (evt.target.ampm.value === 'pm'){
+				hour = Number(hour) + 12
+			}
+			let theDate = ('Trip name:', evt.target.tripName.value, 'Date:', '2017-' + evt.target.month.value+'-'+evt.target.day.value, hour + ':' + evt.target.minute.value+':00')
+			dispatch(postTrip({name: evt.target.tripName.value, date: theDate, ownerId}))
 		},
 		handleChange: function(date) {
 			console.log(date)
