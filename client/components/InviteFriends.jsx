@@ -9,6 +9,14 @@ import { addFriend } from '../store'
 const InviteFriends = (props) => {
 	return (
 		<div>
+			<ul>
+				{props.attendees.map((friend, index) => {
+					return (
+						<li key={index}>{friend.email}</li>
+					)
+				})}
+			</ul>
+
 			<form onSubmit={props.handleSubmit}>
 				<FormGroup controlId='email'>
 					<ControlLabel>Enter a friend's email</ControlLabel>
@@ -18,6 +26,10 @@ const InviteFriends = (props) => {
 			</form>
 		</div>
 	)	
+}
+
+const mapState = state => {
+	return {attendees: state.TripBuild}
 }
 
 const mapDispatch = dispatch => {
@@ -30,4 +42,4 @@ const mapDispatch = dispatch => {
 	}
 }
 
-export default connect(null, mapDispatch)(InviteFriends);
+export default connect(mapState, mapDispatch)(InviteFriends);
