@@ -1,6 +1,6 @@
 //Color Setup
 $colorArray: orange banana pear blueberry;
-$colorChoice: nth($colorArray, 4);
+$colorChoice: nth($colorArray, 3);
 //colorArray index starts at 1, not 0
 
 $mainColor: null;

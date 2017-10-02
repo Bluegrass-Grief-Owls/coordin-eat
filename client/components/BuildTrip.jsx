@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import FriendForm from './FriendForm.jsx'
 import {postTrip} from '../store'
-import {Col, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
+import {Col, FormGroup, FormControl, ControlLabel, Button, Checkbox} from 'react-bootstrap'
 import history from './../history'
 
 //Lets find a date picker that does this
@@ -19,75 +19,91 @@ for(var k = 11; k <= 60; k++){
 	minuiteArray.push(k)
 }
 let ampm = ['am', 'pm']
+let friendCounter = 0
 
 const BuildTrip = (props) => {
-	return (
-		<form onSubmit={(evt) => {props.handleSubmit(evt, props.user.id)}}>
-			<FormGroup controlId="tripForm">
-				<ControlLabel>Trip Name</ControlLabel>
-				<FormControl
-					type="text"
-					name="tripName"
-					placeholder="Enter trip name"
-				/>
-				<ControlLabel>Month</ControlLabel>
-				<FormControl componentClass="select" name="month">
-					{
-						monthArray.map((month, idx) => {
-							return(
-								<option key={idx} value={monthValArray[idx]}>{month}</option>
-							)
-						})
-					}
-				</FormControl>
+	if(props.user.friend){
+		return (
+			<form onSubmit={(evt) => {props.handleSubmit(evt, props.user.id)}}>
+				<FormGroup controlId="tripForm">
+					<ControlLabel>Trip Name</ControlLabel>
+					<FormControl
+						type="text"
+						name="tripName"
+						placeholder="Enter trip name"
+					/>
+					<ControlLabel>Month</ControlLabel>
+					<FormControl componentClass="select" name="month">
+						{
+							monthArray.map((month, idx) => {
+								return(
+									<option key={idx} value={monthValArray[idx]}>{month}</option>
+								)
+							})
+						}
+					</FormControl>
 
-				<ControlLabel>Day</ControlLabel>
-				<FormControl componentClass="select" name="day">
-					{
-						dayArray.map((day, idx) => {
-							return(
-								<option key={idx} value={day}>{day}</option>
-							)
-						})
-					}
-				</FormControl>
+					<ControlLabel>Day</ControlLabel>
+					<FormControl componentClass="select" name="day">
+						{
+							dayArray.map((day, idx) => {
+								return(
+									<option key={idx} value={day}>{day}</option>
+								)
+							})
+						}
+					</FormControl>
 
-				<ControlLabel>Hour</ControlLabel>
-				<FormControl componentClass="select" name="hour">
-					{
-						hourArray.map((hour, idx) => {
-							return(
-								<option key={idx} value={hour}>{hour}</option>
-							)
-						})
-					}
-				</FormControl>
+					<ControlLabel>Hour</ControlLabel>
+					<FormControl componentClass="select" name="hour">
+						{
+							hourArray.map((hour, idx) => {
+								return(
+									<option key={idx} value={hour}>{hour}</option>
+								)
+							})
+						}
+					</FormControl>
 
-				<ControlLabel>Minute</ControlLabel>
-				<FormControl componentClass="select" name="minute">
-					{
-						minuiteArray.map((minute, idx) => {
-							return(
-								<option key={idx} value={minute}>{minute}</option>
-							)
-						})
-					}
-				</FormControl>
+					<ControlLabel>Minute</ControlLabel>
+					<FormControl componentClass="select" name="minute">
+						{
+							minuiteArray.map((minute, idx) => {
+								return(
+									<option key={idx} value={minute}>{minute}</option>
+								)
+							})
+						}
+					</FormControl>
 
-				<ControlLabel>AM/PM</ControlLabel>
-				<FormControl componentClass="select" name="ampm">
+					<ControlLabel>AM/PM</ControlLabel>
+					<FormControl componentClass="select" name="ampm">
+						{
+							ampm.map((amorpm, idx) => {
+								return(
+									<option key={idx} value={amorpm}>{amorpm}</option>
+								)
+							})
+						}
+					</FormControl>
+					<ControlLabel>Invite Your Friends!</ControlLabel>
 					{
-						ampm.map((amorpm, idx) => {
+						props.user.friend.map(friend =>{
+							friendCounter++
 							return(
-								<option key={idx} value={amorpm}>{amorpm}</option>
+								<Checkbox name={'check'+friendCounter} key={friend.id}>{friend.name}</Checkbox>
 							)
 						})
 					}
-				</FormControl>
-			</FormGroup>
-			<Button className='tripButton displayBlock marginLeft15' type='submit' >Make my trip!</Button>
-		</form>
-	)
+				</FormGroup>
+				<Button className='tripButton displayBlock marginLeft15' type='submit' >Make my trip!</Button>
+			</form>
+		)
+	} else {
+		return(
+			<div>Loading...</div>
+		)
+	}
 }
 
 	
