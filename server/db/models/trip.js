@@ -11,7 +11,14 @@ const Trip = db.define('trip', {
 		allowNull: false
 	},
 	ownerId: {
-		type: Sequelize.INTEGER
+		type: Sequelize.INTEGER,
+		allowNull: false
+	},
+	meetup: {
+		type: Sequelize.ARRAY(Sequelize.FLOAT)
+	},
+	yelpResult: {
+		type: Sequelize.ARRAY(Sequelize.JSON)
 	}
 })
 
