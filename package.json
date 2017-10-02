@@ -39,6 +39,7 @@
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-bootstrap": "^0.31.3",
+    "react-datepicker": "^0.55.0",
     "react-dom": "^15.4.2",
     "react-mapbox-gl": "^2.5.2",
     "react-redux": "^5.0.2",
