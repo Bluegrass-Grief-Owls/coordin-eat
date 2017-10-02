@@ -4,12 +4,17 @@ const User = db.model('user')
 const Location = db.model('location')
 const Friends = db.model('friends')
 const Trip = db.model('trip')
+const Attendee = db.model('attendee')
 const Chance = require('chance')
 const chance = new Chance()
 const chalk = require('chalk')
 // const initDB = require('./index') 
 
-const promisesUsers = [], promisesLocations = [], promisesFriends = [], promisesTrips = []
+const promisesUsers = [], 
+	promisesLocations = [], 
+	promisesFriends = [], 
+	promisesTrips = [],
+	promisesAttend = []
 
 db.sync({force: true})
 	.then(() => {
@@ -48,7 +53,7 @@ db.sync({force: true})
 		for (var j = 0; j < 5; j++) {
 			tripName.push(chance.word())
 			tripDate.push(chance.date())
-			tripOwner.push(chance.integer({min: 0, max: 4}))
+			tripOwner.push(chance.integer({min: 1, max: 5}))
 			meetups.push([12.3334, 14.234234])
 		}
 
@@ -95,6 +100,20 @@ db.sync({force: true})
 			yCoordinate.push(push[1].toFixed(6))
 			userId.push(i)
 		}
+
+		// //====================================== Attendee seed ==============================================
+		// const origins = [], tripIds = [], userIds = []
+
+		// for (var p = 1; p < 3; p++) {
+		// 	// for (var q = 0; q < 4; q++) {
+		// 		let pushCoord = mapXYtoLatLng (chance.floating({min: 0, max: 1 , fixed: 6}), chance.floating({min: 0, max: 1 , fixed: 6}))
+		// 		origins.push(pushCoord)
+		// 		tripIds.push(p)
+		// 		userIds.push(p)
+		// 	// }
+		// }
+
+		// console.log('************', tripIds)
 
 		//====================================== Promises ==============================================
 
