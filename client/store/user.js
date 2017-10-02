@@ -4,6 +4,7 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
+const GET_ME = 'GET_ME'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
@@ -15,6 +16,7 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
+const getMe = myself => ({type: GET_ME, myself})
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 
@@ -25,7 +27,7 @@ export const me = () =>
 	dispatch =>
 		axios.get('/auth/me')
 			.then(res =>
-				dispatch(getUser(res.data || defaultUser)))
+				dispatch(getMe(res.data || defaultUser)))
 			.catch(err => console.log(err))
 
 export const auth = (email, password, method) =>
@@ -52,6 +54,8 @@ export const logout = () =>
  */
 export default function (state = defaultUser, action) {
 	switch (action.type) {
+	case GET_ME:
+		return action.myself
 	case GET_USER:
 		return action.user
 	case REMOVE_USER:
