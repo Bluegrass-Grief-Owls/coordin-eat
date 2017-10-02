@@ -34,7 +34,14 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  res.json(req.user)
+	if(req.user){
+		User.findOne({where: {id: req.user.id}, include: [{model: User, as: 'friend'}]})
+			.then(user =>{
+				res.json(user)
+			})
+	} else {
+		res.json(undefined)
+	}
 })
 
 router.use('/google', require('./google'))
