@@ -4,11 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-<<<<<<< HEAD
-import {Main, Login, Signup, UserHome, TripBuild, YelpTest, DestinationPage, InviteFriends} from './components'
-=======
-import {Main, Login, Signup, UserHome, BuildTrip, YelpTest, DestinationPage} from './components'
->>>>>>> master
+import {Main, Login, Signup, UserHome, BuildTrip, YelpTest, DestinationPage, InviteFriends, SingleTrip} from './components'
 import {me} from './store'
 
 
@@ -33,6 +29,7 @@ class Routes extends Component {
 						<Route path='/build_trip' component = {BuildTrip} />
 						<Route path='/yelpTest' component = {YelpTest} />
 						<Route path='/destinations' component = {DestinationPage} />
+						<Route path='/testTrip' component = {SingleTrip} />
 						<Route path='/addfriends' component = {InviteFriends} />
 						{
 							isLoggedIn &&

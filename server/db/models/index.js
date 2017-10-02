@@ -1,10 +1,19 @@
 const User = require('./user')
 const Location = require('./location')
+const Trip = require('./trip')
+const Attendee = require('./attendee')
 
 User.hasMany(Location)
 Location.belongsTo(User, {foreignKey: { allowNull: false }, onDelete: 'CASCADE'})
 
 User.belongsToMany(User, {as: 'friend', through: 'friends'})
+
+Trip.hasMany(Attendee)
+User.hasMany(Attendee)
+Attendee.belongsTo(Trip)
+Attendee.belongsTo(User)
+
+
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -21,5 +30,7 @@ User.belongsToMany(User, {as: 'friend', through: 'friends'})
  */
 module.exports = {
 	User,
-	Location
+	Location,
+	Trip,
+	Attendee
 }
