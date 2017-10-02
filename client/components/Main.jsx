@@ -24,7 +24,8 @@ const Main = (props) => {
 							? <div>
 								{/* The navbar will show these links after you log in */}
 								<a className='linkOnNav' href='#' onClick={handleClick}>Logout</a>
-								<Link className='linkOnNav' to='/TripBuild'>Build a Trip</Link>
+								<Link className='linkOnNav' to='/build_trip'>Build a Trip</Link>
+								<Link className='linkOnNav' to='/addfriends'>Invite friends</Link>
 							</div>
 							: <div>
 								{/* The navbar will show these links before you log in */}
