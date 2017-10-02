@@ -10,4 +10,4 @@ export {default as TripBuild} from './TripBuild.jsx'
 export {default as YelpTest} from './YelpTest.jsx'
 export {default as DestinationPage} from './DestinationPage.jsx'
 export {default as FriendForm} from './FriendForm.jsx'
-
+export {default as InviteFriends} from './InviteFriends.jsx'

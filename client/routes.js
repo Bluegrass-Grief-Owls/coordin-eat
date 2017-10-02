@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, TripBuild, YelpTest, DestinationPage} from './components'
+import {Main, Login, Signup, UserHome, TripBuild, YelpTest, DestinationPage, InviteFriends} from './components'
 import {me} from './store'
 
 
@@ -29,6 +29,7 @@ class Routes extends Component {
 						<Route path='/tripbuild' component = {TripBuild} />
 						<Route path='/yelpTest' component = {YelpTest} />
 						<Route path='/destinations' component = {DestinationPage} />
+						<Route path='/addfriends' component = {InviteFriends} />
 						{
 							isLoggedIn &&
 								<Switch>
