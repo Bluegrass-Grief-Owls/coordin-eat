@@ -17,9 +17,9 @@ const Trip = db.define('trip', {
 	meetup: {
 		type: Sequelize.ARRAY(Sequelize.FLOAT)
 	},
-	yelpResult: {
-		type: Sequelize.ARRAY(Sequelize.JSON)
-	}
+	// yelpResult: {
+	// 	type: Sequelize.ARRAY(Sequelize.JSON)
+	// }
 })
 
 module.exports = Trip

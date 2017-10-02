@@ -6,7 +6,8 @@ const Attendee = db.define('attendees', {
 		type: Sequelize.ARRAY(Sequelize.FLOAT)
 	},
 	vote: {
-		type: Sequelize.INTEGER
+		type: Sequelize.INTEGER,
+		defaultValue: -1
 	}
 })
 

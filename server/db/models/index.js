@@ -8,8 +8,10 @@ Location.belongsTo(User, {foreignKey: { allowNull: false }, onDelete: 'CASCADE'}
 
 User.belongsToMany(User, {as: 'friend', through: 'friends'})
 
-User.belongsToMany(Trip, {through: Attendee})
-Trip.belongsToMany(User, {through: Attendee})
+Trip.hasMany(Attendee)
+User.hasMany(Attendee)
+Attendee.belongsTo(Trip)
+Attendee.belongsTo(User)
 
 
 
