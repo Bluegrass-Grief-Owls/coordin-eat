@@ -73,7 +73,7 @@ class DestinationPage extends Component {
  */
 const mapState = (state) => {
 	return {
-		TripBuild: state.TripBuild,
+		// TripBuild: state.TripBuild,
 		yelpList: state.yelp,
 		Results: state.Results
 	}
@@ -86,6 +86,8 @@ const mapDispatch = (dispatch) => {
 				yelped = true
 				console.log('Yelp search at',this.Results[0].toFixed(6),',', this.Results[1].toFixed(6) )
 				dispatch(getYelpList([this.Results[0].toFixed(6), this.Results[1].toFixed(6)]))
+			} else {
+				dispatch(getYelpList(testCoords))
 			}
 		},
 		handleDestination: (choice) => {
@@ -101,6 +103,6 @@ export default connect(mapState, mapDispatch)(DestinationPage)
  * PROP TYPES
  */
 DestinationPage.propTypes = {
-	TripBuild: PropTypes.array,
+	// TripBuild: PropTypes.array,
 	yelpList: PropTypes.array
 }
