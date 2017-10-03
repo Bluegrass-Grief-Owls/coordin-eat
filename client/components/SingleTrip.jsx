@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
 import {getYelpList} from './../store'
-import {ConfirmingTrip, ResolvingTrip, FinishedTrip} from './index.js'
+import {ConfirmingTrip, VotingTrip, ResolvingTrip, FinishedTrip} from './index.js'
 
 //Diferent statuses for a trip, not sure if we want to implement a past yet
 let tripStatusArray = ['confirm', 'vote', 'resolved', 'past']
@@ -17,8 +17,9 @@ class SingleTrip extends Component {
 				<ConfirmingTrip />
 			)
 		} else if (currentStatus === 'vote') {
+			console.log('voting trip')
 			return(
-				<div>This should be the yelp page view</div>
+				<VotingTrip />
 			)
 		} else if (currentStatus === 'resolved') {
 			return(
@@ -43,29 +44,13 @@ class SingleTrip extends Component {
  */
 const mapState = (state) => {
 	return {
-		TripBuild: state.TripBuild,
+		// TripBuild: state.TripBuild,
 		yelpList: state.yelp,
 		Results: state.Results
 	}
 }
 
-const mapDispatch = (dispatch) => {
-	return {
-		getYelpData () {
-			if(this.Results.length){
-				yelped = true
-				console.log('Yelp search at',this.Results[0].toFixed(6),',', this.Results[1].toFixed(6) )
-				dispatch(getYelpList([this.Results[0].toFixed(6), this.Results[1].toFixed(6)]))
-			}
-		},
-		handleDestination: (choice) => {
-			console.log('You chose ' + choice + '!')
-			//dispatch(addFriend(friend))
-		}
-	}
-}
-
-export default connect(mapState, mapDispatch)(SingleTrip)
+export default connect(mapState)(SingleTrip)
 
 /**
  * PROP TYPES
