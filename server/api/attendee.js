@@ -9,12 +9,7 @@ router.post('/', (req, res, next) => {
 		.catch(next)
 })
 
-router.put('/:id', (req, res, next) => {
-	Attendee.findById(req.params.id)
-		.then(attendee => attendee.update(req.body)
-			.then(updated =>res.json(updated)))
-		.catch(next)
-})
+
 
 
 router.delete('/:tripId/:userId', (req,res, next) => {
