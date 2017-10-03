@@ -106,7 +106,7 @@ const BuildTrip = (props) => {
 	}
 }
 
-	
+
 
 
 
@@ -123,7 +123,7 @@ const mapDispatch = (dispatch) => {
 	return {
 		handleSubmit: function(evt, ownerId) {
 			evt.preventDefault()
-			console.log(this)
+			console.log("FROM HANDLE SUBMIT", this)
 			let hour = evt.target.hour.value
 			if (evt.target.ampm.value === 'pm'){
 				hour = Number(hour) + 12
