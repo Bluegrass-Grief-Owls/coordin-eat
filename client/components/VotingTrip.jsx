@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Accordion, Panel, Button} from 'react-bootstrap'
-import {getYelpList, vote} from './../store'
+import {getYelpList, vote, getVote} from '../store'
 
 //Prevents multiple Yelp request from componentDidUpdate() loop
 let yelped = false
@@ -15,6 +15,11 @@ class VotingTrip extends Component {
 		if(!yelped){
 			this.props.getYelpData()
 		}
+	}
+
+	componentWillReceiveProps(){
+		console.log('recieving props')
+		this.props.fetchVote(this.props.user, this.props.currentTrip)						
 	}
 
 	render () {
@@ -83,6 +88,7 @@ class VotingTrip extends Component {
  */
 const mapState = (state) => {
 	return {
+		user: state.user,
 		currentTrip: state.currentTrip,
 		vote: state.vote,
 		yelpList: state.yelp,
@@ -104,6 +110,9 @@ const mapDispatch = (dispatch) => {
 		handleDestination: (choice, trip) => {
 			console.log('You chose ' + choice + '!')
 			dispatch(vote(choice, trip))
+		},
+		fetchVote: (user, trip) => {
+			dispatch(getVote(user, trip))
 		}
 	}
 }
