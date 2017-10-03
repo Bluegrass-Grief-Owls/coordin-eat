@@ -31,6 +31,7 @@ class Routes extends Component {
 						<Route path='/destinations' component = {DestinationPage} />
 						<Route path='/testTrip' component = {SingleTrip} />
 						<Route path='/addfriends' component = {InviteFriends} />
+						<Route path='/confirmingtrip' component = {SingleTrip} />
 						{
 							isLoggedIn &&
 								<Switch>
