@@ -3,3 +3,5 @@ curl -H "Content-Type: application/json" -X POST -d '{"name": "our trip", "date"
 curl -H "Content-Type: application/json" -X PUT -d '{"origin": [1.2223, 2.3343], "vote": 2, "userId": 2, "tripId": 1}' http://localhost:8080/api/attendee/1
 
 curl -H "Content-Type: application/json" -X POST -d '{"userId": 2, "tripId": 1}' http://localhost:8080/api/attendee
+
+curl -H "Content-Type: application/json" -X POST -d '{}' http://localhost:8080/api/friends/1/12
