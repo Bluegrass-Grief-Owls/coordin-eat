@@ -48,12 +48,17 @@ class VotingTrip extends Component {
 													</ul>
 												</Col>
 											</Row>
-											<Button 
-												className='destButton backgroundMainColor fontAccentColorLight' 
-												onClick={() => {this.props.handleDestination(idx, this.props.currentTrip.id)}}
-											>
-												I Pick This One!
-											</Button>
+											{(this.props.vote != idx) ?
+												<Button
+													bsStyle={this.props.vote ? 'warning' : 'primary'}
+													className='destButton backgroundMainColor fontAccentColorLight'
+													onClick={() => {this.props.handleDestination(idx, this.props.currentTrip.id)}}
+												>
+													{this.props.vote ? 'I changed my mind' : 'I Pick This One!'}
+												</Button>
+												:
+												<Button bsStyle="success" disabled>You voted for this</Button>
+											}
 										</Panel>
 									)
 								})
@@ -79,6 +84,7 @@ class VotingTrip extends Component {
 const mapState = (state) => {
 	return {
 		currentTrip: state.currentTrip,
+		vote: state.vote,
 		yelpList: state.yelp,
 		Results: state.Results
 	}
