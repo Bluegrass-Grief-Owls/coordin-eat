@@ -128,7 +128,7 @@ const mapDispatch = (dispatch) => {
 				hour = Number(hour) + 12
 			}
 			let theDate = ('2017-' + evt.target.month.value+'-'+evt.target.day.value +' '+ hour + ':' + evt.target.minute.value+':00')
-			let invitedIdArray = []
+			let invitedIdArray = [+ownerId]
 			for(var i = 1; i <= friendCounter; i++){
 				let name = 'check' + i
 				let target = document.getElementById(name)
