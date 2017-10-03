@@ -13,7 +13,7 @@ const choice = null
 /**
  * ACTION CREATORS
  */
-const voteAction = optionIndex => ({type: VOTE, optionIndex})
+const voteAction = optionIndex => ({type: VOTED, optionIndex})
 
 /**
  * THUNK CREATORS
@@ -32,7 +32,7 @@ export function vote(optionIndex, tripId){
 export default function (state = choice, action) {
 	switch (action.type) {
 	case VOTED:
-		return vote
+		return action.optionIndex
 	default:
 		return state
 	}
