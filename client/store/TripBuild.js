@@ -5,25 +5,40 @@ import history from '../history'
  * ACTION TYPES
  */
 
-const GET_FRIENDS = 'GET_FRIENDS'
-const ADD_FRIEND = 'ADD_FRIEND'
-const REMOVE_FRIEND = 'REMOVE_FRIEND'
+// const GET_FRIENDS = 'GET_FRIENDS'
+// const ADD_FRIEND = 'ADD_FRIEND'
+// const REMOVE_FRIEND = 'REMOVE_FRIEND'
 
 /**
  * INITIAL STATE
  */
-const friendArray = []
+const currentTrip = {}
 
 /**
  * ACTION CREATORS
  */
-export const getFriends = () => ({type: GET_FRIENDS})
 
-export const addFriend = friend => ({type: ADD_FRIEND, friend})
+// export const getFriends = () => ({type: GET_FRIENDS})
 
-export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
+// export const addFriend = friend => ({type: ADD_FRIEND, friend})
+
+// export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 
 // //THUNKS
+
+export function postTrip(trip, invitedIdArray){
+	return function thunk (dispatch) {
+		return axios.post('/api/trip', trip)
+			.then(res => res.data)
+			.then(newTrip => {
+				invitedIdArray.forEach(userId => {
+					axios.post('api/attendee', {tripId: newTrip.id, userId})
+				})
+				//history.push('/to the new trip url, whatever that is....')
+			})
+	}
+}
+
 // export const calculate = (array) =>
 // 	dispatch =>
 // 		axios.post('/api/midpoint', {places: array})
@@ -35,14 +50,14 @@ export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 /**
  * REDUCER
  */
-export default function (state = friendArray, action) {
+export default function (state = currentTrip, action) {
 	switch (action.type) {
-	case GET_FRIENDS:
-		return state
-	case ADD_FRIEND:
-		return [...state, action.friend]
-	case REMOVE_FRIEND:
-		return friendArray
+	// case GET_FRIENDS:
+	// 	return state
+	// case ADD_FRIEND:
+	// 	return [...state, action.friend]
+	// case REMOVE_FRIEND:
+	// 	return friendArray
 	default:
 		return state
 	}
