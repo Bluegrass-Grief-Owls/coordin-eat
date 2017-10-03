@@ -9,6 +9,10 @@ const ConfirmTrip = (props) => {
 
 	console.log('from confirming', props)
 
+	navigator.geolocation.getCurrentPosition(function(position) {
+		console.log(position.coords.latitude, position.coords.longitude);
+	});
+
 	const { removeSelf } = props
 
 	return (
@@ -18,9 +22,6 @@ const ConfirmTrip = (props) => {
 		</div>
 	)
 }
-
-
-
 
 
 /**

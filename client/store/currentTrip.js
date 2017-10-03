@@ -27,17 +27,22 @@ const setCoordinatesAction = () => ({type:SET_COORDINATES})
 
 // //THUNKS
 
-//SAM: put remove thunk here
-///// --- make sure to redirect them to homepage
-
 //SAM: update status for individual user
+////kept here: currentTrip.attendees[index].origin
+
+export function setCoordinates(id) {
+	return function thunk (dispatch) {
+		return axios.put(`/api/${id}`)
+	}
+}
+//talk to forrest about how this actually works
 
 export function declineInvitation(tripId,userId) {
 	return function thunk (dispatch) {
 		return axios.delete(`/api/attendee/${tripId}/${userId}`)
 			.then(() => {const action = declineInvitationAction()
 				dispatch(action)
-				//this dispatches the declineInvitationAction to the store
+				history.push('/home')
 			})
 	}
 }
