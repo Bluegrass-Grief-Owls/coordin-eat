@@ -18,3 +18,8 @@ router.put('/:tripId', (req, res, next) => {
 		.catch(next)
 })
 
+router.get('/:userId', (req, res, next) => {
+	Attendee.findAll({where: {userId: req.params.userId}, include: [{ model: Trip}]})
+		.then(attendeeList => res.json(attendeeList))
+		.catch(next)
+})
