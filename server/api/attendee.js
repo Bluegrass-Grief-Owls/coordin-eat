@@ -8,8 +8,11 @@ router.post('/', (req, res, next) => {
 		.catch(next)
 })
 
-router.put('/:id', (req, res, next) => {
-	Attendee.findById(req.params.id)
+router.put('/:tripId', (req, res, next) => {
+	Attendee.findOne({where: {
+		tripId: req.params.tripId, 
+		userId: req.user.id}
+	})
 		.then(attendee => attendee.update(req.body)
 			.then(updated =>res.json(updated)))
 		.catch(next)
