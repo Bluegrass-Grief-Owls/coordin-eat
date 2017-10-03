@@ -136,6 +136,10 @@ body {
   padding-right: 0;
 }
 
+.noPaddingBottom {
+  padding-bottom: 0;
+}
+
 .displayBlock {
   display: block;
 }
@@ -160,13 +164,20 @@ body {
   height: 100vh;
 }
 
+.myTripList {
+  border: 2px solid $accentColor;
+  border-radius: 5px;
+  color: $accentColorLight;
+  background-color: $mainColor;
+}
+
 .linkOnNav {
   margin: 0 0 15px 15px;
   color: $accentColorLight;
 }
 
 .welcomeUser {
-  margin: 0 0 0 15px;
+  margin: 0 0 15px 15px;
   padding-top: 20px;
 }
 
