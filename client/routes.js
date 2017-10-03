@@ -13,7 +13,9 @@ import {
 	YelpTest,
 	DestinationPage,
 	SingleTrip,
-	FriendsList
+	FriendsList,
+	InviteFriends,
+	ConfirmingTrip
 } from './components'
 import {me} from './store'
 

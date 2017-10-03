@@ -6,14 +6,14 @@ import history from '../history'
  */
 const GET_TRIP = 'GET_TRIP'
 const POST_TRIP = 'POST_TRIP'
-// const GET_FRIENDS = 'GET_FRIENDS'
-// const ADD_FRIEND = 'ADD_FRIEND'
-// const REMOVE_FRIEND = 'REMOVE_FRIEND'
+const DECLINE_INVITATION = 'DECLINE_INVITATION'
+const SET_COORDINATES = 'SET_COORDINATES'
 
 /**
  * INITIAL STATE
  */
 const currentTrip = {}
+//SAM: the area I'm looking for: currentTrip.attendees (array of objects)
 
 /**
  * ACTION CREATORS
@@ -21,6 +21,8 @@ const currentTrip = {}
 
 const fetchTripAction = (trip) => ({type: GET_TRIP, trip})
 const postTripAction = () => ({type: POST_TRIP})
+const declineInvitationAction = () => ({type: DECLINE_INVITATION})
+const setCoordinatesAction = () => ({type:SET_COORDINATES})
 
 
 // //THUNKS
@@ -30,6 +32,15 @@ const postTripAction = () => ({type: POST_TRIP})
 
 //SAM: update status for individual user
 
+export function declineInvitation(tripId,userId) {
+	return function thunk (dispatch) {
+		return axios.delete(`/api/attendee/${tripId}/${userId}`)
+			.then(() => {const action = declineInvitationAction()
+				dispatch(action)
+				//this dispatches the declineInvitationAction to the store
+			})
+	}
+}
 
 
 export function postTrip(trip, invitedIdArray){
@@ -57,13 +68,6 @@ export function fetchTrip(tripId){
 	}
 }
 
-// export const calculate = (array) =>
-// 	dispatch =>
-// 		axios.post('/api/midpoint', {places: array})
-// 			.then(res => console.log(res.data)
-
-// 			)
-// 			.catch(err => console.log(err))
 
 /**
  * REDUCER
@@ -74,12 +78,8 @@ export default function (state = currentTrip, action) {
 		return state
 	case GET_TRIP:
 		return action.trip
-	// case GET_FRIENDS:
-	// 	return state
-	// case ADD_FRIEND:
-	// 	return [...state, action.friend]
-	// case REMOVE_FRIEND:
-	// 	return friendArray
+	case DECLINE_INVITATION:
+		return state
 	default:
 		return state
 	}
