@@ -48,7 +48,12 @@ class VotingTrip extends Component {
 													</ul>
 												</Col>
 											</Row>
-											<Button className='destButton backgroundMainColor fontAccentColorLight' onClick={() => {this.props.handleDestination(buissness.name)}}>I Pick This One!</Button>
+											<Button 
+												className='destButton backgroundMainColor fontAccentColorLight' 
+												onClick={() => {this.props.handleDestination(idx, this.props.currentTrip.id)}}
+											>
+												I Pick This One!
+											</Button>
 										</Panel>
 									)
 								})
@@ -73,7 +78,7 @@ class VotingTrip extends Component {
  */
 const mapState = (state) => {
 	return {
-		// TripBuild: state.TripBuild,
+		currentTrip: state.currentTrip,
 		yelpList: state.yelp,
 		Results: state.Results
 	}
@@ -90,9 +95,9 @@ const mapDispatch = (dispatch) => {
 				dispatch(getYelpList(testCoords))
 			}
 		},
-		handleDestination: (choice) => {
+		handleDestination: (choice, trip) => {
 			console.log('You chose ' + choice + '!')
-			//dispatch(addFriend(friend))
+			dispatch(vote(choice, trip))
 		}
 	}
 }

@@ -21,7 +21,7 @@ const voteAction = optionIndex => ({type: VOTE, optionIndex})
 
 export function vote(optionIndex, tripId){
 	return function thunk (dispatch) {
-		return axios.put('/api/attendee' + tripId, {vote: optionIndex})
+		return axios.put('/api/attendee/' + tripId, {vote: optionIndex})
 			.then(() => dispatch(voteAction(optionIndex)))
 	}
 }
