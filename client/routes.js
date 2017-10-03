@@ -30,7 +30,6 @@ class Routes extends Component {
 						<Route path='/yelpTest' component = {YelpTest} />
 						<Route path='/destinations' component = {DestinationPage} />
 						<Route path='/trip/:tripId' component = {SingleTrip} />
-						<Route path='/addfriends' component = {InviteFriends} />
 						{
 							isLoggedIn &&
 								<Switch>
