@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
 import axios from 'axios'
-import Geolocation, {getCurrentPosition, fetchingPosition} from 'react-geolocation'
-import Geolocator from './Geolocator.js'
+
 
 
 
@@ -41,6 +40,7 @@ class ConfirmTrip extends Component {
 
 	removeFromTrip () {
 		//need to add delete route in API
+		//delete route is going to go in attendees --- it's going to remove the instance in the attendees table where the trip ID is the same trip id from props and the userId is the user's userId (gotten from the user object received from store)
 	}
 
 
@@ -77,7 +77,8 @@ const mapState = (state) => {
 		TripBuild: state.TripBuild,
 		yelpList: state.yelp,
 		Results: state.Results,
-		user: state.user
+		user: state.user,
+		currentTrip: state.currentTrip
 	}
 }
 
