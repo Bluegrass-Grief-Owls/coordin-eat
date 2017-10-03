@@ -19,19 +19,18 @@ router.delete('/:tripId/:userId', (req,res, next) => {
 			userId: req.params.userId
 		}
 	})
-		.then(() => res.json('blu'))
+		.then(() => res.json('deleted'))
 		.catch(next)
 })
 
-
-
-router.get('/:tripId/:userId', (req,res, next) => {
-	Attendee.findOne({
-		where: {
-			tripId: req.params.tripId,
-			userId: req.params.userId
-		}
+router.put('/:tripId', (req, res, next) => {
+	Attendee.findOne({where: {
+		tripId: req.params.tripId,
+		userId: req.user.id}
 	})
-		.then(t => res.json(t))
+		.then(attendee => attendee.update(req.body)
+			.then(updated =>res.json(updated)))
 		.catch(next)
 })
+
+

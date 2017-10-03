@@ -23,17 +23,25 @@ class ConfirmTrip extends Component {
 
 
 
-	getLocation() {
-		const location = []
+	getLocation () {
 
-		navigator.geolocation.getCurrentPosition(function(position) {
-			location[0] = position.coords.latitude
-			location[1] = position.coords.longitude
+		console.log('old state location', this.state.location)
+
+		const promiseForLocation = new Promise((resolve, reject) => {
+			navigator.geolocation.getCurrentPosition(resolve, reject)
 		})
 
-		location && this.setState({location})
+		promiseForLocation
+			.then(function(position) {
+				this.setState(function() {
+					return {location: [position.coords.longitude, position.coords.latitude]}
+				}, function () {
+					console.log('new state location',this.state.location)
+				})
+			}.bind(this))
+			.catch(console.error.bind(console))
 
-		console.log(this.state.location)
+
 	}
 
 
@@ -78,59 +86,10 @@ class ConfirmTrip extends Component {
  */
 const mapState = (state) => {
 	return {
-		TripBuild: state.TripBuild,
-		yelpList: state.yelp,
-		Results: state.Results,
 		user: state.user,
 		currentTrip: state.currentTrip
 	}
 }
 
-const mapDispatch = (dispatch) => {
-	return {
-	}
-}
 
-export default connect(mapState, mapDispatch)(ConfirmTrip)
-
-/**
- * PROP TYPES
- */
-ConfirmTrip.propTypes = {
-	//TripBuild: PropTypes.array,
-}
-
-/**
- * 	<Row>
-				<Col xs={1}></Col>
-				<Col xs={10}>
-					<h3>Here's Who's Coming!</h3>
-					<Table responsive>
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Name</th>
-								<th>location</th>
-							</tr>
-						</thead>
-						<tbody>
-							{
-								attendeeArray.map((attendee, idx) =>{
-									return (
-										<tr key={idx}>
-											<td>{idx + 1}</td>
-											<td>{attendee.name}</td>
-											{attendee.location ? (<td>{attendee.location[0]+ ', '+attendee.location[1]}</td>) : (<td>Awaiting Reply</td>)}
-										</tr>
-									)
-								})
-							}
-						</tbody>
-					</Table>
-					{
-						isTripOwner ? (<Button className='tripButton'>Procced to Voting</Button>) : ''
-					}
-				</Col>
-				<Col xs={1}></Col>
-			</Row>
- */
+export default connect(mapState)(ConfirmTrip)
