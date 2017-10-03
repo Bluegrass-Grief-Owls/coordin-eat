@@ -49,6 +49,12 @@ export const logout = () =>
 			})
 			.catch(err => console.log(err))
 
+export const postFriend = (myId, friendId) =>
+	dispatch =>
+		axios.post(`api/friends/${myId}/${friendId}`)
+			.then(() => dispatch(me()))
+			.catch(err => console.log(err))
+
 /**
  * REDUCER
  */
