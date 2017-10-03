@@ -70,10 +70,6 @@ class ConfirmTrip extends Component {
 				</form>
 
 				<button onClick={this.removeFromTrip}>Can't make it</button>
-
-
-
-
 			</div>
 
 		)

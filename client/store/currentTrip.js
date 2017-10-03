@@ -21,13 +21,16 @@ const currentTrip = {}
 
 const fetchTripAction = (trip) => ({type: GET_TRIP, trip})
 const postTripAction = () => ({type: POST_TRIP})
-// export const getFriends = () => ({type: GET_FRIENDS})
 
-// export const addFriend = friend => ({type: ADD_FRIEND, friend})
-
-// export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 
 // //THUNKS
+
+//SAM: put remove thunk here
+///// --- make sure to redirect them to homepage
+
+//SAM: update status for individual user
+
+
 
 export function postTrip(trip, invitedIdArray){
 	return function thunk (dispatch) {

@@ -4,7 +4,17 @@ import {Router} from 'react-router'
 import {Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, BuildTrip, YelpTest, DestinationPage, InviteFriends, SingleTrip, ConfirmingTrip} from './components'
+import {
+	Main,
+	Login,
+	Signup,
+	UserHome,
+	BuildTrip,
+	YelpTest,
+	DestinationPage,
+	SingleTrip,
+	FriendsList
+} from './components'
 import {me} from './store'
 
 
@@ -33,6 +43,7 @@ class Routes extends Component {
 						<Route path='/addfriends' component = {InviteFriends} />
 						<Route path='/confirmingtrip' component = {ConfirmingTrip} />
 						<Route path='/trip/:tripId' component = {SingleTrip} />
+						<Route path='/friends' component = {FriendsList} />
 						{
 							isLoggedIn &&
 								<Switch>
