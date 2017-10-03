@@ -15,7 +15,7 @@ class ConfirmTrip extends Component {
 		super(props)
 		this.state = {
 			confirmed: false,
-			location: []
+			location: [4]
 		}
 		this.getLocation = this.getLocation.bind(this)
 	}
@@ -24,11 +24,14 @@ class ConfirmTrip extends Component {
 
 	getLocation() {
 		const location = []
+
 		navigator.geolocation.getCurrentPosition(function(position) {
 			location[0] = position.coords.latitude
 			location[1] = position.coords.longitude
 		})
+
 		location && this.setState({location})
+
 		console.log(this.state.location)
 	}
 
