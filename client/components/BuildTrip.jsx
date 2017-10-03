@@ -24,7 +24,7 @@ let friendCounter = 0
 const BuildTrip = (props) => {
 	if(props.user.friend){
 		return (
-			<form onSubmit={(evt) => {props.handleSubmit(evt, props.user.id)}}>
+			<form onSubmit={(evt) => {props.handleSubmit(evt, props.user.id, props.user.friend)}}>
 				<FormGroup controlId="tripForm">
 					<ControlLabel>Trip Name</ControlLabel>
 					<FormControl
@@ -91,7 +91,7 @@ const BuildTrip = (props) => {
 						props.user.friend.map(friend =>{
 							friendCounter++
 							return(
-								<Checkbox name={'check'+friendCounter} key={friend.id}>{friend.name}</Checkbox>
+								<Checkbox id={'check'+friendCounter} key={friend.id}>{friend.name}</Checkbox>
 							)
 						})
 					}
@@ -121,18 +121,22 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
 	return {
-		handleSubmit: function(evt, ownerId) {
+		handleSubmit: function(evt, ownerId, friends) {
 			evt.preventDefault()
-			console.log(this)
 			let hour = evt.target.hour.value
 			if (evt.target.ampm.value === 'pm'){
 				hour = Number(hour) + 12
 			}
-			let theDate = ('Trip name:', evt.target.tripName.value, 'Date:', '2017-' + evt.target.month.value+'-'+evt.target.day.value, hour + ':' + evt.target.minute.value+':00')
-			dispatch(postTrip({name: evt.target.tripName.value, date: theDate, ownerId}))
-		},
-		handleChange: function(date) {
-			console.log(date)
+			let theDate = ('2017-' + evt.target.month.value+'-'+evt.target.day.value +' '+ hour + ':' + evt.target.minute.value+':00')
+			let invitedIdArray = []
+			for(var i = 1; i <= friendCounter; i++){
+				let name = 'check' + i
+				let target = document.getElementById(name)
+				if(target.checked){
+					invitedIdArray.push(friends[i - 1].id)
+				}
+			}
+			dispatch(postTrip({name: evt.target.tripName.value, date: theDate, ownerId}, invitedIdArray))
 		}
 	}
 }
