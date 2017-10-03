@@ -1,6 +1,6 @@
 //Color Setup
-$colorArray: orange banana pear blueberry;
-$colorChoice: nth($colorArray, 3);
+$colorArray: orange banana pear blueberry blackberry dragonfruit;
+$colorChoice: nth($colorArray, 6);
 //colorArray index starts at 1, not 0
 
 $mainColor: null;
@@ -28,6 +28,16 @@ $accentColorLight: null;
     $mainColorLight: #8D94F2;
     $accentColor: #63477B;
     $accentColorLight: #C9BDD4;
+  } @else if $colorChoice == blackberry {
+    $mainColor: #1e1e1e;
+    $mainColorLight: #424242;
+    $accentColor: #774ab2;
+    $accentColorLight: #b78eed;
+  } @else if $colorChoice == dragonfruit {
+    $mainColor: #00ffa1;
+    $mainColorLight: #a7f2d6;
+    $accentColor: #c61fa5;
+    $accentColorLight: #e86fa2;
   } @else {
     //this is a white and blue color pallet
     $mainColor: #FFFFFF;
