@@ -19,8 +19,8 @@ const TripDetails = (props) => {
 	let monthArray = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 	let month = monthArray[Number(theDate.slice(5,7)) - 1]
 	let day = ' ' + Number(theDate.slice(8,10))
-	console.log(theTrip)
-	console.log(theTime)
+	console.log('the trip',theTrip)
+	console.log('the time',theTime)
 	return (
 		<Row>
 			<Col xs={1}>

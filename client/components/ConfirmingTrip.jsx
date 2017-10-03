@@ -42,15 +42,14 @@ class ConfirmTrip extends Component {
 
 
 	removeFromTrip () {
-		//need to add delete route in API
-		//delete route is going to go in attendees --- it's going to remove the instance in the attendees table where the trip ID is the same trip id from props and the userId is the user's userId (gotten from the user object received from store)
+		axios.delete(`/${this.props.currentTrip.id}/${this.props.user.id}`)
 	}
 
 
 
 	render () {
 
-
+		console.log('props from confirming', this.props)
 		return (
 			<div>
 				<h1>Da trip</h1>

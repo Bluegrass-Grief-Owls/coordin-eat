@@ -16,3 +16,27 @@ router.put('/:id', (req, res, next) => {
 		.catch(next)
 })
 
+
+router.delete('/:tripId/:userId', (req,res, next) => {
+	Attendee.destroy({
+		where: {
+			tripId: req.params.tripId,
+			userId: req.params.userId
+		}
+	})
+		.then(() => res.json('blu'))
+		.catch(next)
+})
+
+
+
+router.get('/:tripId/:userId', (req,res, next) => {
+	Attendee.findOne({
+		where: {
+			tripId: req.params.tripId,
+			userId: req.params.userId
+		}
+	})
+		.then(t => res.json(t))
+		.catch(next)
+})

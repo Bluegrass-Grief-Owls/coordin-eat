@@ -45,7 +45,7 @@ class SingleTrip extends Component {
 						<div>This should be some info from a past trip</div>
 					</div>
 				)
-			} 
+			}
 		} else {
 			return (
 				<div>
