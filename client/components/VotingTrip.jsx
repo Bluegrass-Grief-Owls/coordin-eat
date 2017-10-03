@@ -92,17 +92,17 @@ const mapState = (state) => {
 		currentTrip: state.currentTrip,
 		vote: state.vote,
 		yelpList: state.yelp,
-		Results: state.Results
+		results: state.results
 	}
 }
 
 const mapDispatch = (dispatch) => {
 	return {
 		getYelpData () {
-			if(this.Results.length){
+			if(this.results.length){
 				yelped = true
-				console.log('Yelp search at',this.Results[0].toFixed(6),',', this.Results[1].toFixed(6) )
-				dispatch(getYelpList([this.Results[0].toFixed(6), this.Results[1].toFixed(6)]))
+				console.log('Yelp search at',this.results[0].toFixed(6),',', this.results[1].toFixed(6) )
+				dispatch(getYelpList([this.results[0].toFixed(6), this.results[1].toFixed(6)]))
 			} else {
 				dispatch(getYelpList(testCoords))
 			}

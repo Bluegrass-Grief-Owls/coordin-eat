@@ -4,10 +4,20 @@ import thunkMiddleware from 'redux-thunk'
 import user from './user'
 import yelp from './yelp'
 import currentTrip from './currentTrip'
-import Results from './Results'
+import results from './results'
+import users from './users'
+import friends from './friends'
 import vote from './vote'
 
-const reducer = combineReducers({user, currentTrip, Results, yelp, vote})
+const reducer = combineReducers({
+	user, 
+	currentTrip, 
+	results, 
+	yelp,
+	users,
+	friends,
+	vote
+})
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)
 
@@ -15,5 +25,7 @@ export default store
 export * from './user'
 export * from './yelp'
 export * from './currentTrip'
-export * from './Results'
+export * from './results'
+export * from './users'
+export * from './friends'
 export * from './vote'
