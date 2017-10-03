@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
 import {getYelpList, fetchTrip} from './../store'
-import {ConfirmingTrip, ResolvingTrip, FinishedTrip, TripDetails} from './index.js'
+import {ConfirmingTrip, VotingTrip, ResolvingTrip, FinishedTrip} from './index.js'
 
 // Trip statuses for reference 'confirming', 'voting', 'directions', 'finished'
 
@@ -26,10 +26,7 @@ class SingleTrip extends Component {
 				)
 			} else if (currentStatus === 'voting') {
 				return(
-					<div>
-						<TripDetails />
-						<div>This should be the yelp page view</div>
-					</div>
+					<VotingTrip />					
 				)
 			} else if (currentStatus === 'directions') {
 				return(

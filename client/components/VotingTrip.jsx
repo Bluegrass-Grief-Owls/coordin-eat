@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Accordion, Panel, Button} from 'react-bootstrap'
-import {getYelpList} from './../store'
+import {getYelpList, vote, getVote} from '../store'
 
 //Prevents multiple Yelp request from componentDidUpdate() loop
 let yelped = false
@@ -10,11 +10,16 @@ let yelped = false
 let testCoords = [40.7061336, -74.0119549]
 //Will use the trip build array, later....
 
-class DestinationPage extends Component {
-	componentDidUpdate() {
+class VotingTrip extends Component {
+	componentDidMount() {
 		if(!yelped){
 			this.props.getYelpData()
 		}
+	}
+
+	componentWillReceiveProps(){
+		console.log('recieving props')
+		this.props.fetchVote(this.props.user, this.props.currentTrip)						
 	}
 
 	render () {
@@ -48,7 +53,17 @@ class DestinationPage extends Component {
 													</ul>
 												</Col>
 											</Row>
-											<Button className='destButton backgroundMainColor fontAccentColorLight' onClick={() => {this.props.handleDestination(buissness.name)}}>I Pick This One!</Button>
+											{(this.props.vote != idx) ?
+												<Button
+													bsStyle={this.props.vote ? 'warning' : 'primary'}
+													className='destButton backgroundMainColor fontAccentColorLight'
+													onClick={() => {this.props.handleDestination(idx, this.props.currentTrip.id)}}
+												>
+													{this.props.vote ? 'I changed my mind' : 'I Pick This One!'}
+												</Button>
+												:
+												<Button bsStyle="success" disabled>You voted for this</Button>
+											}
 										</Panel>
 									)
 								})
@@ -73,36 +88,41 @@ class DestinationPage extends Component {
  */
 const mapState = (state) => {
 	return {
-		// TripBuild: state.TripBuild,
+		user: state.user,
+		currentTrip: state.currentTrip,
+		vote: state.vote,
 		yelpList: state.yelp,
-		Results: state.Results
+		results: state.results
 	}
 }
 
 const mapDispatch = (dispatch) => {
 	return {
 		getYelpData () {
-			if(this.Results.length){
+			if(this.results.length){
 				yelped = true
-				console.log('Yelp search at',this.Results[0].toFixed(6),',', this.Results[1].toFixed(6) )
-				dispatch(getYelpList([this.Results[0].toFixed(6), this.Results[1].toFixed(6)]))
+				console.log('Yelp search at',this.results[0].toFixed(6),',', this.results[1].toFixed(6) )
+				dispatch(getYelpList([this.results[0].toFixed(6), this.results[1].toFixed(6)]))
 			} else {
 				dispatch(getYelpList(testCoords))
 			}
 		},
-		handleDestination: (choice) => {
+		handleDestination: (choice, trip) => {
 			console.log('You chose ' + choice + '!')
-			//dispatch(addFriend(friend))
+			dispatch(vote(choice, trip))
+		},
+		fetchVote: (user, trip) => {
+			dispatch(getVote(user, trip))
 		}
 	}
 }
 
-export default connect(mapState, mapDispatch)(DestinationPage)
+export default connect(mapState, mapDispatch)(VotingTrip)
 
 /**
  * PROP TYPES
  */
-DestinationPage.propTypes = {
+VotingTrip.propTypes = {
 	// TripBuild: PropTypes.array,
 	yelpList: PropTypes.array
 }
