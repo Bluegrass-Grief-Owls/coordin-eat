@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Accordion, Panel, Button} from 'react-bootstrap'
-import {getYelpList} from './../store'
+import {getYelpList, vote} from './../store'
 
 //Prevents multiple Yelp request from componentDidUpdate() loop
 let yelped = false
