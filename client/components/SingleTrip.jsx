@@ -26,7 +26,10 @@ class SingleTrip extends Component {
 				)
 			} else if (currentStatus === 'voting') {
 				return(
-					<VotingTrip />
+					<div>
+						<TripDetails />
+						<VotingTrip />
+					</div>
 				)
 			} else if (currentStatus === 'directions') {
 				return(
