@@ -2,33 +2,38 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
-import {getYelpList} from './../store'
+import {getYelpList, fetchTrip} from './../store'
 import {ConfirmingTrip, VotingTrip, ResolvingTrip, FinishedTrip} from './index.js'
 
-//Diferent statuses for a trip, not sure if we want to implement a past yet
-let tripStatusArray = ['confirm', 'vote', 'resolved', 'past']
-let currentStatus = 'confirm'
+// Trip statuses for reference 'confirming', 'voting', 'directions', 'finished'
 
 class SingleTrip extends Component {
 
+	componentDidMount () {
+		this.props.loadInitialData(+this.props.match.params.tripId)
+	}
+
 	render () {
-		if(currentStatus === 'confirm'){
-			return (
-				<ConfirmingTrip />
-			)
-		} else if (currentStatus === 'vote') {
-			console.log('voting trip')
-			return(
-				<VotingTrip />
-			)
-		} else if (currentStatus === 'resolved') {
-			return(
-				<div>This should be the directions to the trip!</div>
-			)
-		} else if (currentStatus === 'past') {
-			return(
-				<div>This should be some info from a past trip</div>
-			)
+		if(this.props.currentTrip.id){
+			let theTrip = this.props.currentTrip
+			let currentStatus = theTrip.status
+			if(currentStatus === 'confirming'){
+				return (
+					<ConfirmingTrip />
+				)
+			} else if (currentStatus === 'voting') {
+				return(
+					<VotingTrip />					
+				)
+			} else if (currentStatus === 'directions') {
+				return(
+					<div>This should be the directions to the trip!</div>
+				)
+			} else if (currentStatus === 'finished') {
+				return(
+					<div>This should be some info from a past trip</div>
+				)
+			} 
 		} else {
 			return (
 				<div>
@@ -44,13 +49,19 @@ class SingleTrip extends Component {
  */
 const mapState = (state) => {
 	return {
-		// TripBuild: state.TripBuild,
-		yelpList: state.yelp,
-		Results: state.Results
+		currentTrip: state.currentTrip
 	}
 }
 
-export default connect(mapState)(SingleTrip)
+const mapDispatch = (dispatch) => {
+	return {
+		loadInitialData (tripId) {
+			dispatch(fetchTrip(tripId))
+		}
+	}
+}
+
+export default connect(mapState, mapDispatch)(SingleTrip)
 
 /**
  * PROP TYPES
