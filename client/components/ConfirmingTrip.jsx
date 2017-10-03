@@ -18,6 +18,7 @@ class ConfirmTrip extends Component {
 			location: [4]
 		}
 		this.getLocation = this.getLocation.bind(this)
+		this.removeFromTrip = this.removeFromTrip.bind(this)
 	}
 
 
@@ -42,7 +43,8 @@ class ConfirmTrip extends Component {
 
 
 	removeFromTrip () {
-		axios.delete(`/${this.props.currentTrip.id}/${this.props.user.id}`)
+		axios.delete(`/api/attendee/${this.props.currentTrip.id}/${this.props.user.id}`)
+			.then(() => console.log(`${this.props.currentTrip.id} ${this.props.user.id}`))
 	}
 
 
@@ -59,7 +61,7 @@ class ConfirmTrip extends Component {
 					<input type='text' name='address'/>
 				</form>
 
-				<button>Can't make it</button>
+				<button onClick={this.removeFromTrip}>Can't make it</button>
 
 
 
