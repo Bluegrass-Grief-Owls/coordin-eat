@@ -10,6 +10,12 @@ const Trip = db.define('trip', {
 		type: Sequelize.DATE,
 		allowNull: false
 	},
+	status: {
+		type: Sequelize.ENUM('confirming', 'voting', 'directions', 'finished'),
+		defaultValue: 'confirming',
+		allowNull: false,
+
+	},
 	ownerId: {
 		type: Sequelize.INTEGER,
 		allowNull: false
