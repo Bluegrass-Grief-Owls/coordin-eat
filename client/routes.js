@@ -29,7 +29,7 @@ class Routes extends Component {
 						<Route path='/build_trip' component = {BuildTrip} />
 						<Route path='/yelpTest' component = {YelpTest} />
 						<Route path='/destinations' component = {DestinationPage} />
-						<Route path='/testTrip' component = {SingleTrip} />
+						<Route path='/trip/:tripId' component = {SingleTrip} />
 						<Route path='/addfriends' component = {InviteFriends} />
 						{
 							isLoggedIn &&
