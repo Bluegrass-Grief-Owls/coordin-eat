@@ -24,13 +24,17 @@ export const addFriend = friend => ({type: ADD_FRIEND, friend})
 export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 
 // //THUNKS
-export const fetchFriends = (userId) =>
-	dispatch =>
-		axios.post('/api/midpoint', {places: array})
-			.then(res => console.log(res.data)
+// export const fetchFriends = () =>
+// 	dispatch =>
+// 		axios.post('/api/midpoint', {places: array})
+// 			.then(res => console.log(res.data))
+// 			.catch(err => console.log(err))
 
-			)
-			.catch(err => console.log(err))
+// export const postFriend = (myId, friendId) =>
+// 	dispatch =>
+// 		axios.post(`api/friends/${myId}/${friendId}`)
+// 			.then(res => console.log(res.data))
+// 			.catch(err => console.log(err))
 
 /**
  * REDUCER

@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
-router.put('/:myId/:friendId', (req, res, next) => {
+router.post('/:myId/:friendId', (req, res, next) => {
 	User.findById(req.params.myId)
 		.then(me => {
 			User.findById(req.params.friendId)

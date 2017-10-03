@@ -5,14 +5,16 @@ import user from './user'
 import yelp from './yelp'
 import currentTrip from './currentTrip'
 import results from './results'
-// import friends from './friends'
+import users from './users'
+import friends from './friends'
 
 const reducer = combineReducers({
 	user, 
 	currentTrip, 
 	results, 
 	yelp,
-	// friends
+	users,
+	friends
 })
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)
@@ -22,4 +24,5 @@ export * from './user'
 export * from './yelp'
 export * from './currentTrip'
 export * from './results'
-// export * from './friends'
+export * from './users'
+export * from './friends'
