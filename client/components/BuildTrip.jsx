@@ -14,7 +14,7 @@ for(var i = 11; i <= 31; i++){
 	dayArray.push(i)
 }
 let hourArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-let minuiteArray = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
+let minuiteArray = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
 for(var k = 11; k <= 60; k++){
 	minuiteArray.push(k)
 }
@@ -127,6 +127,9 @@ const mapDispatch = (dispatch) => {
 			let hour = evt.target.hour.value
 			if (evt.target.ampm.value === 'pm'){
 				hour = Number(hour) + 12
+			}
+			if (hour === 24){
+				hour = '00'
 			}
 			let theDate = ('2017-' + evt.target.month.value+'-'+evt.target.day.value +' '+ hour + ':' + evt.target.minute.value+':00')
 			let invitedIdArray = [+ownerId]
