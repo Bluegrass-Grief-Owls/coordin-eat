@@ -13,12 +13,16 @@ const bxSW = [40.807559, -73.928704]
 const bxSE = [40.812789, -73.900186] 
 const bxRec = [bxNW, bxSW, bxSE]
 
-const addVect = (vec1, vec2, vec3) => {
-	return [vec1[0] + vec2[0] + vec3[0], vec1[1] + vec2[1] + vec3[1],]
-}
+const bxP = .2
+const mP = .6
 
-const addVect2 = (vec1, vec2) => {
-	return [vec1[0] + vec2[0], vec1[1] + vec2[1]]
+const addVect = (...arr) => {
+	const result = [0,0]
+	arr.map((el) => {
+		result[0] += el[0]
+		result[1] += el[1]
+	})
+	return result
 }
 
 const subVect = (vec1, vec2) => {
@@ -42,9 +46,9 @@ const mapXYtoLatLng = (xy = [], NW, SW, SE) => { // x and y are real nums btwn 0
 const randomCoords = () => {
 	const boro = Math.random()
 	const inBoro = [Math.random(), Math.random()]
-	if (boro < .2) return [...mapXYtoLatLng(inBoro, ...bxRec), 0]
-	else if (boro < .8) return [...mapXYtoLatLng(inBoro, ...manhattanRec), 1]
-	else return [...mapXYtoLatLng(inBoro, ...bkqueensRec), 2]
+	if (boro < bxP) return [...mapXYtoLatLng(inBoro, ...bxRec)]
+	else if (boro < bxP + mP) return [...mapXYtoLatLng(inBoro, ...manhattanRec)]
+	else return [...mapXYtoLatLng(inBoro, ...bkqueensRec)]
 }
 
 const twoFriends = () => {
@@ -62,7 +66,7 @@ const midVector = (twoF = [], scale) => {
 const alongMidline = (twoF = [], scale) => {
 	const avg = [(twoF[0][0]+twoF[1][0]) * .5, (twoF[0][1]+twoF[1][1]) * .5]
 	const mVect = midVector(twoF, scale)
-	return addVect2(avg, mVect)
+	return addVect(avg, mVect)
 }
 
 console.log(alongMidline(tf, .2))

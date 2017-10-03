@@ -4,6 +4,7 @@ module.exports = router
 router.use('/users', require('./users'))
 router.use('/yelp', require('./yelp'))
 router.use('/midpoint', require('./midpoint'))
+router.use('/email', require('./email'))
 router.use('/trip', require('./trip'))
 router.use('/attendee', require('./attendee'))
 

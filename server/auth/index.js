@@ -3,7 +3,7 @@ const User = require('../db/models/user')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  User.findOne({where: {email: req.body.email}})
+  User.findOne({where: {email: req.body.email}, include: [{model: User, as: 'friend'}]})
     .then(user => {
       if (!user) {
         res.status(401).send('User not found')
@@ -34,7 +34,14 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-  res.json(req.user)
+	if(req.user){
+		User.findOne({where: {id: req.user.id}, include: [{model: User, as: 'friend'}]})
+			.then(user =>{
+				res.json(user)
+			})
+	} else {
+		res.json(undefined)
+	}
 })
 
 router.use('/google', require('./google'))
