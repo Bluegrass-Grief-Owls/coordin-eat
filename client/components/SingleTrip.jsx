@@ -19,7 +19,10 @@ class SingleTrip extends Component {
 			let currentStatus = theTrip.status
 			if(currentStatus === 'confirming'){
 				return (
-					<ConfirmingTrip />
+					<div>
+						<TripDetails />
+						<ConfirmingTrip />
+					</div>
 				)
 			} else if (currentStatus === 'voting') {
 				return(
@@ -27,11 +30,17 @@ class SingleTrip extends Component {
 				)
 			} else if (currentStatus === 'directions') {
 				return(
-					<div>This should be the directions to the trip!</div>
+					<div>
+						<TripDetails />
+						<div>This should be the directions to the trip!</div>
+					</div>
 				)
 			} else if (currentStatus === 'finished') {
 				return(
-					<div>This should be some info from a past trip</div>
+					<div>
+						<TripDetails />
+						<div>This should be some info from a past trip</div>
+					</div>
 				)
 			} 
 		} else {
