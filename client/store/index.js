@@ -3,15 +3,15 @@ import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import user from './user'
 import yelp from './yelp'
-import TripBuild from './TripBuild'
+import currentTrip from './currentTrip'
 import Results from './Results'
 
-const reducer = combineReducers({user, TripBuild, Results, yelp})
+const reducer = combineReducers({user, currentTrip, Results, yelp})
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
 export * from './yelp'
-export * from './TripBuild'
+export * from './currentTrip'
 export * from './Results'

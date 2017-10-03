@@ -22,6 +22,7 @@ let ampm = ['am', 'pm']
 let friendCounter = 0
 
 const BuildTrip = (props) => {
+	friendCounter = 0
 	if(props.user.friend){
 		return (
 			<form onSubmit={(evt) => {props.handleSubmit(evt, props.user.id, props.user.friend)}}>
@@ -131,6 +132,7 @@ const mapDispatch = (dispatch) => {
 			let invitedIdArray = []
 			for(var i = 1; i <= friendCounter; i++){
 				let name = 'check' + i
+				console.log(name)
 				let target = document.getElementById(name)
 				if(target.checked){
 					invitedIdArray.push(friends[i - 1].id)
