@@ -21,7 +21,6 @@ const ConfirmTrip = (props) => {
 
 	console.log('individual trip test', individualTrip)
 
-	// let attending = false
 
 	let lat, long
 	navigator.geolocation.getCurrentPosition(function(position) {
