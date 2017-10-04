@@ -7,15 +7,7 @@ import history from './../history'
 
 const TripDetails = (props) => {
 	let theTrip = props.currentTrip
-	// let theDate = theTrip.date.slice(0,10)
-	// let theTime = theTrip.date.slice(14,19)
-	// let hour = Number(theTime.slice(0,2))
-	// let amorpm = ' am'
-	// if (hour > 12){
-	// 	amorpm = ' pm'
-	// 	hour -= 12
-	// }
-	// let minute = theTime.slice(2)
+
 	return (
 		<Row>
 			<Col xs={1}>
