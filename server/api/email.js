@@ -16,20 +16,16 @@ let transporter = nodeMailer.createTransport({
 })
 
 router.post('/invite', (req, res) => { //just using post because it allows request to have a body
-	if (req.body.tripName.match(/^[a-z0-9]+$/i)) { //check that the name is alphanumeric
-		const url = 'http://localhost:8080/trips/' + req.body.tripName //or 'http://coordin-Eat.herokuapp.com/trips/ + req.body.tripName		
-		User.findById(req.user.id)
-			.then(user => {
-				return Promise.map(req.body.invitees, inviteeId => {
-					return User.findById(inviteeId)
-						.then(invitee => {
-							sendMail(url, user.name, invitee.email, () => res.sendStatus(200))
-						})
-				})
+	const url = 'http://localhost:8080/trip/' + req.body.tripId //or 'http://coordin-Eat.herokuapp.com/trips/ + req.body.tripName		
+	User.findById(req.user.id)
+		.then(user => {
+			return Promise.map(req.body.invitees, inviteeId => {
+				return User.findById(inviteeId)
+					.then(invitee => {
+						sendMail(url, user.name, invitee.email, () => res.sendStatus(200))
+					})
 			})
-	} else {
-		res.sendStatus(403)
-	}
+		})
 })
 
 function sendMail(url, senderName, recipient, callback) {
