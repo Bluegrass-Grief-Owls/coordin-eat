@@ -21,20 +21,21 @@ const getVoteAction = vote => ({type: GET_VOTE, vote})
  * THUNK CREATORS
  */
 
-export function vote(optionIndex, tripId){
+export function postVote(optionIndex, tripId){
 	return function thunk (dispatch) {
 		return axios.put('/api/attendee/' + tripId, {vote: optionIndex})
-			.then(() => dispatch(voteAction(optionIndex)))
+			.then(() => {
+				dispatch(voteAction(optionIndex))
+			})
 	}
 }
 
 export function getVote(user, trip){
+	console.log('trying to get vote!')
 	return function thunk (dispatch) {
-		console.log('called thunk with', user, trip)
 		trip.attendees.forEach((attendee) =>{
 			if(attendee.userId === user.id){
 				const action = getVoteAction(attendee.vote)
-				console.log(action)
 				dispatch(action)
 			}
 		})
