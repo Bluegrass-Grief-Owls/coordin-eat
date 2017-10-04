@@ -35,12 +35,11 @@ const ConfirmTrip = (props) => {
 	return (
 		<div>
 
+
 			{ individualTrip && !individualTrip.origin ?
 
-
 				<div>
-					{//disable this button until coordinate information has loaded
-					}
+
 					<button onClick={() => 	giveCoords([lat,long], props.currentTrip.id,props.user.id)}>I'm coming, here's my coordinates</button>
 					<button onClick={() => removeSelf(props.currentTrip.id,props.user.id)}>I cannot attend</button>
 				</div>
