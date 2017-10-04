@@ -69,10 +69,24 @@ const alongMidline = (twoF = [], scale) => {
 	return addVect(avg, mVect)
 }
 
-console.log(alongMidline(tf, .2))
+const mid = alongMidline(tf, .3)
 
-// 40.81968977589759, -73.9192938683323 ],
-//   [ 40.685192623966245, -73.90347564684862
+console.log(mid)
+
+const dist = (xy, ij) => {
+	return Math.sqrt((ij[1]-xy[1])*(ij[1]-xy[1]) + (ij[0]-xy[0])*(ij[0]-xy[0]))
+}
+
+// console.log(dist([0,0], [5,12]))
+const checkDist = (friends, mid) => {
+	const dist1 = dist(friends[0], mid)
+	const dist2 = dist(friends[1], mid)
+	return [dist1, dist2]
+}
+
+console.log(checkDist(tf, mid))
+
+
 
 // =======================================
 
