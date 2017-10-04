@@ -26,7 +26,7 @@ const postTripAction = () => ({type: POST_TRIP})
 const declineInvitationAction = (userId) => ({type: DECLINE_INVITATION})
 const setCoordinatesAction = (coordsArray) => ({type:SET_COORDINATES, coordsArray})
 const voteAction = (choiceObj) => ({type: VOTED, choiceObj})
-const updateTripStatus = (updatedTrip) => ({type: UPDATE_STATUS, updatedTrip})
+const updateTripAction = (updatedTrip) => ({type: UPDATE_STATUS, updatedTrip})
 
 
 // //THUNKS
@@ -84,9 +84,9 @@ export function fetchTrip(tripId) {
 	}
 }
 
-export function postVote(choiceIdx, tripId, userId){
+export function postVote(choiceIdx, trip, userId, yelpList){
 	return function thunk (dispatch) {
-		return axios.put('/api/attendee/' + tripId, {vote: choiceIdx})
+		return axios.put('/api/attendee/' + trip.id, {vote: choiceIdx})
 			.then((theTrip) => {
 				let obj = {choiceIdx, userId}
 				dispatch(voteAction(obj))
@@ -95,17 +95,38 @@ export function postVote(choiceIdx, tripId, userId){
 					return attendee.vote !== -1
 				})
 				if(votingDone){
-					dispatch(updateTrip('directions', tripId))
+					//Adding votes
+					let voteCounter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0,}
+					trip.attendees.forEach(attendee => {
+						if(attendee.vote !== -1){
+							voteCounter[attendee.vote]++
+						}
+					})
+					//Determine the most voted for
+					let largest = []
+					let number = voteCounter['0']
+					for (var choice in voteCounter){
+						if(voteCounter[choice] === number){
+							largest.push(choice)
+						} else if (voteCounter[choice] > number){
+							number = voteCounter[choice]
+							largest = [choice]
+						}
+					}
+					//Select a random restaurant from the most voted and stringify it
+					let randomChoice = +largest[Math.floor(Math.random() * largest.length)]
+					let yelpChoice = JSON.stringify(yelpList[randomChoice])
+					dispatch(updateTrip({status: 'directions', yelpString: yelpChoice}, trip.id))
 				}
 			})
 	}
 }
 
-export function updateTrip(status, tripId){
+export function updateTrip(trip, tripId){
 	return function thunk (dispatch) {
-		return axios.put(`/api/trip/${tripId}`, {status})
+		return axios.put(`/api/trip/${tripId}`, trip)
 			.then(tripData => {
-				dispatch(updateTripStatus(tripData.data))
+				dispatch(updateTripAction(tripData.data))
 				history.push(`/trip/${tripId}`)
 			})
 	}

@@ -44,7 +44,7 @@ class VotingTrip extends Component {
 						<Col xs={10}>
 							{
 								isTripOwner ? (<Button className='tripButton' onClick={() => {
-									this.props.moveToDirections(this.props.currentTrip.id)}}>Procced to Directions</Button>) : ''
+									this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
 							}
 							<h3>Choices</h3>
 							<Accordion>
@@ -75,7 +75,7 @@ class VotingTrip extends Component {
 													<Button
 														bsStyle={myVote ? 'warning' : 'primary'}
 														className='destButton backgroundMainColor fontAccentColorLight'
-														onClick={() => {this.props.handleDestination(idx, this.props.currentTrip.id, this.props.user.id)}}
+														onClick={() => {this.props.handleVote(idx, this.props.currentTrip, this.props.user.id, this.props.yelpList)}}
 													>
 														{myVote !== -1 ? 'I changed my mind' : 'I Pick This One!'}
 													</Button>
@@ -127,11 +127,33 @@ const mapDispatch = (dispatch) => {
 				dispatch(getYelpList(testCoords))
 			}
 		},
-		handleDestination: (choice, trip, userId) => {
-			dispatch(postVote(choice, trip, userId))
+		handleVote: (choice, trip, userId, yelpList) => {
+			dispatch(postVote(choice, trip, userId, yelpList))
 		},
-		moveToDirections: (tripId) => {
-			dispatch(updateTrip('directions', tripId))
+		moveToDirections: (trip, yelpList) => {
+			//Adding votes
+			let voteCounter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0,}
+			trip.attendees.forEach(attendee => {
+				if(attendee.vote !== -1){
+					voteCounter[attendee.vote]++
+				}
+			})
+			//Determine the most voted for
+			let largest = []
+			let number = voteCounter['0']
+			for (var choice in voteCounter){
+				if(voteCounter[choice] === number){
+					largest.push(choice)
+				} else if (voteCounter[choice] > number){
+					number = voteCounter[choice]
+					largest = [choice]
+				}
+			}
+			//Select a random restaurant from the most voted and stringify it
+			let randomChoice = +largest[Math.floor(Math.random() * largest.length)]
+			let yelpChoice = JSON.stringify(yelpList[randomChoice])
+
+			dispatch(updateTrip({status: 'directions', yelpString: yelpChoice}, trip.id))
 		}
 	}
 }
