@@ -30,9 +30,9 @@ export const me = () =>
 				dispatch(getMe(res.data || defaultUser)))
 			.catch(err => console.log(err))
 
-export const auth = (email, password, method) =>
+export const auth = (email, password, name, method) =>
 	dispatch =>
-		axios.post(`/auth/${method}`, { email, password })
+		axios.post(`/auth/${method}`, { email, password, name })
 			.then(res => {
 				dispatch(getUser(res.data))
 				history.push('/home')
@@ -47,6 +47,12 @@ export const logout = () =>
 				dispatch(removeUser())
 				history.push('/login')
 			})
+			.catch(err => console.log(err))
+
+export const postFriend = (myId, friendId) =>
+	dispatch =>
+		axios.post(`api/friends/${myId}/${friendId}`)
+			.then(() => dispatch(me()))
 			.catch(err => console.log(err))
 
 /**

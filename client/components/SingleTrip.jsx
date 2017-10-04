@@ -2,32 +2,50 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
-import {getYelpList} from './../store'
-import {ConfirmingTrip, ResolvingTrip, FinishedTrip} from './index.js'
+import {getYelpList, fetchTrip} from './../store'
+import {ConfirmingTrip, VotingTrip, ResolvingTrip, FinishedTrip, TripDetails} from './index.js'
 
-//Diferent statuses for a trip, not sure if we want to implement a past yet
-let tripStatusArray = ['confirm', 'vote', 'resolved', 'past']
-let currentStatus = 'confirm'
+// Trip statuses for reference 'confirming', 'voting', 'directions', 'finished'
 
 class SingleTrip extends Component {
 
+	componentDidMount () {
+		this.props.loadInitialData(+this.props.match.params.tripId)
+	}
+
 	render () {
-		if(currentStatus === 'confirm'){
-			return (
-				<ConfirmingTrip />
-			)
-		} else if (currentStatus === 'vote') {
-			return(
-				<div>This should be the yelp page view</div>
-			)
-		} else if (currentStatus === 'resolved') {
-			return(
-				<div>This should be the directions to the trip!</div>
-			)
-		} else if (currentStatus === 'past') {
-			return(
-				<div>This should be some info from a past trip</div>
-			)
+		if(this.props.currentTrip.id){
+			let theTrip = this.props.currentTrip
+			let currentStatus = theTrip.status
+			if(currentStatus === 'confirming'){
+				return (
+					<div>
+						<TripDetails />
+						<ConfirmingTrip />
+					</div>
+				)
+			} else if (currentStatus === 'voting') {
+				return(
+					<div>
+						<TripDetails />
+						<VotingTrip />	
+					</div>				
+				)
+			} else if (currentStatus === 'directions') {
+				return(
+					<div>
+						<TripDetails />
+						<div>This should be the directions to the trip!</div>
+					</div>
+				)
+			} else if (currentStatus === 'finished') {
+				return(
+					<div>
+						<TripDetails />
+						<div>This should be some info from a past trip</div>
+					</div>
+				)
+			} 
 		} else {
 			return (
 				<div>
@@ -43,24 +61,14 @@ class SingleTrip extends Component {
  */
 const mapState = (state) => {
 	return {
-		TripBuild: state.TripBuild,
-		yelpList: state.yelp,
-		Results: state.Results
+		currentTrip: state.currentTrip
 	}
 }
 
 const mapDispatch = (dispatch) => {
 	return {
-		getYelpData () {
-			if(this.Results.length){
-				yelped = true
-				console.log('Yelp search at',this.Results[0].toFixed(6),',', this.Results[1].toFixed(6) )
-				dispatch(getYelpList([this.Results[0].toFixed(6), this.Results[1].toFixed(6)]))
-			}
-		},
-		handleDestination: (choice) => {
-			console.log('You chose ' + choice + '!')
-			//dispatch(addFriend(friend))
+		loadInitialData (tripId) {
+			dispatch(fetchTrip(tripId))
 		}
 	}
 }

@@ -1,6 +1,6 @@
 //Color Setup
-$colorArray: orange banana pear blueberry;
-$colorChoice: nth($colorArray, 3);
+$colorArray: orange banana pear blueberry blackberry dragonfruit;
+$colorChoice: nth($colorArray, 6);
 //colorArray index starts at 1, not 0
 
 $mainColor: null;
@@ -28,6 +28,16 @@ $accentColorLight: null;
     $mainColorLight: #8D94F2;
     $accentColor: #63477B;
     $accentColorLight: #C9BDD4;
+  } @else if $colorChoice == blackberry {
+    $mainColor: #1e1e1e;
+    $mainColorLight: #424242;
+    $accentColor: #774ab2;
+    $accentColorLight: #b78eed;
+  } @else if $colorChoice == dragonfruit {
+    $mainColor: #00ffa1;
+    $mainColorLight: #a7f2d6;
+    $accentColor: #c61fa5;
+    $accentColorLight: #e86fa2;
   } @else {
     //this is a white and blue color pallet
     $mainColor: #FFFFFF;
@@ -128,12 +138,24 @@ body {
   border-radius: 5px;
 }
 
+.listMed {
+  height: 45px;
+}
+
 .noPaddingLeft {
   padding-left: 0;
 }
 
 .noPaddingRight {
   padding-right: 0;
+}
+
+.noPaddingBottom {
+  padding-bottom: 0;
+}
+
+.floatRight {
+  float: right;
 }
 
 .displayBlock {
@@ -160,13 +182,20 @@ body {
   height: 100vh;
 }
 
+.myTripList {
+  border: 2px solid $accentColor;
+  border-radius: 5px;
+  color: $accentColorLight;
+  background-color: $mainColor;
+}
+
 .linkOnNav {
   margin: 0 0 15px 15px;
   color: $accentColorLight;
 }
 
 .welcomeUser {
-  margin: 0 0 0 15px;
+  margin: 0 0 15px 15px;
   padding-top: 20px;
 }
 

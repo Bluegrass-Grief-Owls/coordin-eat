@@ -27,11 +27,11 @@ db.sync({force: true})
 		userEmail.push('user@gmail.com')
 		password.push('123')
 
-		//Four random users
-		for (var i = 0; i < 4; i++) {
+		//Fourteen random users
+		for (var i = 0; i < 14; i++) {
 			userName.push(chance.first())
 			userEmail.push(chance.email())
-			password.push(chance.string())
+			password.push('123')
 
 		}
 
