@@ -5,15 +5,17 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {
-	Main, 
-	Login, 
-	Signup, 
-	UserHome, 
-	BuildTrip, 
-	YelpTest, 
-	DestinationPage, 
+	Main,
+	Login,
+	Signup,
+	UserHome,
+	BuildTrip,
+	YelpTest,
+	DestinationPage,
 	SingleTrip,
-	FriendsList
+	FriendsList,
+	InviteFriends,
+	ConfirmingTrip
 } from './components'
 import {me} from './store'
 
@@ -39,6 +41,9 @@ class Routes extends Component {
 						<Route path='/build_trip' component = {BuildTrip} />
 						<Route path='/yelpTest' component = {YelpTest} />
 						<Route path='/destinations' component = {DestinationPage} />
+						<Route path='/testTrip' component = {SingleTrip} />
+						<Route path='/addfriends' component = {InviteFriends} />
+						<Route path='/confirmingtrip' component = {ConfirmingTrip} />
 						<Route path='/trip/:tripId' component = {SingleTrip} />
 						<Route path='/friends' component = {FriendsList} />
 						{

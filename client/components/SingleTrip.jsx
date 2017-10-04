@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
+import { withRouter } from 'react-router';
 import {Col, Row, Button, Table} from 'react-bootstrap'
 import {getYelpList, fetchTrip} from './../store'
 import {ConfirmingTrip, VotingTrip, ResolvingTrip, FinishedTrip, TripDetails} from './index.js'
@@ -28,14 +29,14 @@ class SingleTrip extends Component {
 				return(
 					<div>
 						<TripDetails />
-						<VotingTrip />	
-					</div>				
+						<VotingTrip />
+					</div>
 				)
 			} else if (currentStatus === 'directions') {
 				return(
 					<div>
 						<TripDetails />
-						<div>This should be the directions to the trip!</div>
+						<h3>This should be the directions to the trip!</h3>
 					</div>
 				)
 			} else if (currentStatus === 'finished') {
@@ -45,7 +46,7 @@ class SingleTrip extends Component {
 						<div>This should be some info from a past trip</div>
 					</div>
 				)
-			} 
+			}
 		} else {
 			return (
 				<div>
@@ -73,7 +74,7 @@ const mapDispatch = (dispatch) => {
 	}
 }
 
-export default connect(mapState, mapDispatch)(SingleTrip)
+export default withRouter(connect(mapState, mapDispatch)(SingleTrip))
 
 /**
  * PROP TYPES

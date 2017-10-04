@@ -107,7 +107,7 @@ const BuildTrip = (props) => {
 	}
 }
 
-	
+
 
 
 
