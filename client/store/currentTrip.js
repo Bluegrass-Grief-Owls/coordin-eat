@@ -22,8 +22,7 @@ const currentTrip = {}
 const fetchTripAction = (trip) => ({type: GET_TRIP, trip})
 const postTripAction = () => ({type: POST_TRIP})
 const voteAction = (choiceObj) => ({type: VOTED, choiceObj})
-const getVoteAction = (vote) => ({type: GET_VOTE, vote})
-const updateTripStatus = (newStatus) => ({type: UPDATE_STATUS, newStatus})
+const updateTripStatus = (updatedTrip) => ({type: UPDATE_STATUS, updatedTrip})
 
 // //THUNKS
 
@@ -56,28 +55,29 @@ export function postVote(choiceIdx, tripId, userId){
 	return function thunk (dispatch) {
 		return axios.put('/api/attendee/' + tripId, {vote: choiceIdx})
 			.then((theTrip) => {
+				let obj = {choiceIdx, userId}
+				dispatch(voteAction(obj))
 				//This route returns the trip, which lets us check to see if voting is done
 				let votingDone = theTrip.data.attendees.every(attendee => {
 					return attendee.vote !== -1
 				})
-				console.log('is voting done?',votingDone)
-				let obj = {choiceIdx, userId}
-				dispatch(voteAction(obj))
+				if(votingDone){
+					dispatch(updateTrip('directions', tripId))
+				}
 			})
 	}
 }
 
-// export function getVote(user, trip){
-// 	console.log('trying to get vote!')
-// 	return function thunk (dispatch) {
-// 		trip.attendees.forEach((attendee) =>{
-// 			if(attendee.userId === user.id){
-// 				const action = getVoteAction(attendee.vote)
-// 				dispatch(action)
-// 			}
-// 		})
-// 	}
-// }
+export function updateTrip(status, tripId){
+	return function thunk (dispatch) {
+		return axios.put(`/api/trip/${tripId}`, {status})
+			.then(tripData => {
+				dispatch(updateTripStatus(tripData.data))
+				history.push(`/trip/${tripId}`)
+			})
+	}
+}
+
 
 /**
  * REDUCER
@@ -98,8 +98,8 @@ export default function (state = currentTrip, action) {
 				return attendee
 			}
 		})})
-	// case GET_VOTE:
-	// 	return action.vote
+	case UPDATE_STATUS:
+		return action.updatedTrip
 	default:
 		return state
 	}

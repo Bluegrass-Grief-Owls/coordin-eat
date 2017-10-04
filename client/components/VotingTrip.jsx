@@ -2,11 +2,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React, {Component} from 'react'
 import {Col, Row, Accordion, Panel, Button} from 'react-bootstrap'
-import {getYelpList, postVote} from '../store'
+import {getYelpList, postVote, updateTrip} from '../store'
 
 //Prevents multiple Yelp request from componentDidUpdate() loop
 let yelped = false
-let gotVote = false
 
 let testCoords = [40.7061336, -74.0119549]
 //Will use the trip build array, later....
@@ -27,6 +26,10 @@ class VotingTrip extends Component {
 
 	render () {
 		if(this.props.currentTrip.id){
+			let isTripOwner = false
+			if(this.props.currentTrip.ownerId === this.props.user.id){
+				isTripOwner = true
+			}
 			let attendance = this.props.currentTrip.attendees.find(attendee => {
 				return attendee.userId === this.props.user.id
 			})
@@ -39,6 +42,10 @@ class VotingTrip extends Component {
 					<Row>
 						<Col xs={1}></Col>
 						<Col xs={10}>
+							{
+								isTripOwner ? (<Button className='tripButton' onClick={() => {
+									this.props.moveToDirections(this.props.currentTrip.id)}}>Procced to Directions</Button>) : ''
+							}
 							<h3>Choices</h3>
 							<Accordion>
 								{
@@ -115,18 +122,17 @@ const mapDispatch = (dispatch) => {
 				console.log('Yelp search at', coords[0].toFixed(6), ',', coords[1].toFixed(6) )
 				dispatch(getYelpList([coords[0].toFixed(6), coords[1].toFixed(6)]))
 			} else {
+				yelped = true
 				console.log('This is using the default coords [40.7061336, -74.0119549]')
 				dispatch(getYelpList(testCoords))
 			}
 		},
 		handleDestination: (choice, trip, userId) => {
-			console.log('You chose ' + choice + '!')
-
 			dispatch(postVote(choice, trip, userId))
 		},
-		// fetchVote: (user, trip) => {
-		// 	dispatch(getVote(user, trip))
-		// }
+		moveToDirections: (tripId) => {
+			dispatch(updateTrip('directions', tripId))
+		}
 	}
 }
 
