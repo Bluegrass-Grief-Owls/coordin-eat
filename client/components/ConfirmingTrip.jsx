@@ -11,9 +11,17 @@ const ConfirmTrip = (props) => {
 	let attendeeArray = props.currentTrip.attendees
 	let isTripOwner = true
 
+	console.log('attendee array', attendeeArray)
+
+	let individualTrip = props.currentTrip.attendees.filter(attendee => {
+		return attendee.user.id == props.user.id
+	})[0]
+
 	console.log('from confirming', props)
 
-	let attending = true
+	console.log('individual trip test', individualTrip)
+
+	// let attending = false
 
 	let lat, long
 	navigator.geolocation.getCurrentPosition(function(position) {
@@ -27,11 +35,13 @@ const ConfirmTrip = (props) => {
 	return (
 		<div>
 
-			{!attending ?
+			{ individualTrip && !individualTrip.origin ?
 
 
 				<div>
-					<button onClick={() => giveCoords([lat,long],props.currentTrip.id,props.user.id)}>I'm coming, here's my coordinates</button>
+					{//disable this button until coordinate information has loaded
+					}
+					<button onClick={() => 	giveCoords([lat,long], props.currentTrip.id,props.user.id)}>I'm coming, here's my coordinates</button>
 					<button onClick={() => removeSelf(props.currentTrip.id,props.user.id)}>I cannot attend</button>
 				</div>
 				:
@@ -53,7 +63,7 @@ const ConfirmTrip = (props) => {
 										return (
 											<tr key={idx}>
 												<td>{idx + 1}</td>
-												<td>{attendee.user.name}</td>{//TODO:Change to name
+												<td>{attendee.user.name}</td>{
 												}
 												{attendee.origin ? (<td>{attendee.origin}</td>) : (<td>Awaiting Reply</td>)}
 											</tr>
@@ -93,6 +103,7 @@ const mapDispatch = (dispatch) => {
 		},
 		giveCoords(coords,tripId, userId) {
 			dispatch(setCoordinates(coords, tripId, userId))
+
 		}
 	}
 }

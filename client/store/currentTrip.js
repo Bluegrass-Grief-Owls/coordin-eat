@@ -22,7 +22,7 @@ const currentTrip = {}
 const fetchTripAction = (trip) => ({type: GET_TRIP, trip})
 const postTripAction = () => ({type: POST_TRIP})
 const declineInvitationAction = (userId) => ({type: DECLINE_INVITATION})
-const setCoordinatesAction = (coords, userId) => ({type:SET_COORDINATES})
+const setCoordinatesAction = (coordsArray) => ({type:SET_COORDINATES, coordsArray})
 
 
 // //THUNKS
@@ -33,7 +33,7 @@ const setCoordinatesAction = (coords, userId) => ({type:SET_COORDINATES})
 export function setCoordinates(coords, tripId, userId){
 	return function thunk (dispatch) {
 		return axios.put('/api/attendee/' + tripId, {origin: coords})
-			.then(() => dispatch(setCoordinatesAction(coords,userId)))
+			.then(() => dispatch(setCoordinatesAction([coords,userId])))
 	}
 }
 //talk to forrest about how this actually works
@@ -90,8 +90,13 @@ export default function (state = currentTrip, action) {
 		})} )
 	case SET_COORDINATES:
 		return Object.assign({}, state, {attendees: state.attendees.map(attendee => {
-			if (attendee.id == action.userId ) {
-				attendee.origin = action.coords
+			console.log("!!!!!!!!!", action)
+			if (attendee.userId == action.coordsArray[1] ) {
+				let tempObj = attendee
+				tempObj.origin = action.coordsArray[0]
+				return tempObj
+			} else {
+				return attendee
 			}
 		})})
 	default:
