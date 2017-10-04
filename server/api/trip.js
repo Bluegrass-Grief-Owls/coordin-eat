@@ -16,3 +16,10 @@ router.post('/', (req, res, next) => {
 		.catch(next)
 })
 
+router.put('/:tripId', (req, res, next) => {
+	Trip.findById(req.params.tripId, {include: [Attendee]})
+		.then(trip => trip.update(req.body))
+		.then(updatedTrip => res.json(updatedTrip))
+		.catch(next)
+})
+
