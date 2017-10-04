@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import Promise from 'bluebird'
 
 /**
  * ACTION TYPES
@@ -19,8 +20,8 @@ const currentTrip = {}
  * ACTION CREATORS
  */
 
-const fetchTripAction = (trip) => ({type: GET_TRIP, trip})
-const postTripAction = () => ({type: POST_TRIP})
+const fetchTripAction = (trip) => ({ type: GET_TRIP, trip })
+const postTripAction = () => ({ type: POST_TRIP })
 // export const getFriends = () => ({type: GET_FRIENDS})
 
 // export const addFriend = friend => ({type: ADD_FRIEND, friend})
@@ -28,24 +29,29 @@ const postTripAction = () => ({type: POST_TRIP})
 // export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 
 // //THUNKS
-
-export function postTrip(trip, invitedIdArray){
-	return function thunk (dispatch) {
+export function postTrip(trip, invitedIdArray) {
+	return function thunk(dispatch) {
 		return axios.post('/api/trip', trip)
 			.then(res => res.data)
 			.then(newTrip => {
 				newTrip.attendees = []
-				invitedIdArray.forEach(userId => {
-					axios.post('/api/attendee', {tripId: newTrip.id, userId})
+				Promise.map(invitedIdArray, userId => { //post each invited user to the attendees table
+					return axios.post('/api/attendee', { tripId: newTrip.id, userId })
 				})
-				dispatch(postTripAction())
-				history.push(`/trip/${newTrip.id}`)
+					.then(() => { //once ALL posts have succeeded, 
+						return axios.post('/api/email/invite', { tripId: newTrip.id, invitees: invitedIdArray })
+					})
+					.then(() => { //once invites have successfully been sent
+						dispatch(postTripAction())
+						history.push(`/trip/${newTrip.id}`)
+					})
 			})
+			.catch(console.error.bind(console))
 	}
 }
 
-export function fetchTrip(tripId){
-	return function thunk (dispatch) {
+export function fetchTrip(tripId) {
+	return function thunk(dispatch) {
 		return axios.get(`/api/trip/${tripId}`)
 			.then(res => res.data)
 			.then(trip => {
@@ -67,17 +73,17 @@ export function fetchTrip(tripId){
  */
 export default function (state = currentTrip, action) {
 	switch (action.type) {
-	case POST_TRIP:
-		return state
-	case GET_TRIP:
-		return action.trip
-	// case GET_FRIENDS:
-	// 	return state
-	// case ADD_FRIEND:
-	// 	return [...state, action.friend]
-	// case REMOVE_FRIEND:
-	// 	return friendArray
-	default:
-		return state
+		case POST_TRIP:
+			return state
+		case GET_TRIP:
+			return action.trip
+		// case GET_FRIENDS:
+		// 	return state
+		// case ADD_FRIEND:
+		// 	return [...state, action.friend]
+		// case REMOVE_FRIEND:
+		// 	return friendArray
+		default:
+			return state
 	}
 }
