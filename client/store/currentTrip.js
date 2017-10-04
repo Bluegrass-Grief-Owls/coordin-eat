@@ -6,9 +6,9 @@ import history from '../history'
  */
 const GET_TRIP = 'GET_TRIP'
 const POST_TRIP = 'POST_TRIP'
-// const GET_FRIENDS = 'GET_FRIENDS'
-// const ADD_FRIEND = 'ADD_FRIEND'
-// const REMOVE_FRIEND = 'REMOVE_FRIEND'
+const VOTED = 'VOTED'
+const GET_VOTE = 'GET_VOTE'
+const UPDATE_STATUS = 'UPDATE_STATUS'
 
 /**
  * INITIAL STATE
@@ -21,11 +21,9 @@ const currentTrip = {}
 
 const fetchTripAction = (trip) => ({type: GET_TRIP, trip})
 const postTripAction = () => ({type: POST_TRIP})
-// export const getFriends = () => ({type: GET_FRIENDS})
-
-// export const addFriend = friend => ({type: ADD_FRIEND, friend})
-
-// export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
+const voteAction = (choiceObj) => ({type: VOTED, choiceObj})
+const getVoteAction = (vote) => ({type: GET_VOTE, vote})
+const updateTripStatus = (newStatus) => ({type: UPDATE_STATUS, newStatus})
 
 // //THUNKS
 
@@ -54,13 +52,32 @@ export function fetchTrip(tripId){
 	}
 }
 
-// export const calculate = (array) =>
-// 	dispatch =>
-// 		axios.post('/api/midpoint', {places: array})
-// 			.then(res => console.log(res.data)
+export function postVote(choiceIdx, tripId, userId){
+	return function thunk (dispatch) {
+		return axios.put('/api/attendee/' + tripId, {vote: choiceIdx})
+			.then((theTrip) => {
+				//This route returns the trip, which lets us check to see if voting is done
+				let votingDone = theTrip.data.attendees.every(attendee => {
+					return attendee.vote !== -1
+				})
+				console.log('is voting done?',votingDone)
+				let obj = {choiceIdx, userId}
+				dispatch(voteAction(obj))
+			})
+	}
+}
 
-// 			)
-// 			.catch(err => console.log(err))
+// export function getVote(user, trip){
+// 	console.log('trying to get vote!')
+// 	return function thunk (dispatch) {
+// 		trip.attendees.forEach((attendee) =>{
+// 			if(attendee.userId === user.id){
+// 				const action = getVoteAction(attendee.vote)
+// 				dispatch(action)
+// 			}
+// 		})
+// 	}
+// }
 
 /**
  * REDUCER
@@ -71,12 +88,18 @@ export default function (state = currentTrip, action) {
 		return state
 	case GET_TRIP:
 		return action.trip
-	// case GET_FRIENDS:
-	// 	return state
-	// case ADD_FRIEND:
-	// 	return [...state, action.friend]
-	// case REMOVE_FRIEND:
-	// 	return friendArray
+	case VOTED:
+		return Object.assign({}, state, { attendees: state.attendees.map(attendee => {
+			if(attendee.userId === action.choiceObj.userId){
+				let tempObj = attendee
+				tempObj.vote = action.choiceObj.choiceIdx
+				return tempObj
+			} else {
+				return attendee
+			}
+		})})
+	// case GET_VOTE:
+	// 	return action.vote
 	default:
 		return state
 	}
