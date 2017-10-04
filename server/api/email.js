@@ -16,7 +16,8 @@ let transporter = nodeMailer.createTransport({
 })
 
 router.post('/invite', (req, res) => { //just using post because it allows request to have a body
-	const url = 'http://localhost:8080/trip/' + req.body.tripId //or 'http://coordin-Eat.herokuapp.com/trips/ + req.body.tripName		
+	const domain = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'http://coordin-Eat.herokuapp.com'
+	const url = `${domain}/trip/${req.body.tripId}`
 	User.findById(req.user.id)
 		.then(user => {
 			return Promise.map(req.body.invitees, inviteeId => {
