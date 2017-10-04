@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
+import ReactMapboxGl, { Layer, Feature, Marker } from 'react-mapbox-gl'
 import {Col, Row, Button} from 'react-bootstrap'
 import history from './../history'
 
@@ -53,21 +53,31 @@ export const TripDirections = (props) => {
 		'distance': 265.345237528376
 	}
 
+	const origin = {latitude: 40.7094191, longitude: -74.0084873}
+	const googleMapsUrl = 
+	`https://www.google.com/maps/dir/${origin.latitude},+${origin.longitude}/${meetingPlace.coordinates.latitude},${meetingPlace.coordinates.longitude}`
 	return (
 		<Row>
 			<Col xs={12}>
-				<h2 className='alignCenter'>Let's meet at {meetingPlace.name}</h2>
+				<h3 className='alignCenter'>Let's meet at {meetingPlace.name}</h3>
+				<h4><a href={googleMapsUrl}>Directions</a></h4>
 			</Col>
 			<Col xs={12}>
 				<Map
 					style='mapbox://styles/mapbox/streets-v9'
-					center={{lng: meetingPlace.coordinates.longitude, lat: meetingPlace.coordinates.latitude}}
+					center={{lat: meetingPlace.coordinates.latitude, lng: meetingPlace.coordinates.longitude}}
 					containerStyle={{
 						height: '50vh',
 						width: '100%'
 					}}
 				>
 				</Map>
+				{/* <Marker 
+					coordinates={[meetingPlace.coordinates.latitude, meetingPlace.coordinates.longitude]}
+					anchor="bottom"
+				>
+					<img src='http://i.imgur.com/cqR6pUI.png'/>
+				</Marker> */}
 			</Col>
 		</Row>
 	)
