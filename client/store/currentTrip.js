@@ -38,14 +38,12 @@ export function postTrip(trip, invitedIdArray) {
 				Promise.map(invitedIdArray, userId => { //post each invited user to the attendees table
 					return axios.post('/api/attendee', { tripId: newTrip.id, userId })
 				})
-					.then(() => { //ove ALL posts have succeeded, 
-						return Promise.map(invitedIdArray, userId => { //send an invite email to each
-							return axios.post('/api/email/invite', { tripName: newTrip.name, invitee: userId })
-						})
-							.then(() => { //once ALL have successfully been sent, dispatch action and redirect.
-								dispatch(postTripAction())
-								history.push(`/trip/${newTrip.id}`)
-							})
+					.then(() => { //once ALL posts have succeeded, 
+						return axios.post('/api/email/invite', { tripName: newTrip.name, invitees: invitedIdArray })
+					})
+					.then(() => { //once invites have successfully been sent
+						dispatch(postTripAction())
+						history.push(`/trip/${newTrip.id}`)
 					})
 			})
 			.catch(console.error.bind(console))
@@ -75,17 +73,17 @@ export function fetchTrip(tripId) {
  */
 export default function (state = currentTrip, action) {
 	switch (action.type) {
-	case POST_TRIP:
-		return state
-	case GET_TRIP:
-		return action.trip
-	// case GET_FRIENDS:
-	// 	return state
-	// case ADD_FRIEND:
-	// 	return [...state, action.friend]
-	// case REMOVE_FRIEND:
-	// 	return friendArray
-	default:
-		return state
+		case POST_TRIP:
+			return state
+		case GET_TRIP:
+			return action.trip
+		// case GET_FRIENDS:
+		// 	return state
+		// case ADD_FRIEND:
+		// 	return [...state, action.friend]
+		// case REMOVE_FRIEND:
+		// 	return friendArray
+		default:
+			return state
 	}
 }
