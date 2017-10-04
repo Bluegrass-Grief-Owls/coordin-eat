@@ -8,12 +8,16 @@ import {Button} from 'react-bootstrap'
  * COMPONENT
  */
 const AuthForm = (props) => {
-	const {name, displayName, handleSubmit, error} = props
+	const {name, displayName, handleSubmit, needsname, error} = props
 
 	return (
 		<div>
 			<form onSubmit={handleSubmit} name={name}>
-				<div>
+				{needsname ? <div className='displayBlock'>
+					<label htmlFor='submitName'><small>Name</small></label>
+					<input className='backgroundAccentColorLight' name='submitName' type='text' />
+				</div> : <div />}
+				<div className='displayBlock'>
 					<label htmlFor='email'><small>Email</small></label>
 					<input className='backgroundAccentColorLight' name='email' type='text' />
 				</div>
@@ -50,6 +54,7 @@ const mapSignup = (state) => {
 	return {
 		name: 'signup',
 		displayName: 'Sign Up',
+		needsname: true,
 		error: state.user.error
 	}
 }
@@ -61,7 +66,9 @@ const mapDispatch = (dispatch) => {
 			const formName = evt.target.name
 			const email = evt.target.email.value
 			const password = evt.target.password.value
-			dispatch(auth(email, password, formName))
+			const username = evt.target.submitName.value
+			console.log(username)
+			dispatch(auth(email, password, username, formName))
 		}
 	}
 }
