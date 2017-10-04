@@ -23,10 +23,11 @@ router.post('/invite', (req, res) => { //just using post because it allows reque
 			return Promise.map(req.body.invitees, inviteeId => {
 				return User.findById(inviteeId)
 					.then(invitee => {
-						sendMail(url, user.name, invitee.email, () => res.sendStatus(200))
+						sendMail(url, user.name, invitee.email)
 					})
 			})
 		})
+		.then(() => res.sendStatus(200))
 })
 
 function sendMail(url, senderName, recipient, callback) {
