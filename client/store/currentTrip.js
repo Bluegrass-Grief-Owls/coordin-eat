@@ -21,8 +21,8 @@ const currentTrip = {}
 
 const fetchTripAction = (trip) => ({type: GET_TRIP, trip})
 const postTripAction = () => ({type: POST_TRIP})
-const declineInvitationAction = () => ({type: DECLINE_INVITATION})
-const setCoordinatesAction = () => ({type:SET_COORDINATES})
+const declineInvitationAction = (userId) => ({type: DECLINE_INVITATION})
+const setCoordinatesAction = (coords, userId) => ({type:SET_COORDINATES})
 
 
 // //THUNKS
@@ -30,9 +30,10 @@ const setCoordinatesAction = () => ({type:SET_COORDINATES})
 //SAM: update status for individual user
 ////kept here: currentTrip.attendees[index].origin
 
-export function setCoordinates(id) {
+export function setCoordinates(coords, tripId, userId){
 	return function thunk (dispatch) {
-		return axios.put(`/api/${id}`)
+		return axios.put('/api/attendee/' + tripId, {origin: coords})
+			.then(() => dispatch(setCoordinatesAction(coords,userId)))
 	}
 }
 //talk to forrest about how this actually works
@@ -40,7 +41,7 @@ export function setCoordinates(id) {
 export function declineInvitation(tripId,userId) {
 	return function thunk (dispatch) {
 		return axios.delete(`/api/attendee/${tripId}/${userId}`)
-			.then(() => {const action = declineInvitationAction()
+			.then(() => {const action = declineInvitationAction(userId)
 				dispatch(action)
 				history.push('/home')
 			})
@@ -84,7 +85,15 @@ export default function (state = currentTrip, action) {
 	case GET_TRIP:
 		return action.trip
 	case DECLINE_INVITATION:
-		return state
+		return Object.assign({}, state, {attendees: state.attendees.filter(attendee => {
+			return attendee.id != action.userId
+		})} )
+	case SET_COORDINATES:
+		return Object.assign({}, state, {attendees: state.attendees.map(attendee => {
+			if (attendee.id == action.userId ) {
+				attendee.origin = action.coords
+			}
+		})})
 	default:
 		return state
 	}
