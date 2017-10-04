@@ -1,114 +1,168 @@
-const manhattanNW = [40.813765, -73.959703]
-const manhattanSW = [40.748876, -74.006936]
-const manhattanSE = [40.736821, -73.978567]
-const manhattanRec = [manhattanNW, manhattanSW, manhattanSE]
+const Chance = require('chance')
+const chance = new Chance()
+var math = require('mathjs')
 
-const bkqueensNW = [40.724311, -73.955616]
-const bkqueensSW = [40.632278, -74.024884]
-const bkqueensSE = [40.607248, -73.940419] 
-const bkqueensRec = [bkqueensNW, bkqueensSW, bkqueensSE]
+// given a center (mean) coordinate, gives a random coordinate based on the normal distribution
+// has arguments for std and bound
+const normalCoord = (center, stDev, deviationBound) => {
+	let vertDisplacement = chance.normal({dev: stDev})
+	vertDisplacement = Math.abs(vertDisplacement) < deviationBound ? vertDisplacement : deviationBound
+	let horizDisplacement = chance.normal({dev: stDev})
+	horizDisplacement = Math.abs(horizDisplacement) < deviationBound ? horizDisplacement : deviationBound
+	return [center[0] + vertDisplacement, center[1] + horizDisplacement]
+}
 
-const bxNW = [40.859941, -73.912531]
-const bxSW = [40.807559, -73.928704]
-const bxSE = [40.812789, -73.900186] 
-const bxRec = [bxNW, bxSW, bxSE]
+// ======== For testing =========
+// const optimalPair = [-.1, .5]
+// const k = -1
+// const b = 2
+// const mocktravelDur = (xyPair) => {
+// 	return k * (Math.pow(xyPair[0]-optimalPair[0], 2) + Math.pow(xyPair[1]-optimalPair[1], 2)) + b
+// }
+// ==============================
 
-const bxP = .2
-const mP = .6
 
-const addVect = (...arr) => {
-	const result = [0,0]
-	arr.map((el) => {
-		result[0] += el[0]
-		result[1] += el[1]
-	})
+// creates random new meetup candidates from a center coordinate
+const stdToBound = .5 // ratio between std and bound
+const createCandidates = (n, center, bound) => {
+	const result = []
+	for (let p = 0; p < n; p++){
+		result.push(normalCoord(center, stdToBound * bound, bound))
+	}
 	return result
 }
 
-const subVect = (vec1, vec2) => {
-	return [vec1[0] - vec2[0], vec1[1] - vec2[1]]
+
+const coordAnneal = (center, startRadius) => {
+	let currentCenter = center || [0,0]
+	let radius = startRadius || 1
+	let resolved = false // for closing the calculation early
+	let maxIterations = 3
+	let score
+	let cands
+	let indexOfMax
+	while (!resolved && maxIterations > 0) {
+		cands = createCandidates(10, currentCenter, radius)
+		score = cands.map(cand => cand)
+	
+		indexOfMax = score.indexOf(Math.max.apply(Math, score))
+		currentCenter = cands[indexOfMax]
+
+		radius *= .6
+
+		maxIterations--
+		// console.log(cands, score)
+	}
+	return cands[indexOfMax]
 }
 
-const scaleVect = (vec1, scale) => {
-	return [vec1[0] * scale, vec1[1] * scale]
-}
+// console.log(createCandidates(4, [0,0], 20))
+// console.log(coordAnneal([0,0], .7))
 
-const mapXYtoLatLng = (xy = [], NW, SW, SE) => { // x and y are real nums btwn 0 and 1
-	const yVect = subVect(NW,SW)
-	const xVect = subVect(SE, SW)
-	return addVect(SW, scaleVect(xVect, xy[0]), scaleVect(yVect, xy[0]))
-}
-
-// console.log(mapXYtoLatLng([.5,.5], ...manhattanRec))
-// console.log(mapXYtoLatLng([1,1], ...bkqueensRec))
-// console.log(mapXYtoLatLng([1,1], ...bxRec))
-
-const randomCoords = () => {
-	const boro = Math.random()
-	const inBoro = [Math.random(), Math.random()]
-	if (boro < bxP) return [...mapXYtoLatLng(inBoro, ...bxRec)]
-	else if (boro < bxP + mP) return [...mapXYtoLatLng(inBoro, ...manhattanRec)]
-	else return [...mapXYtoLatLng(inBoro, ...bkqueensRec)]
-}
-
-const twoFriends = () => {
-	return [randomCoords(), randomCoords()]
-}	
-const tf = twoFriends()
-
-console.log(tf)
-
-const midVector = (twoF = [], scale) => {
-	const vect = subVect(...twoF)
-	return [-vect[1] * scale, vect[0] * scale]
-}
-
-const alongMidline = (twoF = [], scale) => {
-	const avg = [(twoF[0][0]+twoF[1][0]) * .5, (twoF[0][1]+twoF[1][1]) * .5]
-	const mVect = midVector(twoF, scale)
-	return addVect(avg, mVect)
-}
-
-const mid = alongMidline(tf, .3)
-
-console.log(mid)
-
-const dist = (xy, ij) => {
-	return Math.sqrt((ij[1]-xy[1])*(ij[1]-xy[1]) + (ij[0]-xy[0])*(ij[0]-xy[0]))
-}
-
-// console.log(dist([0,0], [5,12]))
-const checkDist = (friends, mid) => {
-	const dist1 = dist(friends[0], mid)
-	const dist2 = dist(friends[1], mid)
-	return [dist1, dist2]
-}
-
-console.log(checkDist(tf, mid))
 
 
 
 // =======================================
 
-// const client = require('@google/maps').createClient({
-// 	key: 'AIzaSyB6N413BwZWE2KkNTdb0wsxQZw6VlrUvdU',
-// 	Promise: Promise
-// })
+const client = require('@google/maps').createClient({
+	key: 'AIzaSyB6N413BwZWE2KkNTdb0wsxQZw6VlrUvdU',
+	Promise: Promise
+})
 
-// const getTravelTime = (origin, dest, mode) => {
-// 	const query = {
-// 		origins: [origin],
-// 		destinations: [dest],
-// 		mode: mode
-// 	}
-// 	return client.distanceMatrix(query).asPromise()
-// 		.then(res => res.json.rows[0].elements[0].duration.value / 60.0)
-// 		.catch(console.log)
-// 	// 	, (res, status) => {
-// 	// 	const tTime = res.rows.elements[0].duration.value / 60.0
-// 	// 	console.log('time is', tTime)
-// 	// })
-// }
+const getTravelTime = (origin, dest, mode) => {
+	const query = {
+		origins: [origin],
+		destinations: [dest],
+		mode: mode
+	}
+	return client.distanceMatrix(query).asPromise()
+		.then(res => {
+			console.log('responseeeee', res.json.rows[0].elements[0])
+			return res.json.rows[0].elements[0].duration.value / 60.0
+		})
+		.catch(console.log)
+}
 
 // getTravelTime([40.739999, -73.983083], [40.768007, -74.204254], 'transit')
 // 	.then(console.log)
+
+const locationPromiseAll = (loc, origins) => {
+	const locationsPromises = origins.map(origin => {
+		return getTravelTime(origin, loc, 'transit')
+	})
+	return Promise.all(locationsPromises)
+}
+
+const importance = 1
+const locationScore = (loc, origins) => {
+	return locationPromiseAll(loc, origins)
+		.then(times => {
+			const sum = times.reduce((a, b) => a + b)
+			const std = math.std(times)
+			const score = sum * Math.pow(std, importance)
+			return score
+		})
+		.catch(err => console.log(err))
+}
+
+const candScorePromiseAll = (candArr, origins) => {
+	const candPromises = candArr.map(candidate => {
+		return locationScore(candidate, origins)
+	})
+	return Promise.all(candPromises)
+}
+
+
+
+// candScorePromiseAll (
+// 	[
+// 		[ 40.80964019275301, -73.9270895692334 ],
+// 		[ 40.85964019275301, -73.9370895692334 ]
+// 	],
+// 	[
+// 		[ 40.76588646255421, -73.9825951401366 ],
+// 		[ 40.7971972524459, -73.93779144673098 ],
+// 		[ 40.66975627373278, -73.93889311219257 ],
+// 		[ 40.76525691298981, -73.9834959844067 ]
+// 	]
+// ).then(console.log)
+//	.catch(err => console.log(err))
+
+// =================================
+const investigate = (center, score, bound, numCands, origins) => {
+	const cands = createCandidates(numCands, center, bound)
+	// console.log('cands', cands)
+	// console.log('...origins', origins)
+	return candScorePromiseAll(cands, origins)
+		.then(scores => {
+			console.log('scores', scores)
+			const indexOfMax = scores.indexOf(Math.max.apply(Math, score))	
+			console.log('here yet')
+			const winner = score > scores[indexOfMax] ? [center, score] : [cands[indexOfMax], scores[indexOfMax]]
+			return winner	
+		})
+		.catch(err => console.log(err))
+}
+
+investigate (
+	[ 40.80964019275301, -73.9270895692334 ],
+	123, .05, 10,
+	[
+		[ 40.76588646255421, -73.9825951401366 ],
+		[ 40.7971972524459, -73.93779144673098 ],
+		[ 40.66975627373278, -73.93889311219257 ],
+		[ 40.76525691298981, -73.9834959844067 ] 
+	]
+)
+	.then(success => {
+		console.log('made it!!!!!')
+		console.log(success)
+	})
+	.catch(err => console.log(err))
+
+
+
+
+
+
+
