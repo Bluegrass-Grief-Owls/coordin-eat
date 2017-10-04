@@ -28,7 +28,6 @@ const postTripAction = () => ({type: POST_TRIP})
 // export const removeFriend = friend => ({type: REMOVE_FRIEND, friend})
 
 // //THUNKS
-
 export function postTrip(trip, invitedIdArray){
 	return function thunk (dispatch) {
 		return axios.post('/api/trip', trip)
@@ -37,10 +36,14 @@ export function postTrip(trip, invitedIdArray){
 				newTrip.attendees = []
 				invitedIdArray.forEach(userId => {
 					axios.post('/api/attendee', {tripId: newTrip.id, userId})
+						.then( () => {
+							axios.post('/api/email/invite', {tripName: newTrip.name, invitee: userId})
+						})
 				})
 				dispatch(postTripAction())
 				history.push(`/trip/${newTrip.id}`)
 			})
+			.catch(console.error.bind(console))
 	}
 }
 
