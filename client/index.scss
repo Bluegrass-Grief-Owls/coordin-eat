@@ -1,6 +1,6 @@
 //Color Setup
-$colorArray: orange banana pear blueberry blackberry dragonfruit;
-$colorChoice: nth($colorArray, 6);
+$colorArray: orange banana pear blueberry blackberry dragonfruit watermelon;
+$colorChoice: nth($colorArray, 7);
 //colorArray index starts at 1, not 0
 
 $mainColor: null;
@@ -38,6 +38,11 @@ $accentColorLight: null;
     $mainColorLight: #a7f2d6;
     $accentColor: #c61fa5;
     $accentColorLight: #e86fa2;
+  } @else if $colorChoice == watermelon {
+    $mainColor: #e54e4b;
+    $mainColorLight: #f4817f;
+    $accentColor: #09511b;
+    $accentColorLight: #33d65d;
   } @else {
     //this is a white and blue color pallet
     $mainColor: #FFFFFF;
@@ -192,6 +197,11 @@ body {
 .linkOnNav {
   margin: 0 0 15px 15px;
   color: $accentColorLight;
+}
+
+.theMapBox {
+  height: 260px;
+  width: 100%;
 }
 
 .welcomeUser {
