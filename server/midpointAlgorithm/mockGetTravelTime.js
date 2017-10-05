@@ -202,25 +202,36 @@ let origins = [
 	[40.674333, -73.970488]
 ]
 
-const centroid = centerCoord(...origins).reverse()
-
 const maxDistanceFromCentroid = (centroid, origins) => {
 	const dists = origins.map(coord => math.distance(coord, centroid))
 	return math.max(dists)
 }
 
-console.log(centroid.reverse())
-const calcBound = maxDistanceFromCentroid(centroid, origins)
-console.log('bound', calcBound)
+const invest = (origins = [], n, center, lowScore = 9999) => {
+	const centroid = center || centerCoord(...origins).reverse()	
+	console.log(centroid.reverse())
+	const calcBound = maxDistanceFromCentroid(centroid, origins)
+	let cands = createCandidates(25, centroid.reverse(), calcBound * 2.5)
+	cands = cands.map(coord => coord.reverse())
+	console.log(cands)
+	// origins = origins.map(coord => coord.reverse())
+	console.log(origins)
+	return candScorePromiseAll(cands, origins)
+		.then(scores => {
+			scores = scores.map(score => score ? score : 9999)
+			console.log('scores', scores)
+			const indexOfMin = scores.indexOf(math.min(scores))	
+			const winner = lowScore < scores[indexOfMin] ? [centroid, lowScore] : [cands[indexOfMin], scores[indexOfMin]]
+			return winner	
+		})
+		.catch(err => console.log(err))
+}
 
-let cands = createCandidates(25, centroid.reverse(), calcBound * 2.5)
-cands = cands.map(coord => coord.reverse())
-console.log(cands)
-// origins = origins.map(coord => coord.reverse())
-console.log(origins)
-
-
-candScorePromiseAll(cands, origins)
+invest(origins, 25)
+	.then(res => {
+		// console.log(res)
+		return invest(origins, 25, res[0], res[1] )
+	})
 	.then(console.log)
-	.catch(console.log)
+	.catch(err => console.log(err))
 
