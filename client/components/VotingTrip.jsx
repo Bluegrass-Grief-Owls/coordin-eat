@@ -11,6 +11,10 @@ let testCoords = [40.7061336, -74.0119549]
 //Will use the trip build array, later....
 
 class VotingTrip extends Component {
+	componentWillMount(){
+		yelped = false
+	}
+
 	componentDidMount() {
 		if(!yelped){
 			this.props.getYelpData()

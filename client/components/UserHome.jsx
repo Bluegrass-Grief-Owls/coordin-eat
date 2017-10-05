@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {Col, Row, Button, Table, ListGroup, ListGroupItem} from 'react-bootstrap'
-import {fetchMyTrips} from './../store'
+import {fetchMyTrips, resetCurrentTrip, resetYelpList} from './../store'
 import {connect} from 'react-redux'
 import history from './../history'
 
@@ -12,6 +12,7 @@ class UserHome extends Component {
 
 	componentDidMount () {
 		this.props.loadInitialData(+this.props.user.id)
+
 	}
 
 	render () {
@@ -60,6 +61,8 @@ const mapDispatch = (dispatch) => {
 	return {
 		loadInitialData (userId) {
 			dispatch(fetchMyTrips(userId))
+			dispatch(resetCurrentTrip())
+			dispatch(resetYelpList())
 		}
 	}
 }
