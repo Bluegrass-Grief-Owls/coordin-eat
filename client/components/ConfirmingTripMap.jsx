@@ -11,13 +11,31 @@ import history from './../history'
 const ConfirmTripMap = (props) => {
 	const {removeSelf, giveCoords} = props
 
+	const coordinates = [props.coordinates[1], props.coordinates[0]]
+
 	mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w'
 	const map = new mapboxgl.Map({
 		container: 'putMapHere',
 		style: 'mapbox://styles/mapbox/streets-v9',
-		center: [props.coordinates[1], props.coordinates[0]],
+		center: coordinates,
 		zoom: 14
 	})
+
+	map.on('load', function(){
+		let width = 40
+		let height = 40
+		let position = map.project(coordinates)
+
+		let marker = document.createElement('div')
+		marker.style.width = width + 'px'
+		marker.style.height = height + 'px'
+		marker.style.top = position.y - height / 2 + 'px'
+		marker.style.left = position.x - width / 2 + 'px'
+
+
+	})
+
+
 
 	return (
 		<Row>

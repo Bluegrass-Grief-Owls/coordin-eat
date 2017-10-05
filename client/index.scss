@@ -202,7 +202,31 @@ body {
 .theMapBox {
   height: 260px;
   width: 100%;
+  position: absolute;
+  top:0;
+  bottom:0;
 }
+
+
+.custom-marker {
+  position:absolute;
+  z-index:1;
+  display:block;
+  border-radius:50%;
+  background-color:#f86767;
+  -webkit-box-shadow:inset 0 0 0 4px rgba(255,255,255,0.25);
+          box-shadow:inset 0 0 0 4px rgba(255,255,255,0.25);
+}
+
+
+// .markerForMap {
+//   height: 50px;
+//   width: 50px;
+//   background-color: black;
+//   position: relative;
+//   // margin-top: 150px;
+//   margin-left: 50px;
+// }
 
 .welcomeUser {
   margin: 0 0 15px 15px;
