@@ -17,13 +17,6 @@ class VotingTrip extends Component {
 		}
 	}
 
-	// componentWillReceiveProps(){
-	// 	if(this.props.user.id && !gotVote){
-	// 		gotVote = true
-	// 		this.props.fetchVote(this.props.user, this.props.currentTrip)
-	// 	}					
-	// }
-
 	render () {
 		if(this.props.currentTrip.id){
 			let isTripOwner = false
