@@ -2,6 +2,12 @@ const Chance = require('chance')
 const chance = new Chance()
 var math = require('mathjs')
 
+// const mapboxgl = require("mapbox-gl");
+const buildMarker = require("./marker");
+const attractions = require("./attractions");
+console.log('here1')
+buildMarker('hotels', [ 40.80964019275301, -73.9270895692334 ])
+console.log('here')
 // given a center (mean) coordinate, gives a random coordinate based on the normal distribution
 // has arguments for std and bound
 const normalCoord = (center, stDev, deviationBound) => {
@@ -25,10 +31,30 @@ const normalCoord = (center, stDev, deviationBound) => {
 // creates random new meetup candidates from a center coordinate
 const stdToBound = .5 // ratio between std and bound
 const createCandidates = (n, center, bound) => {
+	const radiiRatio = [.005, .1,.2,.5, .9]
+	const radii = radiiRatio.map(ratio => ratio * bound)
+	const inCircleRatios = [.02, .08, .2, .3, .4]
+	const inCircle = inCircleRatios.map(ratio => {
+		return Math.floor(n*ratio)
+	})
+	console.log(inCircle)
 	const result = []
-	for (let p = 0; p < n; p++){
-		result.push(normalCoord(center, stdToBound * bound, bound))
-	}
+	inCircle.forEach((num, idx) => {
+		const deg = 360/ num
+		const fuzzRate = .2
+		for (let p = 0; p < num; p++){
+			console.log(num, (p*deg))
+			const newCoord = [
+				center[0] + chance.normal({mean: 1, dev: fuzzRate}) * radii[idx] * math.sin(math.unit(p*deg, 'deg')),
+				center[1] + chance.normal({mean: 1, dev: fuzzRate}) * radii[idx] * math.cos(math.unit(p*deg, 'deg'))
+			]
+			result.push(newCoord)
+		}
+	})
+
+	// for (let p = 0; p < n; p++){
+	// 	result.push(normalCoord(center, stdToBound * bound, bound))
+	// }
 	return result
 }
 
@@ -144,25 +170,20 @@ const investigate = (center, score, bound, numCands, origins) => {
 		.catch(err => console.log(err))
 }
 
-investigate (
-	[ 40.80964019275301, -73.9270895692334 ],
-	123, .05, 10,
-	[
-		[ 40.76588646255421, -73.9825951401366 ],
-		[ 40.7971972524459, -73.93779144673098 ],
-		[ 40.66975627373278, -73.93889311219257 ],
-		[ 40.76525691298981, -73.9834959844067 ] 
-	]
-)
-	.then(success => {
-		console.log('made it!!!!!')
-		console.log(success)
-	})
-	.catch(err => console.log(err))
-
-
-
-
-
+// investigate (
+// 	[ 40.80964019275301, -73.9270895692334 ],
+// 	123, .05, 10,
+// 	[
+// 		[ 40.76588646255421, -73.9825951401366 ],
+// 		[ 40.7971972524459, -73.93779144673098 ],
+// 		[ 40.66975627373278, -73.93889311219257 ],
+// 		[ 40.76525691298981, -73.9834959844067 ] 
+// 	]
+// )
+// 	.then(success => {
+// 		console.log('made it!!!!!')
+// 		console.log(success)
+// 	})
+// 	.catch(err => console.log(err))
 
 
