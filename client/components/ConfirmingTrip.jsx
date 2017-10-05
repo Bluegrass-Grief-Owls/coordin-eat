@@ -78,7 +78,7 @@ const ConfirmTrip = (props) => {
 			)
 		} else {
 			return(
-				<h3>Loading . . .</h3>
+				<h3 id='putMapHere'>Loading . . .</h3>
 			)
 		}
 	}
