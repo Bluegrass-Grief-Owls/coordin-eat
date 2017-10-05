@@ -12,10 +12,11 @@ class TripDirections extends React.Component {
 
 	componentDidMount() {
 		mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w'
+		console.log('coords:', this.meetingPlace.coordinates)		
 		this.map = new mapboxgl.Map({
 			container: 'putMapHere',
 			style: 'mapbox://styles/mapbox/streets-v9',
-			center: [this.meetingPlace.coordinates.latitude, this.meetingPlace.coordinates.longitude],
+			center: [this.meetingPlace.coordinates.longitude, this.meetingPlace.coordinates.latitude],
 			zoom: 14
 		})
 	}
