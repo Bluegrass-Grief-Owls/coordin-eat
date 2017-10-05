@@ -60,7 +60,7 @@ export function setCoordinates(coords, tripId, userId){
 }
 
 //talk to forrest about how this actually works
-
+//This route should also check if the trip is now ready to move onto voting
 export function declineInvitation(tripId, userId) {
 	return function thunk (dispatch) {
 		return axios.delete(`/api/attendee/${tripId}/${userId}`)
