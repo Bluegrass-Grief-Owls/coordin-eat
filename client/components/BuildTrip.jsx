@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import FriendForm from './FriendForm.jsx'
-import {postTrip, resetCurrentTrip} from '../store'
+import {postTrip, resetCurrentTrip, resetYelpList} from '../store'
 import {Col, FormGroup, FormControl, ControlLabel, Button, Checkbox} from 'react-bootstrap'
 import history from './../history'
 
@@ -126,6 +126,7 @@ const mapDispatch = (dispatch) => {
 			evt.preventDefault()
 			//reset the current trip state
 			dispatch(resetCurrentTrip())
+			dispatch(resetYelpList())
 			let hour = evt.target.hour.value
 			if (evt.target.ampm.value === 'pm'){
 				hour = Number(hour) + 12
