@@ -4,7 +4,7 @@ import React, {Component} from 'react'
 import { withRouter } from 'react-router';
 import {Col, Row, Button, Table} from 'react-bootstrap'
 import {getYelpList, fetchTrip} from './../store'
-import {ConfirmingTrip, VotingTrip, ResolvingTrip, FinishedTrip, TripDetails} from './index.js'
+import {ConfirmingTrip, VotingTrip, TripDirections, FinishedTrip, TripDetails} from './index.js'
 
 // Trip statuses for reference 'confirming', 'voting', 'directions', 'finished'
 
@@ -36,7 +36,7 @@ class SingleTrip extends Component {
 				return(
 					<div>
 						<TripDetails />
-						<h3>This should be the directions to the trip!</h3>
+						<TripDirections />
 					</div>
 				)
 			} else if (currentStatus === 'finished') {
