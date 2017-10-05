@@ -10,7 +10,7 @@ const POST_TRIP = 'POST_TRIP'
 const DECLINE_INVITATION = 'DECLINE_INVITATION'
 const SET_COORDINATES = 'SET_COORDINATES'
 const VOTED = 'VOTED'
-const UPDATE_STATUS = 'UPDATE_STATUS'
+const UPDATE_TRIP = 'UPDATE_TRIP'
 
 /**
  * INITIAL STATE
@@ -23,10 +23,11 @@ const currentTrip = {}
  */
 const fetchTripAction = (trip) => ({type: GET_TRIP, trip})
 const postTripAction = () => ({type: POST_TRIP})
-const declineInvitationAction = (userId) => ({type: DECLINE_INVITATION})
-const setCoordinatesAction = (coordsArray) => ({type:SET_COORDINATES, coordsArray})
+const declineInvitationAction = (userId) => ({type: DECLINE_INVITATION, userId})
+const setCoordinatesAction = (coordsArray) => ({type: SET_COORDINATES, coordsArray})
 const voteAction = (choiceObj) => ({type: VOTED, choiceObj})
-const updateTripAction = (updatedTrip) => ({type: UPDATE_STATUS, updatedTrip})
+const updateTripAction = (updatedTrip) => ({type: UPDATE_TRIP, updatedTrip})
+export const resetCurrentTrip = () => ({type: GET_TRIP, trip: {}})
 
 
 // //THUNKS
@@ -37,17 +38,35 @@ const updateTripAction = (updatedTrip) => ({type: UPDATE_STATUS, updatedTrip})
 export function setCoordinates(coords, tripId, userId){
 	return function thunk (dispatch) {
 		return axios.put('/api/attendee/' + tripId, {origin: coords})
-			.then(() => dispatch(setCoordinatesAction([coords,userId])))
+			.then((theTrip) => {
+				dispatch(setCoordinatesAction([coords, userId]))
+				//This route returns the trip, which lets us check to see if all coords are in.
+				let RVSPDone = theTrip.data.attendees.every(attendee => {
+					return attendee.origin !== null
+				})
+				if(RVSPDone){
+					//Putting origin pairs into an array
+					let originArray = []
+					theTrip.data.attendees.forEach(attendee => {
+						originArray.push(attendee.origin)
+					})
+					//We should use a midpoint formula, but for now I'm just gonna pick a random coord
+					let meetup = originArray[Math.floor(Math.random() * originArray.length)]
+					console.log(meetup)
+					dispatch(updateTrip({status: 'voting', meetup}, theTrip.data.id))
+				}
+			})
 	}
 }
+
 //talk to forrest about how this actually works
 
-export function declineInvitation(tripId,userId) {
+export function declineInvitation(tripId, userId) {
 	return function thunk (dispatch) {
 		return axios.delete(`/api/attendee/${tripId}/${userId}`)
-			.then(() => {const action = declineInvitationAction(userId)
+			.then(() => {
+				const action = declineInvitationAction(userId)
 				dispatch(action)
-				history.push('/home')
 			})
 	}
 }
@@ -97,7 +116,7 @@ export function postVote(choiceIdx, trip, userId, yelpList){
 				if(votingDone){
 					//Adding votes
 					let voteCounter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0,}
-					trip.attendees.forEach(attendee => {
+					theTrip.data.attendees.forEach(attendee => {
 						if(attendee.vote !== -1){
 							voteCounter[attendee.vote]++
 						}
@@ -116,7 +135,7 @@ export function postVote(choiceIdx, trip, userId, yelpList){
 					//Select a random restaurant from the most voted and stringify it
 					let randomChoice = +largest[Math.floor(Math.random() * largest.length)]
 					let yelpChoice = JSON.stringify(yelpList[randomChoice])
-					dispatch(updateTrip({status: 'directions', yelpString: yelpChoice}, trip.id))
+					dispatch(updateTrip({status: 'directions', yelpString: yelpChoice}, theTrip.data.id))
 				}
 			})
 	}
@@ -144,11 +163,11 @@ export default function (state = currentTrip, action) {
 		return action.trip
 	case DECLINE_INVITATION:
 		return Object.assign({}, state, {attendees: state.attendees.filter(attendee => {
-			return attendee.id != action.userId
+			return attendee.id !== action.userId
 		})} )
 	case SET_COORDINATES:
 		return Object.assign({}, state, {attendees: state.attendees.map(attendee => {
-			if (attendee.userId == action.coordsArray[1] ) {
+			if (attendee.userId === action.coordsArray[1] ) {
 				let tempObj = attendee
 				tempObj.origin = action.coordsArray[0]
 				return tempObj
@@ -166,7 +185,7 @@ export default function (state = currentTrip, action) {
 				return attendee
 			}
 		})})
-	case UPDATE_STATUS:
+	case UPDATE_TRIP:
 		return action.updatedTrip
 	default:
 		return state

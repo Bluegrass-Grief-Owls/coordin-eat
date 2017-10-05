@@ -7,8 +7,8 @@ import currentTrip from './currentTrip'
 import myTrips from './myTrips'
 import results from './results'
 import users from './users'
-import friends from './friends'
-//import vote from './vote'
+//import friends from './friends'
+import currentLocation from './currentLocation'
 
 const reducer = combineReducers({
 	user, 
@@ -16,9 +16,9 @@ const reducer = combineReducers({
 	results, 
 	yelp,
 	users,
-	friends,
-	//vote,
-	myTrips
+	//friends,
+	myTrips,
+	currentLocation
 })
 
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -31,5 +31,5 @@ export * from './currentTrip'
 export * from './myTrips'
 export * from './results'
 export * from './users'
-export * from './friends'
-// export * from './vote'
+//export * from './friends'
+export * from './currentLocation'
