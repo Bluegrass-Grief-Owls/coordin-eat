@@ -9,9 +9,6 @@ router.post('/', (req, res, next) => {
 		.catch(next)
 })
 
-
-
-
 router.delete('/:tripId/:userId', (req,res, next) => {
 	Attendee.destroy({
 		where: {

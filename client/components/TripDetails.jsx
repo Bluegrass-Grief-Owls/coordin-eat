@@ -13,10 +13,9 @@ const TripDetails = (props) => {
 			<Col xs={1}>
 			</Col>
 			<Col xs={10}>
-				<h3>{theTrip.name}</h3>
+				<h4>{theTrip.name}</h4>
 				<h5>Party Size: {theTrip.attendees.length}</h5>
-				<h5>Date: {theTrip.readableDate}</h5>
-				<h5>Time: {theTrip.time}</h5>
+				<h5>{theTrip.readableDate} at {theTrip.time}</h5>
 			</Col>
 			<Col xs={1}>
 			</Col>
