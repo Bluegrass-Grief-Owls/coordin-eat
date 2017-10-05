@@ -9,12 +9,13 @@ const GET_YELP_LIST = 'GET_YELP_LIST'
 /**
  * INITIAL STATE
  */
-const yelpList = []
+const yelpList = [null]
 
 /**
  * ACTION CREATORS
  */
 const getYelpListAction = yelpList => ({type: GET_YELP_LIST, yelpList})
+export const resetYelpList = () => ({type: GET_YELP_LIST, yelpList: [null]})
 
 
 /**

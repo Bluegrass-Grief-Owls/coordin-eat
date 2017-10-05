@@ -11,6 +11,10 @@ let testCoords = [40.7061336, -74.0119549]
 //Will use the trip build array, later....
 
 class VotingTrip extends Component {
+	componentWillMount(){
+		yelped = false
+	}
+
 	componentDidMount() {
 		if(!yelped){
 			this.props.getYelpData()
@@ -27,63 +31,71 @@ class VotingTrip extends Component {
 				return attendee.userId === this.props.user.id
 			})
 			let myVote = null
+			//Votes are -1 in the database
 			if(attendance){
 				myVote = attendance.vote
 			}
-			if(this.props.yelpList.length && myVote !== null){
-				return (
-					<Row>
-						<Col xs={1}></Col>
-						<Col xs={10}>
-							{
-								isTripOwner ? (<Button className='tripButton' onClick={() => {
-									this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
-							}
-							<h3>Choices</h3>
-							<Accordion>
+			if(this.props.yelpList[0] !== null && myVote !== null){
+				if(this.props.yelpList.length) {
+					return (
+						<Row>
+							<Col xs={1}></Col>
+							<Col xs={10}>
 								{
-									this.props.yelpList.map((buissness, idx) => {
-										let tagList = ''
-										for (var tag in buissness.categories){
-											tagList += (', ' + buissness.categories[tag].title)
-										}
-										tagList = tagList.slice(2)
-										return(
-											<Panel header={buissness.name} key={idx} eventKey={buissness.id}>
-												<Row>
-													<Col className='noPaddingRight noPaddingLeft' xs={12} sm={6}>
-														<img className='buissnessImage' src={buissness.image_url} alt= {buissness.name + ' image'} />
-													</Col>
-													<Col xs={12} sm={6} className='noPaddingLeft'>
-														<ul>
-															<li>Tags: {tagList}</li>
-															<li>Rating: {buissness.rating} | Price: {buissness.price}</li>
-															<li>Phone: {buissness.display_phone}</li>
-															<li>Link: <a className='fontAccentColor' href={buissness.url}>{buissness.name}</a></li>
-															<li>Reviews: {buissness.review_count}</li>
-														</ul>
-													</Col>
-												</Row>
-												{(myVote != idx) ?
-													<Button
-														bsStyle={myVote ? 'warning' : 'primary'}
-														className='destButton backgroundMainColor fontAccentColorLight'
-														onClick={() => {this.props.handleVote(idx, this.props.currentTrip, this.props.user.id, this.props.yelpList)}}
-													>
-														{myVote !== -1 ? 'I changed my mind' : 'I Pick This One!'}
-													</Button>
-													:
-													<Button bsStyle="success" disabled>You voted for this</Button>
-												}
-											</Panel>
-										)
-									})
+									isTripOwner ? (<Button className='tripButton' onClick={() => {
+										this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
 								}
-							</Accordion>
-						</Col>
-						<Col xs={1}></Col>
-					</Row>
-				)
+								<h3>Choices</h3>
+								<Accordion>
+									{
+										this.props.yelpList.map((buissness, idx) => {
+											let tagList = ''
+											for (var tag in buissness.categories){
+												tagList += (', ' + buissness.categories[tag].title)
+											}
+											tagList = tagList.slice(2)
+											return(
+												<Panel header={buissness.name} key={idx} eventKey={buissness.id}>
+													<Row>
+														<Col className='noPaddingRight noPaddingLeft' xs={12} sm={6}>
+															<img className='buissnessImage' src={buissness.image_url} alt= {buissness.name + ' image'} />
+														</Col>
+														<Col xs={12} sm={6} className='noPaddingLeft'>
+															<ul>
+																<li>Tags: {tagList}</li>
+																<li>Rating: {buissness.rating} | Price: {buissness.price}</li>
+																<li>Phone: {buissness.display_phone}</li>
+																<li>Link: <a className='fontAccentColor' href={buissness.url}>{buissness.name}</a></li>
+																<li>Reviews: {buissness.review_count}</li>
+															</ul>
+														</Col>
+													</Row>
+													{(myVote != idx) ?
+														<Button
+															bsStyle={myVote ? 'warning' : 'primary'}
+															className='destButton backgroundMainColor fontAccentColorLight'
+															onClick={() => {this.props.handleVote(idx, this.props.currentTrip, this.props.user.id, this.props.yelpList)}}
+														>
+															{myVote !== -1 ? 'I changed my mind' : 'I Pick This One!'}
+														</Button>
+														:
+														<Button bsStyle="success" disabled>You voted for this</Button>
+													}
+												</Panel>
+											)
+										})
+									}
+								</Accordion>
+							</Col>
+							<Col xs={1}></Col>
+						</Row>
+					)
+				} else {
+					return (
+						<div className='marginLeft15'>We couldn't find anything at this location!</div>
+					)
+				}
+				
 			} else {
 				return (
 					<div>
