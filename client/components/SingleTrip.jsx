@@ -42,8 +42,7 @@ class SingleTrip extends Component {
 			} else if (currentStatus === 'finished') {
 				return(
 					<div>
-						<TripDetails />
-						<div>This should be some info from a past trip</div>
+						<FinishedTrip />
 					</div>
 				)
 			}
