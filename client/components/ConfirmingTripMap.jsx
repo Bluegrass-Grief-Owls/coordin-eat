@@ -11,7 +11,7 @@ import history from './../history'
 class ConfirmTripMap extends React.Component {
 	constructor(props) {
 		super(props)
-		this.removeSelf = props.removeSel
+		this.removeSelf = props.removeSelf
 		this.giveCoords = props.giveCoords
 	}
 
