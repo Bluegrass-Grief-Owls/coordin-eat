@@ -116,7 +116,7 @@ export function postVote(choiceIdx, trip, userId, yelpList){
 				if(votingDone){
 					//Adding votes
 					let voteCounter = {'0': 0, '1': 0, '2': 0, '3': 0, '4': 0,}
-					theTrip.attendees.forEach(attendee => {
+					theTrip.data.attendees.forEach(attendee => {
 						if(attendee.vote !== -1){
 							voteCounter[attendee.vote]++
 						}
@@ -135,7 +135,7 @@ export function postVote(choiceIdx, trip, userId, yelpList){
 					//Select a random restaurant from the most voted and stringify it
 					let randomChoice = +largest[Math.floor(Math.random() * largest.length)]
 					let yelpChoice = JSON.stringify(yelpList[randomChoice])
-					dispatch(updateTrip({status: 'directions', yelpString: yelpChoice}, theTrip.id))
+					dispatch(updateTrip({status: 'directions', yelpString: yelpChoice}, theTrip.data.id))
 				}
 			})
 	}
