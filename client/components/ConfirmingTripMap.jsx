@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { Col, Row, Button, Table } from 'react-bootstrap'
 import { declineInvitation, setCoordinates } from './../store'
-import mapboxgl, { Marker } from 'mapbox-gl/dist/mapbox-gl'
+import mapboxgl, { Marker } from 'mapbox-gl'
 import history from './../history'
 
 
