@@ -3,20 +3,16 @@ const chance = new Chance()
 var math = require('mathjs')
 
 // const mapboxgl = require("mapbox-gl");
-const buildMarker = require("./marker");
-const attractions = require("./attractions");
-console.log('here1')
-buildMarker('hotels', [ 40.80964019275301, -73.9270895692334 ])
-console.log('here')
+
 // given a center (mean) coordinate, gives a random coordinate based on the normal distribution
 // has arguments for std and bound
-const normalCoord = (center, stDev, deviationBound) => {
-	let vertDisplacement = chance.normal({dev: stDev})
-	vertDisplacement = Math.abs(vertDisplacement) < deviationBound ? vertDisplacement : deviationBound
-	let horizDisplacement = chance.normal({dev: stDev})
-	horizDisplacement = Math.abs(horizDisplacement) < deviationBound ? horizDisplacement : deviationBound
-	return [center[0] + vertDisplacement, center[1] + horizDisplacement]
-}
+// const normalCoord = (center, stDev, deviationBound) => {
+// 	let vertDisplacement = chance.normal({dev: stDev})
+// 	vertDisplacement = Math.abs(vertDisplacement) < deviationBound ? vertDisplacement : deviationBound
+// 	let horizDisplacement = chance.normal({dev: stDev})
+// 	horizDisplacement = Math.abs(horizDisplacement) < deviationBound ? horizDisplacement : deviationBound
+// 	return [center[0] + vertDisplacement, center[1] + horizDisplacement]
+// }
 
 // ======== For testing =========
 // const optimalPair = [-.1, .5]
@@ -29,7 +25,7 @@ const normalCoord = (center, stDev, deviationBound) => {
 
 
 // creates random new meetup candidates from a center coordinate
-const stdToBound = .5 // ratio between std and bound
+// const stdToBound = .5 // ratio between std and bound
 const createCandidates = (n, center, bound) => {
 	const radiiRatio = [.005, .1,.2,.5, .9]
 	const radii = radiiRatio.map(ratio => ratio * bound)
@@ -152,7 +148,7 @@ const candScorePromiseAll = (candArr, origins) => {
 // 		[ 40.76525691298981, -73.9834959844067 ]
 // 	]
 // ).then(console.log)
-//	.catch(err => console.log(err))
+// 	.catch(err => console.log(err))
 
 // =================================
 const investigate = (center, score, bound, numCands, origins) => {
@@ -162,7 +158,7 @@ const investigate = (center, score, bound, numCands, origins) => {
 	return candScorePromiseAll(cands, origins)
 		.then(scores => {
 			console.log('scores', scores)
-			const indexOfMax = scores.indexOf(Math.max.apply(Math, score))	
+			const indexOfMax = scores.indexOf(Math.max.apply(Math, scores))	
 			console.log('here yet')
 			const winner = score > scores[indexOfMax] ? [center, score] : [cands[indexOfMax], scores[indexOfMax]]
 			return winner	
@@ -170,20 +166,20 @@ const investigate = (center, score, bound, numCands, origins) => {
 		.catch(err => console.log(err))
 }
 
-// investigate (
-// 	[ 40.80964019275301, -73.9270895692334 ],
-// 	123, .05, 10,
-// 	[
-// 		[ 40.76588646255421, -73.9825951401366 ],
-// 		[ 40.7971972524459, -73.93779144673098 ],
-// 		[ 40.66975627373278, -73.93889311219257 ],
-// 		[ 40.76525691298981, -73.9834959844067 ] 
-// 	]
-// )
-// 	.then(success => {
-// 		console.log('made it!!!!!')
-// 		console.log(success)
-// 	})
-// 	.catch(err => console.log(err))
+investigate (
+	[ 40.80964019275301, -73.9270895692334 ],
+	123, .05, 10,
+	[
+		[ 40.76588646255421, -73.9825951401366 ],
+		[ 40.7971972524459, -73.93779144673098 ],
+		[ 40.66975627373278, -73.93889311219257 ],
+		[ 40.76525691298981, -73.9834959844067 ] 
+	]
+)
+	.then(success => {
+		console.log('made it!!!!!')
+		console.log(success)
+	})
+	.catch(err => console.log(err))
 
 
