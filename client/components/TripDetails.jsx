@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Button} from 'react-bootstrap'
 import history from './../history'
 
 
@@ -9,17 +9,19 @@ const TripDetails = (props) => {
 	let theTrip = props.currentTrip
 
 	return (
-		<Row>
-			<Col xs={1}>
-			</Col>
-			<Col xs={10}>
-				<h4>{theTrip.name}</h4>
-				<h5>Party Size: {theTrip.attendees.length}</h5>
-				<h5>{theTrip.readableDate} at {theTrip.time}</h5>
-			</Col>
-			<Col xs={1}>
-			</Col>
-		</Row>
+		<div>
+			<Row>
+				<Col xs={1}>
+				</Col>
+				<Col xs={10}>
+					<h4>{theTrip.name}</h4>
+					<h5>Party Size: {theTrip.attendees.length}</h5>
+					<h5>{theTrip.readableDate} at {theTrip.time}</h5>
+				</Col>
+				<Col xs={1}>
+				</Col>
+			</Row>
+		</div>
 	)
 }
 
