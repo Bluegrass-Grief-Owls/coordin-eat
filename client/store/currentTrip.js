@@ -78,7 +78,7 @@ export function declineInvitation(tripId, userId) {
 					})
 					//We should use a midpoint formula, but for now I'm just gonna pick a random coord
 					let meetup = originArray[Math.floor(Math.random() * originArray.length)]
-					dispatch(updateTrip({status: 'voting', meetup}, theTrip.data.id))
+					dispatch(updateTrip({status: 'voting', meetup}, theTrip.data.id, true))
 				}
 			})
 	}
@@ -154,12 +154,14 @@ export function postVote(choiceIdx, trip, userId, yelpList){
 	}
 }
 
-export function updateTrip(trip, tripId){
+export function updateTrip(trip, tripId, isLeaving){
 	return function thunk (dispatch) {
 		return axios.put(`/api/trip/${tripId}`, trip)
 			.then(tripData => {
 				dispatch(updateTripAction(tripData.data))
-				history.push(`/trip/${tripId}`)
+				if(!isLeaving){
+					history.push(`/trip/${tripId}`)
+				}
 			})
 	}
 }
@@ -175,10 +177,14 @@ export default function (state = currentTrip, action) {
 	case GET_TRIP:
 		return action.trip
 	case DECLINE_INVITATION:
-		console.log('state is...', state)
-		return Object.assign({}, state, {attendees: state.attendees.filter(attendee => {
-			return attendee.id !== action.userId
-		})} )
+		return state
+		//!!!!!!
+		//Ok, this seems weird, but when you press decline, it redirects you to home
+		//At home, current trip is {}, so it errors if you filter
+
+		// return Object.assign({}, state, {attendees: state.attendees.filter(attendee => {
+		// 	return attendee.id !== action.userId
+		// })} )
 	case SET_COORDINATES:
 		return Object.assign({}, state, {attendees: state.attendees.map(attendee => {
 			if (attendee.userId === action.coordsArray[1] ) {
