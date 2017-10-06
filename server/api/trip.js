@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Trip, Attendee, User} = require('../db/models')
-const { isLoggedIn, isTripOwner, isAttendee } = require('../auth/gatekeepers')
+const { isLoggedIn, isAttendee } = require('../auth/gatekeepers')
 module.exports = router
 
 router.get('/:id', (req, res, next) => { //should use isAttendee, but there's a bug
@@ -23,4 +23,3 @@ router.put('/:tripId', isAttendee, (req, res, next) => { //would be isTripOwner,
 		.then(updatedTrip => res.json(updatedTrip))
 		.catch(next)
 })
-
