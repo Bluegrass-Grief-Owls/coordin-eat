@@ -20,7 +20,7 @@ router.delete('/:tripId/:userId', isTripOwner, (req, res, next) => {
 		.catch(next)
 })
 
-router.put('/:tripId', isLoggedIn, (req, res, next) => {
+router.put('/:tripId', (req, res, next) => {
 	Attendee.findOne({
 		where: {
 			tripId: req.params.tripId,

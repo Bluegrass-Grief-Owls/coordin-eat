@@ -1,7 +1,7 @@
 const { Trip, Attendee, User } = require('../db/models')
 
 function isLoggedIn(req, res, next) {
-	if (res.isAuthenticated()) {
+	if (req.isAuthenticated()) {
 		return next()
 	} else {
 		res.status(403).send(
@@ -19,6 +19,7 @@ function isTripOwner(req, res, next) {
 				return next()
 			}
 		})
+		.catch()
 }
 
 function isAttendee(req, res, next) {
