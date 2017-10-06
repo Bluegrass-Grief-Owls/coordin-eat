@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Router} from 'react-router'
-import {Route, Switch, Redirect} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Router } from 'react-router'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {
@@ -17,19 +17,19 @@ import {
 	InviteFriends,
 	ConfirmingTrip
 } from './components'
-import {me} from './store'
+import { me } from './store'
 
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-	componentDidMount () {
+	componentDidMount() {
 		this.props.loadInitialData()
 	}
 
-	render () {
-		const {isLoggedIn} = this.props
+	render() {
+		const { isLoggedIn } = this.props
 
 		return (
 			<Router history={history}>
@@ -38,18 +38,18 @@ class Routes extends Component {
 						{/* Routes placed here are available to all visitors */}
 						<Route path='/login' component={Login} />
 						<Route path='/signup' component={Signup} />
-						<Route path='/build_trip' component = {BuildTrip} />
-						<Route path='/addfriends' component = {InviteFriends} />
-						<Route path='/trip/:tripId' component = {SingleTrip} />
-						<Route path='/friends' component = {FriendsList} />
 						{
 							isLoggedIn &&
-								<Switch>
-									{/* Routes placed here are only available after logging in */}
-									<Route path='/home' component={UserHome} />
-									<Redirect to='/home' />
-									<Route></Route>
-								</Switch>
+							<Switch>
+								{/* Routes placed here are only available after logging in */}
+								<Route path='/home' component={UserHome} />
+								<Route path='/build_trip' component={BuildTrip} />
+								<Route path='/addfriends' component={InviteFriends} />
+								<Route path='/trip/:tripId' component={SingleTrip} />
+								<Route path='/friends' component={FriendsList} />
+								<Redirect to='/home' />
+								<Route></Route>
+							</Switch>
 						}
 						{/* Displays our Login component as a fallback */}
 						<Redirect to='/login' />
@@ -75,7 +75,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
 	return {
-		loadInitialData () {
+		loadInitialData() {
 			dispatch(me())
 		}
 	}
