@@ -27,6 +27,7 @@ export function fetchMyTrips(userId){
 				//This is actually a list of attendances attached with the trip they attended
 				dispatch(fetchTripAction(trips))
 			})
+			.catch(console.error.bind(console))
 	}
 }
 

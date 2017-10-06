@@ -5,10 +5,9 @@ module.exports = router
 router.post('/', (req, res, next) => { //just using post because it allows request to have a body
 	const origins = req.body.origins
 	console.log('the origin', origins)
-	anneal(origins, 25)
+	anneal(origins)
 		.then(res => {
-			// console.log(res)
-			return anneal(origins, 25, res[0], res[1] )
+			return anneal(origins, res[0], res[1], .7)
 		})
 		.then(meetup => {
 			console.log('the meetup', meetup)

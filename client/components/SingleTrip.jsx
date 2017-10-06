@@ -18,28 +18,29 @@ class SingleTrip extends Component {
 		if(this.props.currentTrip.id){
 			let theTrip = this.props.currentTrip
 			let currentStatus = theTrip.status
-			if(currentStatus === 'confirming'){
+			switch (currentStatus) {
+			case 'confirming':
 				return (
 					<div>
 						<TripDetails />
 						<ConfirmingTrip />
 					</div>
 				)
-			} else if (currentStatus === 'voting') {
+			case 'voting':
 				return(
 					<div>
 						<TripDetails />
 						<VotingTrip />
 					</div>
 				)
-			} else if (currentStatus === 'directions') {
+			case 'directions':
 				return(
 					<div>
 						<TripDetails />
 						<TripDirections />
 					</div>
 				)
-			} else if (currentStatus === 'finished') {
+			case 'finished':
 				return(
 					<div>
 						<FinishedTrip />
@@ -79,5 +80,5 @@ export default withRouter(connect(mapState, mapDispatch)(SingleTrip))
  * PROP TYPES
  */
 SingleTrip.propTypes = {
-	//TripBuild: PropTypes.array,
+	currentTrip: PropTypes.object,
 }
