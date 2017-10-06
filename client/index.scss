@@ -1,6 +1,6 @@
 //Color Setup
 $colorArray: orange banana pear blueberry blackberry dragonfruit watermelon;
-$colorChoice: nth($colorArray, 7);
+$colorChoice: nth($colorArray, 3);
 //colorArray index starts at 1, not 0
 
 $mainColor: null;
@@ -240,4 +240,13 @@ body {
   border-radius: 5px;
   background-color: $accentColorLight;
   color: $mainColor;
+}
+
+.finishedContainer {
+  border: $accentColor solid 2px;
+  border-radius: 5px;
+  margin-top: 50px;
+  padding-bottom: 10px;
+  color: $accentColorLight;
+  background-color: $mainColor;
 }

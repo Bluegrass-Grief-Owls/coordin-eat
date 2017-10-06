@@ -29,6 +29,11 @@ class ConfirmTripMap extends React.Component {
 
 	render() {
 
+		let isTripOwner = false
+		if(this.props.user.id === this.props.currentTrip.ownerId){
+			isTripOwner = true
+		}
+        
 		return (
 			<Row>
 				<Col xs={1}></Col>
@@ -37,7 +42,9 @@ class ConfirmTripMap extends React.Component {
 						<div className='samtest'></div>
 					</div>
 					<Button className='tripButton displayBlock' onClick={() => this.giveCoords(this.map, this.props.currentTrip.id, this.props.user.id)}>RVSP with this starting location</Button>
-					<Button className='tripButton displayBlock' onClick={() => this.removeSelf(this.props.currentTrip.id, this.props.user.id)}>I cannot attend</Button>
+					{
+						isTripOwner ? <div /> : <Button className='tripButton displayBlock' onClick={() => this.removeSelf(this.props.currentTrip.id, this.props.user.id)}>I cannot attend</Button>	
+					}
 				</Col>
 				<Col xs={1}></Col>
 			</Row>

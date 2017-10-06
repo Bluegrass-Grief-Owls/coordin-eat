@@ -15,6 +15,7 @@ const yelpList = [null]
  * ACTION CREATORS
  */
 const getYelpListAction = yelpList => ({type: GET_YELP_LIST, yelpList})
+export const resetYelpList = () => ({type: GET_YELP_LIST, yelpList: [null]})
 
 
 /**
