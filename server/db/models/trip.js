@@ -29,7 +29,6 @@ const Trip = db.define('trip', {
 },{
 	getterMethods: {
 		readableDate() {
-			console.log(this.date)
 			let theDate = this.date.toString().slice(0,10)
 			return theDate
 		},

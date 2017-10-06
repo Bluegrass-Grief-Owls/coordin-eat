@@ -112,8 +112,8 @@ const mapDispatch = (dispatch) => {
 				}
 			})
 			//We should use a midpoint formula, but for now I'm just gonna pick a random coord
-			let meetup = originArray[Math.floor(Math.random() * originArray.length)]
-			dispatch(updateTrip({status: 'voting', meetup}, trip.id))
+			// let meetup = originArray[Math.floor(Math.random() * originArray.length)]
+			// dispatch(updateTrip({status: 'voting', meetup}, trip.id))
 		}
 	}
 }

@@ -16,7 +16,9 @@ router.delete('/:tripId/:userId', (req,res, next) => {
 			userId: req.params.userId
 		}
 	})
-		.then(() => res.json('deleted'))
+		//I'm not sending back the deleted attendance, I'm sending back the whole trip!
+		.then(() => Trip.findById(req.params.tripId, {include: [ Attendee ]})
+			.then((trip) => res.json(trip)))
 		.catch(next)
 })
 
