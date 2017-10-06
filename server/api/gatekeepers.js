@@ -21,7 +21,8 @@ function isTripOwner(req, res, next) {
 			} else {
 				res.status(403).send(
 					`<h3>403 forbidden</h3>
-					<p>(I'm spying on you!)</p>`
+					<p>Mr. Postman, look and see</p>
+					<p>Is there a letter in your bag for me?</p>`
 				)
 			}
 		})
@@ -39,7 +40,7 @@ function isAttendee(req, res, next) {
 			} else {
 				res.status(403).send(
 					`<h3>403 forbidden</h3>
-					<p>Hey! </p>`
+					<p>(I'm spying on you!)</p>`
 				)
 			}
 		})
