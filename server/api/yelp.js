@@ -5,13 +5,11 @@ module.exports = router
 
 router.get('/:xcoord/:ycoord', isLoggedIn, (req, res, next) => {
 	let theresMore = true
-	//let offset = -50
 	let resultArr = []
 	let promiseArray = []
 	let term = 'restaurants'
 	while(theresMore){
-		//offset += 50
-		/*if(offset > 1000) */theresMore = false
+		theresMore = false
 		promiseArray.push(fetch('https://api.yelp.com/v3/businesses/search?term=' + term + '&latitude=' + req.params.xcoord + '&longitude=' + req.params.ycoord + '&radius=200&limit=5'/*&offset=' + offset*/,
 			{method: 'GET', headers: {'Authorization': 'Bearer ' + process.env.YELP_ACCESS_TOKEN}}
 		)
@@ -23,7 +21,6 @@ router.get('/:xcoord/:ycoord', isLoggedIn, (req, res, next) => {
 						resultArr.push(business)
 					})
 				}
-				//console.log('length:', resultArr.length, 'type of:', Array.isArray(businesses))
 			})
 			.catch(next)
 		)
@@ -32,4 +29,5 @@ router.get('/:xcoord/:ycoord', isLoggedIn, (req, res, next) => {
 		.then(() => {
 			res.json(resultArr)
 		})
+		.catch(next)
 })

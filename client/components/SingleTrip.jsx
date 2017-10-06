@@ -80,5 +80,5 @@ export default withRouter(connect(mapState, mapDispatch)(SingleTrip))
  * PROP TYPES
  */
 SingleTrip.propTypes = {
-	//TripBuild: PropTypes.array,
+	currentTrip: PropTypes.object,
 }

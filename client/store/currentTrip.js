@@ -82,9 +82,9 @@ export function declineInvitation(tripId, userId) {
 						.then((meetup) => {
 							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
 						})
-						.catch(console.log)
 				}
 			})
+			.catch(console.error.bind(console))
 	}
 }
 
@@ -117,6 +117,7 @@ export function fetchTrip(tripId) {
 			.then(trip => {
 				dispatch(fetchTripAction(trip))
 			})
+			.catch(console.error.bind(console))
 	}
 }
 
@@ -155,6 +156,7 @@ export function postVote(choiceIdx, trip, userId, yelpList){
 					dispatch(updateTrip({status: 'directions', yelpString: yelpChoice}, theTrip.data.id))
 				}
 			})
+			.catch(console.error.bind(console))
 	}
 }
 
@@ -167,6 +169,7 @@ export function updateTrip(trip, tripId, isLeaving){
 					history.push(`/trip/${tripId}`)
 				}
 			})
+			.catch(console.error.bind(console))
 	}
 }
 

@@ -4,7 +4,6 @@ const { User } = require('../db/models')
 const { isTripOwner } = require('../auth/gatekeepers')
 const Promise = require('bluebird')
 
-
 module.exports = router
 
 let transporter = nodeMailer.createTransport({
@@ -16,9 +15,10 @@ let transporter = nodeMailer.createTransport({
 	}
 })
 
-router.post('/invite', isTripOwner, (req, res) => { //just using post because it allows request to have a body
+router.post('/invite', isTripOwner, (req, res, next) => { //just using post because it allows request to have a body
 	const domain = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'http://coordin-Eat.herokuapp.com'
 	const url = `${domain}/trip/${req.body.tripId}`
+	
 	User.findById(req.user.id)
 		.then(user => {
 			return Promise.map(req.body.invitees, inviteeId => {
@@ -29,6 +29,7 @@ router.post('/invite', isTripOwner, (req, res) => { //just using post because it
 			})
 		})
 		.then(() => res.sendStatus(200))
+		.catch(next)
 })
 
 function sendMail(url, senderName, recipient, callback) {

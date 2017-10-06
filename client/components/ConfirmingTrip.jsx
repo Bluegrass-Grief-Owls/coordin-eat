@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import React, {Component} from 'react'
+import React from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
 import {setCurrentCoords, declineInvitation, updateTrip} from './../store'
 import {ConfirmingTripMap} from './index.js'
-// import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
-
-
 
 const ConfirmTrip = (props) => {
 

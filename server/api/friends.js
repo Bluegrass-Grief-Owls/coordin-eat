@@ -17,10 +17,3 @@ router.post('/:myId/:friendId', isLoggedIn, (req, res, next) => {
 		.catch(next)
 })
 
-// router.put('/:id', (req, res, next) => {
-// 	Attendee.findById(req.params.id)
-// 		.then(attendee => attendee.update(req.body)
-// 			.then(updated =>res.json(updated)))
-// 		.catch(next)
-// })
-
