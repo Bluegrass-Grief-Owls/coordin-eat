@@ -11,8 +11,6 @@ import history from './../history'
 class ConfirmTripMap extends React.Component {
 	constructor(props) {
 		super(props)
-		this.removeSelf = props.removeSelf
-		this.giveCoords = props.giveCoords
 	}
 
 	componentDidMount() {
@@ -30,15 +28,18 @@ class ConfirmTripMap extends React.Component {
 	}
 
 	render() {
+
 		let isTripOwner = false
 		if(this.props.user.id === this.props.currentTrip.ownerId){
 			isTripOwner = true
 		}
+        
 		return (
 			<Row>
 				<Col xs={1}></Col>
 				<Col xs={10}>
 					<div id='putMapHere' className='theMapBox'>
+						<div className='samtest'></div>
 					</div>
 					<Button className='tripButton displayBlock' onClick={() => this.giveCoords(this.map, this.props.currentTrip.id, this.props.user.id)}>RVSP with this starting location</Button>
 					{
