@@ -39,9 +39,7 @@ class Routes extends Component {
 						<Route path='/login' component={Login} />
 						<Route path='/signup' component={Signup} />
 						<Route path='/build_trip' component = {BuildTrip} />
-						<Route path='/destinations' component = {DestinationPage} />
 						<Route path='/addfriends' component = {InviteFriends} />
-						<Route path='/confirmingtrip' component = {ConfirmingTrip} />
 						<Route path='/trip/:tripId' component = {SingleTrip} />
 						<Route path='/friends' component = {FriendsList} />
 						{
