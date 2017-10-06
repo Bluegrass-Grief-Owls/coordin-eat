@@ -54,7 +54,7 @@ const createCandidates = (n, center, bound) => {
 // ==================== API REQUESTS & STUFF ===================
 
 const client = require('@google/maps').createClient({
-	key: 'AIzaSyB6N413BwZWE2KkNTdb0wsxQZw6VlrUvdU',
+	key: process.env.GOOGLE_DIRECTIONS_KEY,
 	Promise: Promise
 })
 

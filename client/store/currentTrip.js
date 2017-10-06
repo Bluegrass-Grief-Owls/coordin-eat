@@ -50,9 +50,11 @@ export function setCoordinates(coords, tripId, userId){
 					theTrip.data.attendees.forEach(attendee => {
 						originArray.push(attendee.origin)
 					})
-					//We should use a midpoint formula, but for now I'm just gonna pick a random coord
-					let meetup = originArray[Math.floor(Math.random() * originArray.length)]
-					dispatch(updateTrip({status: 'voting', meetup}, theTrip.data.id))
+					axios.post('/api/meetup', {origins: originArray})
+						.then((meetup) => {
+							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
+						})
+						.catch(console.log)
 				}
 			})
 	}
@@ -76,9 +78,11 @@ export function declineInvitation(tripId, userId) {
 					theTrip.data.attendees.forEach(attendee => {
 						originArray.push(attendee.origin)
 					})
-					//We should use a midpoint formula, but for now I'm just gonna pick a random coord
-					let meetup = originArray[Math.floor(Math.random() * originArray.length)]
-					dispatch(updateTrip({status: 'voting', meetup}, theTrip.data.id, true))
+					axios.post('/api/meetup', {origins: originArray})
+						.then((meetup) => {
+							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
+						})
+						.catch(console.log)
 				}
 			})
 	}
