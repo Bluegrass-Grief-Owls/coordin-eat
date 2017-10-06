@@ -66,11 +66,10 @@ const getTravelTime = (origin, dest, mode) => {
 	}
 	return client.distanceMatrix(query).asPromise()
 		.then(res => {
-			// console.log('response: ', res.json.rows[0].elements[0])
 			return res.json.rows[0].elements[0].duration.value / 60.0
 		})
 		.catch(console.error.bind(console))
-	}
+}
 
 // ====================== PROMISES/SCORING =========================
 

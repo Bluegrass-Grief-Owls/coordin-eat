@@ -14,7 +14,6 @@ const getTravelTime = (origin, dest, mode) => {
 		.catch(console.log)
 	// 	, (res, status) => {
 	// 	const tTime = res.rows.elements[0].duration.value / 60.0
-	// 	console.log('time is', tTime)
 	// })
 }
 

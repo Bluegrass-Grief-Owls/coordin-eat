@@ -113,8 +113,6 @@ db.sync({force: true})
 		// 	// }
 		// }
 
-		// console.log('************', tripIds)
-
 		//====================================== Promises ==============================================
 
 		Promise.all(promisesUsers)
