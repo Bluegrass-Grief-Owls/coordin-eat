@@ -60,6 +60,10 @@ const ConfirmTrip = (props) => {
 				let currentCoords = [Number(position.coords.latitude.toFixed(6)), Number(position.coords.longitude.toFixed(6))]
 				console.log('Your current location', currentCoords)
 				props.setLocation(currentCoords)
+			},
+			function(error) {
+				console.log('de error code:', error.code)
+				props.setLocation([40.750589, -73.993512])
 			})
 		}
 		if (props.currentLocation[0] !== null) {
