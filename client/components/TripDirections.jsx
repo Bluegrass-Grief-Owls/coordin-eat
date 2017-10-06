@@ -31,7 +31,25 @@ class TripDirections extends React.Component {
 			container: 'putMapHere',
 			style: 'mapbox://styles/mapbox/streets-v9',
 			center: [this.meetingPlace.coordinates.longitude, this.meetingPlace.coordinates.latitude],
-			zoom: 18
+			zoom: 12
+		})
+
+		function markerFactory(name, long, lat, img, map){
+			let markerDomEl = document.createElement('div')
+			markerDomEl.className = 'mapMarker'
+			markerDomEl.name = name
+			markerDomEl.style.backgroundImage = img
+			console.log(markerDomEl)
+
+			new mapboxgl.Marker(markerDomEl)
+				.setLngLat([long, lat + 0.001])
+				.setPopup(new mapboxgl.Popup({ offset: 25 })
+					.setHTML('<h7>' + markerDomEl.name + '</h7>'))
+				.addTo(map)
+		}
+		markerFactory(this.meetingPlace.name, this.meetingPlace.coordinates.longitude, this.meetingPlace.coordinates.latitude, 'url(../DestPin.png)', this.map)
+		this.props.currentTrip.attendees.forEach(attendee =>{
+			markerFactory(attendee.user.name, attendee.origin[1], attendee.origin[0], 'url(../Pin.png)', this.map)
 		})
 	}
 
