@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
-const { isLoggedIn } = require('./gatekeepers')
+const { isLoggedIn } = require('../auth/gatekeepers')
 
 module.exports = router
 

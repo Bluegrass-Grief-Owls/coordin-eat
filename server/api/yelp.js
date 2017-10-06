@@ -1,8 +1,9 @@
 const router = require('express').Router()
 var fetch = require('node-fetch')
+const { isLoggedIn } = require('../auth/gatekeepers')
 module.exports = router
 
-router.get('/:xcoord/:ycoord', (req, res, next) => {
+router.get('/:xcoord/:ycoord', isLoggedIn, (req, res, next) => {
 	let theresMore = true
 	//let offset = -50
 	let resultArr = []

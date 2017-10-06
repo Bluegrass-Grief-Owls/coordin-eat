@@ -1,9 +1,9 @@
 const router = require('express').Router()
 const {Trip, Attendee, User} = require('../db/models')
-const { isLoggedIn, isTripOwner, isAttendee } = require('./gatekeepers')
+const { isLoggedIn, isTripOwner, isAttendee } = require('../auth/gatekeepers')
 module.exports = router
 
-router.get('/:id', isAttendee, (req, res, next) => {
+router.get('/:id', (req, res, next) => { //should use isAttendee, but there's a bug
 	Trip.findById(req.params.id, {
 		include: [ {model: Attendee, include: [User]} ]
 	})

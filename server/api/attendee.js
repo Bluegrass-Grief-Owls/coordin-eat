@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const { Trip, Attendee } = require('../db/models')
-const { isLoggedIn, isTripOwner } = require('./gatekeepers')
+const { isLoggedIn, isTripOwner } = require('../auth/gatekeepers')
 module.exports = router
 
 router.post('/', isTripOwner, (req, res, next) => {

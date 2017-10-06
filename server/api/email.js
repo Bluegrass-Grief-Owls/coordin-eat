@@ -1,7 +1,7 @@
 const nodeMailer = require('nodemailer')
 const router = require('express').Router()
 const { User } = require('../db/models')
-const { isTripOwner } = require('./gatekeepers')
+const { isTripOwner } = require('../auth/gatekeepers')
 const Promise = require('bluebird')
 
 
