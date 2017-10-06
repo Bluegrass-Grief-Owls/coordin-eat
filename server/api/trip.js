@@ -17,7 +17,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
 		.catch(next)
 })
 
-router.put('/:tripId', isTripOwner, (req, res, next) => {
+router.put('/:tripId', isAttendee, (req, res, next) => { //would be isTripOwner, but last confirmation should change status to 'voting', etc. 
 	Trip.findById(req.params.tripId, {include: [Attendee]})
 		.then(trip => trip.update(req.body))
 		.then(updatedTrip => res.json(updatedTrip))
