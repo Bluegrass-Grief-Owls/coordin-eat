@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import mapboxgl, { Marker } from 'mapbox-gl'
+import mapboxgl from 'mapbox-gl'
 import { Col, Row } from 'react-bootstrap'
 
 class TripDirections extends React.Component {
@@ -12,6 +12,7 @@ class TripDirections extends React.Component {
 
 	componentWillReceiveProps(newProps) {
 		this.meetingPlace = JSON.parse(newProps.meetingPlace)
+		this.tooltipContainer = document.createElement('div')
 
 		const me = newProps.currentTrip
 			.attendees
@@ -23,7 +24,6 @@ class TripDirections extends React.Component {
 			this.currentLat = me.origin[0]
 			this.currentLong = me.origin[1]
 		}
-
 	}
 
 	componentDidMount() {
@@ -33,7 +33,7 @@ class TripDirections extends React.Component {
 			container: 'putMapHere',
 			style: 'mapbox://styles/mapbox/streets-v9',
 			center: [this.meetingPlace.coordinates.longitude, this.meetingPlace.coordinates.latitude],
-			zoom: 14
+			zoom: 18
 		})
 	}
 
@@ -77,6 +77,6 @@ export default connect(mapState)(TripDirections)
 /**
  * PROP TYPES
  */
-// TripDirections.propTypes = {
-// 	meetingPlace: PropTypes.string
-// }
+TripDirections.propTypes = {
+	meetingPlace: PropTypes.string
+}
