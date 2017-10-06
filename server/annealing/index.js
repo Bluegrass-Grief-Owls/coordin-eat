@@ -102,27 +102,15 @@ const candScorePromiseAll = (candArr, origins) => {
 	return Promise.all(candPromises)
 }
 
-
 //========================== THE ANNEALING =============================
-let origins = [
-	[40.709202, -73.957048],
-	[40.674333, -73.970488],
-	[40.753504, -73.993079] 
-]
 
 const anneal = (origins = [], n, center, lowScore = 9999) => {
 	const centroid = center || centerCoord(...origins)	
-	console.log(centroid)
 	const calcBound = maxDistanceFromCentroid(centroid, origins)
 	let cands = createCandidates(25, centroid, calcBound * 2.5)
-	cands = cands.map(coord => coord)
-	console.log(cands)
-	// origins = origins.map(coord => coord)
-	console.log(origins)
 	return candScorePromiseAll(cands, origins)
 		.then(scores => {
 			scores = scores.map(score => score ? score : 9999)
-			console.log('scores', scores)
 			const indexOfMin = scores.indexOf(math.min(scores))	
 			const winner = lowScore < scores[indexOfMin] ? [centroid, lowScore] : [cands[indexOfMin], scores[indexOfMin]]
 			return winner	
@@ -130,11 +118,4 @@ const anneal = (origins = [], n, center, lowScore = 9999) => {
 		.catch(err => console.log(err))
 }
 
-anneal(origins, 25)
-	.then(res => {
-		// console.log(res)
-		return anneal(origins, 25, res[0], res[1] )
-	})
-	.then(console.log)
-	.catch(err => console.log(err))
-
+module.exports = anneal
