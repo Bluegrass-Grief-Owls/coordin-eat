@@ -1,6 +1,7 @@
 const nodeMailer = require('nodemailer')
 const router = require('express').Router()
 const { User } = require('../db/models')
+const { isTripOwner } = require('../auth/gatekeepers')
 const Promise = require('bluebird')
 
 
@@ -15,7 +16,7 @@ let transporter = nodeMailer.createTransport({
 	}
 })
 
-router.post('/invite', (req, res) => { //just using post because it allows request to have a body
+router.post('/invite', isTripOwner, (req, res) => { //just using post because it allows request to have a body
 	const domain = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'http://coordin-Eat.herokuapp.com'
 	const url = `${domain}/trip/${req.body.tripId}`
 	User.findById(req.user.id)
