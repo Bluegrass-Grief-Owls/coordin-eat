@@ -39,7 +39,7 @@ class ConfirmTripMap extends React.Component {
 				<Col xs={1}></Col>
 				<Col xs={10}>
 					<div id='putMapHere' className='theMapBox'>
-						<img className='samtest' src='../Pin.png'/>
+						<img className='mapPin' src='../Pin.png'/>
 					</div>
 					<Button className='tripButton displayBlock' onClick={() => this.props.giveCoords(this.map, this.props.currentTrip.id, this.props.user.id)}>RVSP with this starting location</Button>
 					{
