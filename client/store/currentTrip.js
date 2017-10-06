@@ -60,7 +60,6 @@ export function setCoordinates(coords, tripId, userId){
 	}
 }
 
-//talk to forrest about how this actually works
 //This route should also check if the trip is now ready to move onto voting
 export function declineInvitation(tripId, userId) {
 	return function thunk (dispatch) {
@@ -89,7 +88,9 @@ export function declineInvitation(tripId, userId) {
 }
 
 
-export function postTrip(trip, invitedIdArray) {
+export function postTrip(trip, invitedIdArray) {//from buildTrip: trip is an object with name prop that has tripname from synthetic event and date prop which has a formatted date and the owner id
+	//this means that this thunk needs to receive a formatted date and owner ID
+	//invitedIdArray is an array of friend objects; inconsequential to time
 	return function thunk(dispatch) {
 		return axios.post('/api/trip', trip)
 			.then(res => res.data)
