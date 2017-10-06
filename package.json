@@ -1,7 +1,7 @@
 {
   "name": "coordin-eat",
   "version": "1.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "description": "A mobile-first web app to ease the pain of finding the perfect spot for dinner with your geographically inconvenient friends.",
   "engines": {
     "node": ">= 7.0.0"
   },
@@ -16,7 +16,7 @@
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
     "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/coordin-eat-test' mocha ./**/*.spec.js --compilers js:babel-register"
   },
-  "author": "",
+  "author": "Bluegrass Grief Owls capstone team, consisting of: Sam Glass, David Berger, Jackson Sui, and Forrest Weiswolf",
   "license": "ISC",
   "dependencies": {
     "@google/maps": "^0.4.3",
