@@ -52,7 +52,6 @@ export function setCoordinates(coords, tripId, userId){
 					})
 					//We should use a midpoint formula, but for now I'm just gonna pick a random coord
 					let meetup = originArray[Math.floor(Math.random() * originArray.length)]
-					console.log(meetup)
 					dispatch(updateTrip({status: 'voting', meetup}, theTrip.data.id))
 				}
 			})
@@ -64,9 +63,23 @@ export function setCoordinates(coords, tripId, userId){
 export function declineInvitation(tripId, userId) {
 	return function thunk (dispatch) {
 		return axios.delete(`/api/attendee/${tripId}/${userId}`)
-			.then(() => {
+			.then((theTrip) => {
 				const action = declineInvitationAction(userId)
 				dispatch(action)
+				//This route returns the trip, which lets us check to see if all coords are in.
+				let RVSPDone = theTrip.data.attendees.every(attendee => {
+					return attendee.origin !== null
+				})
+				if(RVSPDone){
+					//Putting origin pairs into an array
+					let originArray = []
+					theTrip.data.attendees.forEach(attendee => {
+						originArray.push(attendee.origin)
+					})
+					//We should use a midpoint formula, but for now I'm just gonna pick a random coord
+					let meetup = originArray[Math.floor(Math.random() * originArray.length)]
+					dispatch(updateTrip({status: 'voting', meetup}, theTrip.data.id, true))
+				}
 			})
 	}
 }
@@ -141,12 +154,14 @@ export function postVote(choiceIdx, trip, userId, yelpList){
 	}
 }
 
-export function updateTrip(trip, tripId){
+export function updateTrip(trip, tripId, isLeaving){
 	return function thunk (dispatch) {
 		return axios.put(`/api/trip/${tripId}`, trip)
 			.then(tripData => {
 				dispatch(updateTripAction(tripData.data))
-				history.push(`/trip/${tripId}`)
+				if(!isLeaving){
+					history.push(`/trip/${tripId}`)
+				}
 			})
 	}
 }
@@ -162,9 +177,14 @@ export default function (state = currentTrip, action) {
 	case GET_TRIP:
 		return action.trip
 	case DECLINE_INVITATION:
-		return Object.assign({}, state, {attendees: state.attendees.filter(attendee => {
-			return attendee.id !== action.userId
-		})} )
+		return state
+		//!!!!!!
+		//Ok, this seems weird, but when you press decline, it redirects you to home
+		//At home, current trip is {}, so it errors if you filter
+
+		// return Object.assign({}, state, {attendees: state.attendees.filter(attendee => {
+		// 	return attendee.id !== action.userId
+		// })} )
 	case SET_COORDINATES:
 		return Object.assign({}, state, {attendees: state.attendees.map(attendee => {
 			if (attendee.userId === action.coordsArray[1] ) {
