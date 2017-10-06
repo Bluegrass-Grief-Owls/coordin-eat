@@ -16,6 +16,7 @@ class UserHome extends Component {
 	}
 
 	render () {
+		console.log("$$$$$$", this.props)
 		return (
 			<Row className=''>
 				<h3 className='noMargin welcomeUser'>Welcome, {this.props.user.name}!</h3>
@@ -28,6 +29,8 @@ class UserHome extends Component {
 								this.props.myTrips.map(attendance => {
 									//This is actually a list of attendances attached with the trip they attended
 									let theTrip = attendance.trip
+									//TODO: if trip gets deleted need to specify that all associated attendences need to be deleted
+									console.log('oooooo', theTrip)
 									return(
 										<ListGroupItem key={theTrip.id} className='noPaddingBottom myTripList' onClick={() => {history.push(`/trip/${theTrip.id}`)}}>
 											<h3 className='noMargin fontAccentColorLight'>{theTrip.name}</h3>
