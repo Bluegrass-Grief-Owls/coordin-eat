@@ -35,7 +35,7 @@ function isAttendee(req, res, next) {
 		include: [{ model: Attendee, include: [User] }]
 	})
 		.then((trip) => {
-			if (trip && (trip.attendees.any(attendee => attendee.userId === req.user.id))) {
+			if (trip && (trip.attendees.some(attendee => attendee.userId === req.user.id))) {
 				return next()
 			} else {
 				res.status(403).send(
