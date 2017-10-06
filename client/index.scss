@@ -1,6 +1,6 @@
 //Color Setup
 $colorArray: orange banana pear blueberry blackberry dragonfruit watermelon;
-$colorChoice: nth($colorArray, 3);
+$colorChoice: nth($colorArray, 1);
 //colorArray index starts at 1, not 0
 
 $mainColor: null;
@@ -208,13 +208,12 @@ body {
 }
 
 .samtest {
-  background-color: red;
-  height: 20px;
-  width: 20px;
+  height: 36px;
+  width: 19px;
   z-index: 1;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 42%;
+  left: 48%;
 
 }
 
