@@ -39,7 +39,6 @@ class TripDirections extends React.Component {
 			markerDomEl.className = 'mapMarker'
 			markerDomEl.name = name
 			markerDomEl.style.backgroundImage = img
-			console.log(markerDomEl)
 
 			new mapboxgl.Marker(markerDomEl)
 				.setLngLat([long, lat + 0.001])
