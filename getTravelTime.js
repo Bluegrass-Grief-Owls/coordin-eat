@@ -3,14 +3,15 @@ const client = require('@google/maps').createClient({
 	Promise: Promise
 })
 
-const getTravelTime =(origin, dest, mode) => {
+const getTravelTime = (origin, dest, mode) => {
 	const query = {
 		origins: [origin],
 		destinations: [dest],
 		mode: mode
 	}
 	return client.distanceMatrix(query).asPromise()
-	.then(res => res.json.rows[0].elements[0].duration.value / 60.0 )
+		.then(res => res.json.rows[0].elements[0].duration.value / 60.0)
+		.catch(console.error.bind(console))
 
 	// 	, (res, status) => {
 	// 	const tTime = res.rows.elements[0].duration.value / 60.0

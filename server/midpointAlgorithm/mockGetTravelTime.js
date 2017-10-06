@@ -69,7 +69,7 @@ const getTravelTime = (origin, dest, mode) => {
 			// console.log('response: ', res.json.rows[0].elements[0])
 			return res.json.rows[0].elements[0].duration.value / 60.0
 		})
-		.catch(console.log)
+		.catch(console.error.bind(console))
 }
 
 // ====================== PROMISES/SCORING =========================
@@ -92,7 +92,7 @@ const locationScore = (loc, origins) => {
 			const score = sum * Math.pow(std, importance)
 			return score
 		})
-		.catch(err => console.log(err))
+		.catch(console.error.bind(console))
 }
 
 const candScorePromiseAll = (candArr, origins) => {
@@ -127,7 +127,7 @@ const anneal = (origins = [], n, center, lowScore = 9999) => {
 			const winner = lowScore < scores[indexOfMin] ? [centroid, lowScore] : [cands[indexOfMin], scores[indexOfMin]]
 			return winner	
 		})
-		.catch(err => console.log(err))
+		.catch(console.error.bind(console))
 }
 
 anneal(origins, 25)
@@ -136,5 +136,4 @@ anneal(origins, 25)
 		return anneal(origins, 25, res[0], res[1] )
 	})
 	.then(console.log)
-	.catch(err => console.log(err))
-
+	.catch(console.error.bind(console))	

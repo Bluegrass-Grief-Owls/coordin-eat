@@ -29,4 +29,5 @@ router.get('/:xcoord/:ycoord', isLoggedIn, (req, res, next) => {
 		.then(() => {
 			res.json(resultArr)
 		})
+		.catch(next)
 })
