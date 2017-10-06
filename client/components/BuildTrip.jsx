@@ -9,7 +9,6 @@ import history from './../history'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 
-//Lets find a date picker that does this
 
 let friendCounter = 0
 
@@ -23,7 +22,6 @@ class BuildTrip extends React.Component {
 			dateToGive: ''
 		}
 		this.handleChange = this.handleChange.bind(this)
-
 	}
 
 	handleChange(date) {
@@ -35,6 +33,7 @@ class BuildTrip extends React.Component {
 
 	render() {
 		// console.log("THIS IS THE DATE", this.state.dateToGive)
+		friendCounter = 0
 		if(this.props.user.friend){
 			return (
 				<div>
@@ -44,8 +43,19 @@ class BuildTrip extends React.Component {
 						dateFormat="LLL"
 					/>
 
-					<form onSubmit={(evt) => {this.props.handleSubmit(evt, this.props.user.id, this.props.user.friend)}}>
+					{//needto give this sythetic event onsubmit access to state props
+					}
+					<form onSubmit={(evt) => {this.props.handleSubmit(evt, this.props.user.id,
+						this.props.user.friend, this.state.dateToGive)}}>
 						<FormGroup controlId="tripForm">
+							<ControlLabel>Trip Name</ControlLabel>
+							<FormControl
+								type="text"
+								name="tripName"
+								placeholder="Enter trip name"
+							/>
+							<ControlLabel>Month</ControlLabel>
+
 							<ControlLabel>Invite Your Friends!</ControlLabel>
 							{
 								this.props.user.friend.map(friend =>{
@@ -82,19 +92,13 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
 	return {
-		handleSubmit: function(evt, ownerId, friends) {
+		handleSubmit: function(evt, ownerId, friends, theEventTime) {
 			evt.preventDefault()
 			//reset the current trip state
 			dispatch(resetCurrentTrip())
 			dispatch(resetYelpList())
-			let hour = evt.target.hour.value
-			if (evt.target.ampm.value === 'pm'){
-				hour = Number(hour) + 12
-			}
-			if (hour === 24){
-				hour = '00'
-			}
-			let theDate = ('2017-' + evt.target.month.value+'-'+evt.target.day.value +' '+ hour + ':' + evt.target.minute.value+':00')
+
+			let theDate = theEventTime
 			let invitedIdArray = [+ownerId]
 			for(var i = 1; i <= friendCounter; i++){
 				let name = 'check' + i

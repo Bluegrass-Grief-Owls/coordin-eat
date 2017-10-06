@@ -91,6 +91,9 @@ export function declineInvitation(tripId, userId) {
 export function postTrip(trip, invitedIdArray) {//from buildTrip: trip is an object with name prop that has tripname from synthetic event and date prop which has a formatted date and the owner id
 	//this means that this thunk needs to receive a formatted date and owner ID
 	//invitedIdArray is an array of friend objects; inconsequential to time
+
+	console.log('test from thunk')
+
 	return function thunk(dispatch) {
 		return axios.post('/api/trip', trip)
 			.then(res => res.data)

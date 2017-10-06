@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Button} from 'react-bootstrap'
 import history from './../history'
 
 
@@ -21,7 +21,6 @@ const TripDetails = (props) => {
 				<Col xs={1}>
 				</Col>
 			</Row>
-			<Button>Actually, I don't want to go on this trip</Button>
 		</div>
 	)
 }
