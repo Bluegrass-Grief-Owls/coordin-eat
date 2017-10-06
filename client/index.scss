@@ -224,7 +224,7 @@ body {
   bottom:0;
 }
 
-.samtest {
+.mapPin {
   height: 36px;
   width: 19px;
   z-index: 1;
@@ -825,5 +825,53 @@ body {
     bottom: -1px;
     border-top-color: $datepicker__border-color;
   }
+.mapboxgl-popup-content {
+  border: $accentColor solid 1px;
+  border-radius: 3px;
+  background: $mainColorLight !important;
+  color: $accentColor;
 }
 
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+  border-left-color: $accentColor !important;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+  border-right-color: $accentColor !important;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+  border-bottom-color: $accentColor !important;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  border-top-color: $accentColor !important;
+}
+
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip {
+  border-bottom-color: $accentColor !important;
+}
+
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+  border-bottom-color: $accentColor !important;
+}
+
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip {
+  border-top-color: $accentColor !important;
+}
+
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+  border-top-color: $accentColor !important;
+}
+
+.mapMarker {
+  z-index: 1;
+  width: 19px;
+  height: 36px;
+}
+
+.mapboxgl-map {
+  position: relative;
+}
+
+}

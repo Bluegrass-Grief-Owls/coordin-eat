@@ -40,5 +40,5 @@ export default connect(mapState)(TripDetails)
  * PROP TYPES
  */
 TripDetails.propTypes = {
-	// friendArray: PropTypes.array
+	currentTrip: PropTypes.object
 }

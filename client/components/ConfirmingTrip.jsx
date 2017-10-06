@@ -1,12 +1,9 @@
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import React, {Component} from 'react'
+import React from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
 import {setCurrentCoords, declineInvitation, updateTrip} from './../store'
 import {ConfirmingTripMap} from './index.js'
-// import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
-
-
 
 const ConfirmTrip = (props) => {
 
@@ -63,6 +60,10 @@ const ConfirmTrip = (props) => {
 				let currentCoords = [Number(position.coords.latitude.toFixed(6)), Number(position.coords.longitude.toFixed(6))]
 				console.log('Your current location', currentCoords)
 				props.setLocation(currentCoords)
+			},
+			function(error) {
+				console.log('de error code:', error.code)
+				props.setLocation([40.750589, -73.993512])
 			})
 		}
 		if (props.currentLocation[0] !== null) {

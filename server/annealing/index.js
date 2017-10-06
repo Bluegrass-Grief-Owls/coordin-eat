@@ -33,10 +33,10 @@ const createCandidates = (n, center, bound) => {
 	const radii = radiiRatio.map(ratio => ratio * bound)
 	const inCircleRatios = [.02, .08, .15, .25, .5]
 	const inCircle = inCircleRatios.map(ratio => {
-		return Math.floor(n*ratio)
+		return math.ceil(n*ratio)
 	})
 	
-	const result = []
+	const result = [center]
 	inCircle.forEach((num, idx) => {
 		const deg = 360/ num
 		const fuzzRate = .2
@@ -69,8 +69,8 @@ const getTravelTime = (origin, dest, mode) => {
 			// console.log('response: ', res.json.rows[0].elements[0])
 			return res.json.rows[0].elements[0].duration.value / 60.0
 		})
-		.catch(console.log)
-}
+		.catch(console.error.bind(console))
+	}
 
 // ====================== PROMISES/SCORING =========================
 
@@ -92,7 +92,7 @@ const locationScore = (loc, origins) => {
 			const score = sum * Math.pow(std, importance)
 			return score
 		})
-		.catch(err => console.log(err))
+		.catch(console.error.bind(console))
 }
 
 const candScorePromiseAll = (candArr, origins) => {
@@ -104,10 +104,11 @@ const candScorePromiseAll = (candArr, origins) => {
 
 //========================== THE ANNEALING =============================
 
-const anneal = (origins = [], n, center, lowScore = 9999) => {
+const anneal = (origins = [], center, lowScore = 9999, tighten = 1) => {
 	const centroid = center || centerCoord(...origins)	
+	const numCands = math.max(15, 75 / origins.length) * tighten
 	const calcBound = maxDistanceFromCentroid(centroid, origins)
-	let cands = createCandidates(25, centroid, calcBound * 2.5)
+	let cands = createCandidates(numCands, centroid, calcBound * 2.5)
 	return candScorePromiseAll(cands, origins)
 		.then(scores => {
 			scores = scores.map(score => score ? score : 9999)
@@ -115,7 +116,7 @@ const anneal = (origins = [], n, center, lowScore = 9999) => {
 			const winner = lowScore < scores[indexOfMin] ? [centroid, lowScore] : [cands[indexOfMin], scores[indexOfMin]]
 			return winner	
 		})
-		.catch(err => console.log(err))
+		.catch(console.error.bind(console))
 }
 
 module.exports = anneal

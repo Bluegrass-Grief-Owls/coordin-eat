@@ -10,6 +10,15 @@ curl -H "Content-Type: application/json" -X POST -d '{
 	"origins": [
 	[40.709202, -73.957048],
 	[40.674333, -73.970488],
-	[40.753504, -73.993079] 
+	[40.753504, -73.993079],
+	[40.763620, -73.964889],
+	[40.813591, -73.952522]
+	]
+}' http://localhost:8080/api/meetup
+
+curl -H "Content-Type: application/json" -X POST -d '{
+	"origins": [
+	[40.709202, -73.957048],
+	[40.674333, -73.970488] 
 	]
 }' http://localhost:8080/api/meetup

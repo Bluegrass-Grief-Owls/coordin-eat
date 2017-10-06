@@ -1,15 +1,15 @@
 const router = require('express').Router()
-const {Trip, Attendee} = require('../db/models')
+const { Trip, Attendee } = require('../db/models')
+const { isLoggedIn, isTripOwner } = require('../auth/gatekeepers')
 module.exports = router
 
-
-router.post('/', (req, res, next) => {
+router.post('/', isTripOwner, (req, res, next) => {
 	Attendee.create(req.body)
 		.then(attendee => res.json(attendee))
 		.catch(next)
 })
 
-router.delete('/:tripId/:userId', (req,res, next) => {
+router.delete('/:tripId/:userId', isTripOwner, (req, res, next) => {
 	Attendee.destroy({
 		where: {
 			tripId: req.params.tripId,
@@ -23,19 +23,21 @@ router.delete('/:tripId/:userId', (req,res, next) => {
 })
 
 router.put('/:tripId', (req, res, next) => {
-	Attendee.findOne({where: {
-		tripId: req.params.tripId,
-		userId: req.user.id}
+	Attendee.findOne({
+		where: {
+			tripId: req.params.tripId,
+			userId: req.user.id
+		}
 	})
 		.then(attendee => attendee.update(req.body)
 			//I'm not sending back the updated attendance, I'm sending back the whole trip!
-			.then(() => Trip.findById(req.params.tripId, {include: [ Attendee ]})
+			.then(() => Trip.findById(req.params.tripId, { include: [Attendee] })
 				.then((trip) => res.json(trip))))
 		.catch(next)
 })
 
 router.get('/:userId', (req, res, next) => {
-	Attendee.findAll({where: {userId: req.params.userId}, include: [{ model: Trip}]})
+	Attendee.findAll({ where: { userId: req.params.userId }, include: [{ model: Trip }] })
 		.then(attendeeList => res.json(attendeeList))
 		.catch(next)
 })

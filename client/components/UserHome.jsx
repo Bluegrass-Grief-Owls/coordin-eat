@@ -76,5 +76,6 @@ export default connect(mapState, mapDispatch)(UserHome)
  * PROP TYPES
  */
 UserHome.propTypes = {
-	user: PropTypes.object
+	user: PropTypes.object,
+	myTrips: PropTypes.array
 }
