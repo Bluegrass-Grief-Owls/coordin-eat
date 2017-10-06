@@ -12,7 +12,6 @@ class TripDirections extends React.Component {
 
 	componentWillReceiveProps(newProps) {
 		this.meetingPlace = JSON.parse(newProps.meetingPlace)
-		this.tooltipContainer = document.createElement('div')
 
 		const me = newProps.currentTrip
 			.attendees
@@ -28,7 +27,6 @@ class TripDirections extends React.Component {
 
 	componentDidMount() {
 		mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w'
-		console.log('coords:', this.meetingPlace.coordinates)
 		this.map = new mapboxgl.Map({
 			container: 'putMapHere',
 			style: 'mapbox://styles/mapbox/streets-v9',
@@ -49,7 +47,7 @@ class TripDirections extends React.Component {
 			<Row>
 				<Col xs={12}>
 					<h3 className='alignCenter'>Let's meet at {this.meetingPlace.name}</h3>
-					<h4><a href={googleMapsUrl}>Directions</a></h4>
+					<h4 className='alignCenter'><a href={googleMapsUrl}>Click here for directions</a></h4>
 				</Col>
 				<Col xs={12}>
 					<div id='putMapHere' className='theMapBox'></div>
