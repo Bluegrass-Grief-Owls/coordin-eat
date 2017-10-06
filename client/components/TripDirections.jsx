@@ -8,36 +8,20 @@ class TripDirections extends React.Component {
 	constructor(props) {
 		super(props)
 		this.meetingPlace = JSON.parse(props.meetingPlace)
-
-		console.log('abt to filter', props.userId, typeof props.userId, props.currentTrip.attendees)
-		const me = props.currentTrip
-			.attendees
-			.find((attendee) => {
-				console.log(attendee.userId)
-				return (attendee.userId === props.userId)
-			})
-
-		if (me) {
-			this.currentLat = me.origin[0]
-			this.currentLong = me.origin[1]
-		}
 	}
 
 	componentWillReceiveProps(newProps) {
 		this.meetingPlace = JSON.parse(newProps.meetingPlace)
-		console.log('abt to filter', newProps.userId, newProps.currentTrip.attendees)
 
 		const me = newProps.currentTrip
 			.attendees
 			.find((attendee) => {
-				console.log(attendee.userId)
 				return (attendee.userId === newProps.userId)
 			})
 
 		if (me) {
 			this.currentLat = me.origin[0]
 			this.currentLong = me.origin[1]
-			console.log('currentLat', this.currentLat)
 		}
 
 	}
