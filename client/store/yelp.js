@@ -9,7 +9,7 @@ const GET_YELP_LIST = 'GET_YELP_LIST'
 /**
  * INITIAL STATE
  */
-const yelpList = []
+const yelpList = [null]
 
 /**
  * ACTION CREATORS

@@ -1,55 +1,50 @@
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import React, {Component} from 'react'
-import {Col, Row, Button, Table} from 'react-bootstrap'
-import {declineInvitation, setCoordinates} from './../store'
-import mapboxgl from 'mapbox-gl'
+import { connect } from 'react-redux'
+import React, { Component } from 'react'
+import { Col, Row, Button, Table } from 'react-bootstrap'
+import { declineInvitation, setCoordinates } from './../store'
+import mapboxgl, { Marker } from 'mapbox-gl'
 import history from './../history'
 
 
 
-const ConfirmTripMap = (props) => {
-	const {removeSelf, giveCoords} = props
+class ConfirmTripMap extends React.Component {
+	constructor(props) {
+		super(props)
+	}
 
-	const coordinates = [props.coordinates[1], props.coordinates[0]]
+	componentDidMount() {
+		mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w'
+		this.map = new mapboxgl.Map({
+			container: 'putMapHere',
+			style: 'mapbox://styles/mapbox/streets-v9',
+			center: [this.props.coordinates[1], this.props.coordinates[0]],
+			zoom: 14
+		})
+	}
 
-	mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZ2xhc3MiLCJhIjoiY2o2ODNod2c3MGJqNDM0bDdpNm9xNWFxaSJ9.zt0UYvQhCl8Lx6zH9pZ7-w'
-	const map = new mapboxgl.Map({
-		container: 'putMapHere',
-		style: 'mapbox://styles/mapbox/streets-v9',
-		center: coordinates,
-		zoom: 14
-	})
+	componentWillUnmount() {
+		this.map.remove()
+	}
 
-	map.on('load', function(){
-		let width = 40
-		let height = 40
-		let position = map.project(coordinates)
+	render() {
 
-		let marker = document.createElement('div')
-		marker.style.width = width + 'px'
-		marker.style.height = height + 'px'
-		marker.style.top = position.y - height / 2 + 'px'
-		marker.style.left = position.x - width / 2 + 'px'
-
-
-	})
-
-
-
-	return (
-		<Row>
-			<Col xs={1}></Col>
-			<Col xs={10}>
-				<div id='putMapHere' className='theMapBox'>
-				</div>
-				<Button className='tripButton displayBlock' onClick={() => giveCoords(map, props.currentTrip.id, props.user.id)}>RVSP with this starting location</Button>
-				<Button className='tripButton displayBlock' onClick={() => removeSelf(props.currentTrip.id, props.user.id)}>I cannot attend</Button>
-			</Col>
-			<Col xs={1}></Col>
-		</Row>
-	)
+		return (
+			<Row>
+				<Col xs={1}></Col>
+				<Col xs={10}>
+					<div id='putMapHere' className='theMapBox'>
+						<div className='samtest'></div>
+					</div>
+					<Button className='tripButton displayBlock' onClick={() => this.giveCoords(this.map, this.props.currentTrip.id, this.props.user.id)}>RVSP with this starting location</Button>
+					<Button className='tripButton displayBlock' onClick={() => this.removeSelf(this.props.currentTrip.id, this.props.user.id)}>I cannot attend</Button>
+				</Col>
+				<Col xs={1}></Col>
+			</Row>
+		)
+	}
 }
+
 
 /**
  * CONTAINER
