@@ -8,7 +8,7 @@ $datepicker__text-color: #000 !default;
 $datepicker__border-radius: .3rem !default;
 $datepicker__day-margin: .166rem !default;
 $datepicker__font-size: .8rem !default;
-$datepicker__item-size: 1.7rem !default;
+$datepicker__item-size: 4.7rem !default;
 $datepicker__margin: .4rem !default;
 $datepicker__navigation-size: .45rem !default;
 $datepicker__triangle-size: 8px !default;
@@ -440,15 +440,15 @@ body {
     background: white;
 
     .react-datepicker__time-box {
-      width: 70px;
+      width: 200px;
       overflow-x: hidden;
       ul.react-datepicker__time-list {
         list-style: none;
         margin: 0;
-        height: calc(195px + calc(#{$datepicker__item-size} / 2));
+        height: calc(495px + calc(#{$datepicker__item-size} / 2));
         overflow-y: scroll;
-        padding-right: 30px;
-        width: 100%;
+        padding-right: 60px;
+        width: 150%;
 
         li.react-datepicker__time-list-item {
           padding: 5px 10px;
