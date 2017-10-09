@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import FriendForm from './FriendForm.jsx'
 import {postTrip, resetCurrentTrip, resetYelpList} from '../store'
-import {Col, FormGroup, FormControl, ControlLabel, Button, Checkbox} from 'react-bootstrap'
+import {Col, FormGroup, FormControl, ControlLabel, Button, Checkbox, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import history from './../history'
 import MobileDatePicker from 'react-mobile-datepicker'
 import moment from 'moment'
@@ -63,17 +63,22 @@ class BuildTrip extends React.Component {
 				<div>
 
 					<h3 className='marginLeft15'>Pick a Date</h3>
+					<h6 className='marginLeft15'>{this.state.time.toString().slice(0,-15)}</h6>
 					<div className="marginLeft15">
-						<Button
-							className="select-btn"
-							onClick={this.handleDateClick}>
-							Select Date
-						</Button>
-						<Button
-							className="select-btn"
-							onClick={this.handleTimeClick}>
-							Select Time
-						</Button>
+						<ButtonToolbar>
+					      <ButtonGroup>
+					        <Button
+								className="select-btn"
+								onClick={this.handleDateClick}>
+								Set Date
+							</Button>
+							<Button
+								className="select-btn"
+								onClick={this.handleTimeClick}>
+								Set Time
+							</Button>
+					      </ButtonGroup>
+					    </ButtonToolbar>
 
 						<MobileDatePicker
 							value={this.state.time}
@@ -82,7 +87,7 @@ class BuildTrip extends React.Component {
 							onCancel={this.handleDateCancel} 
 							confirmText="Confirm"
 							cancelText="Cancel"
-							dateFormat={['YYYY', 'M', 'D']}
+							dateFormat={['M', 'D', 'YYYY']}
 						/>
 						<MobileDatePicker
 							value={this.state.time}
