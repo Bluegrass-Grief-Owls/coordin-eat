@@ -124,7 +124,6 @@ const mapDispatch = (dispatch) => {
 			let coords = this.currentTrip.meetup
 			if(coords.length){
 				yelped = true
-				console.log('Yelp search at', coords[0].toFixed(6), ',', coords[1].toFixed(6) )
 				dispatch(getYelpList([coords[0].toFixed(6), coords[1].toFixed(6)]))
 			} else {
 				yelped = true

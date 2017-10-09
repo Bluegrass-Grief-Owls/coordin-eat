@@ -102,7 +102,6 @@ const mapDispatch = (dispatch) => {
 			let invitedIdArray = [+ownerId]
 			for(var i = 1; i <= friendCounter; i++){
 				let name = 'check' + i
-				console.log(name)
 				let target = document.getElementById(name)
 				if(target.checked){
 					invitedIdArray.push(friends[i - 1].id)

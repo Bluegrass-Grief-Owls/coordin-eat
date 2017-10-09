@@ -26,8 +26,7 @@ export const fetchUsers = () =>
 		axios.get('/api/users')
 			.then(res =>
 				dispatch(getUsers(res.data || defaultUsers)))
-			.catch(err => console.log(err))
-
+			.catch(console.error.bind(console))
 
 /**
  * REDUCER
