@@ -113,8 +113,6 @@ db.sync({force: true})
 		// 	// }
 		// }
 
-		// console.log('************', tripIds)
-
 		//====================================== Promises ==============================================
 
 		Promise.all(promisesUsers)
@@ -151,4 +149,4 @@ db.sync({force: true})
 				process.exit(1)
 			})
 	})
-	.catch(err => console.log(err))
+	.catch(console.error.bind(console))

@@ -24,8 +24,6 @@ export default class FriendForm extends Component {
 
 	handleSubmit (e) {
 		e.preventDefault()
-		console.log(this.state.location)//temporary
-
 	}
 
 

@@ -54,7 +54,7 @@ export function setCoordinates(coords, tripId, userId){
 						.then((meetup) => {
 							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
 						})
-						.catch(console.log)
+						.catch(console.error.bind(console))
 				}
 			})
 	}
