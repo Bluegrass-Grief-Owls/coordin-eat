@@ -292,7 +292,7 @@ body {
 .react-datepicker {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: $datepicker__font-size;
-  background-color: #fff;
+  background-color: $accentColorLight;
   color: $datepicker__text-color;
   border: 1px solid $datepicker__border-color;
   border-radius: $datepicker__border-radius;
@@ -345,8 +345,8 @@ body {
 
 .react-datepicker__header {
   text-align: center;
-  background-color: $datepicker__background-color;
-  border-bottom: 1px solid $datepicker__border-color;
+  background-color: $accentColor;
+  border-bottom: 1px solid $mainColorLight;
   border-top-left-radius: $datepicker__border-radius;
   border-top-right-radius: $datepicker__border-radius;
   padding-top: 8px;
