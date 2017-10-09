@@ -85,6 +85,7 @@ class BuildTrip extends React.Component {
 							isOpen={this.state.isDateOpen}
 							onSelect={this.handleDateSelect}
 							onCancel={this.handleDateCancel} 
+							theme="ios"
 							confirmText="Confirm"
 							cancelText="Cancel"
 							dateFormat={['M', 'D', 'YYYY']}
@@ -94,6 +95,7 @@ class BuildTrip extends React.Component {
 							isOpen={this.state.isTimeOpen}
 							onSelect={this.handleTimeSelect}
 							onCancel={this.handleTimeCancel} 
+							theme="ios"
 							confirmText="Confirm"
 							cancelText="Cancel"
 							dateFormat={['hh', 'mm']}

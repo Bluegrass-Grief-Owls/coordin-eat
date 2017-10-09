@@ -44,8 +44,9 @@ class TripDirections extends React.Component {
 			new mapboxgl.Marker(markerDomEl)
 				.setLngLat([long, lat + 0.001])
 				.setPopup(new mapboxgl.Popup({ offset: 25 })
-					.setHTML('<h7>' + markerDomEl.name + '</h7>'))
+					.setHTML('<h5>' + markerDomEl.name + '</h5>'))
 				.addTo(map)
+			console.log(markerDomEl)
 		}
 		markerFactory(this.meetingPlace.name, this.meetingPlace.coordinates.longitude, this.meetingPlace.coordinates.latitude, 'url(../DestPin.png)', this.map)
 		this.props.currentTrip.attendees.forEach(attendee =>{
