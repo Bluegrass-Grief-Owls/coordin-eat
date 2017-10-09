@@ -16,8 +16,8 @@ $datepicker__triangle-size: 8px !default;
 
 
 //Color Setup
-$colorArray: orange banana pear blueberry blackberry dragonfruit watermelon;
-$colorChoice: nth($colorArray, 1);
+$colorArray: orange banana pear blueberry blackberry dragonfruit watermelon original;
+$colorChoice: nth($colorArray, 8);
 //colorArray index starts at 1, not 0
 
 $mainColor: null;
@@ -60,6 +60,11 @@ $accentColorLight: null;
     $mainColorLight: #f4817f;
     $accentColor: #09511b;
     $accentColorLight: #33d65d;
+  } @else if $colorChoice == original {
+    $mainColor: white;
+    $mainColorLight: #63676b; //Dark gray
+    $accentColor: #aa0813; //Red
+    $accentColorLight: #aecfef; //light Blue
   } @else {
     //this is a white and blue color pallet
     $mainColor: #FFFFFF;
@@ -70,7 +75,7 @@ $accentColorLight: null;
 
 body {
   font-family: sans-serif;
-  background-color: $mainColorLight;
+  background-color: $accentColorLight;
 
   a {
     text-decoration: none;
@@ -137,6 +142,10 @@ body {
   background-color: $mainColorLight;
 }
 
+.backgroundAccentColor {
+  background-color: $accentColor;
+}
+
 .backgroundAccentColorLight {
   background-color: $accentColorLight;
 }
@@ -145,12 +154,20 @@ body {
   color: $mainColor;
 }
 
+.fontMainColorLight {
+  color: $mainColorLight;
+}
+
 .fontAccentColor {
   color: $accentColor;
 }
 
 .fontAccentColorLight {
   color: $accentColorLight;
+}
+
+.checkbox label {
+  color: $mainColorLight;
 }
 
 .buissnessImage {
@@ -207,13 +224,13 @@ body {
 .myTripList {
   border: 2px solid $accentColor;
   border-radius: 5px;
-  color: $accentColorLight;
-  background-color: $mainColor;
+  color: $mainColor;
+  background-color: $mainColorLight;
 }
 
 .linkOnNav {
   margin: 0 0 15px 15px;
-  color: $accentColorLight;
+  color: $mainColor;
 }
 
 .theMapBox {
@@ -254,7 +271,7 @@ body {
   margin-top: 15px;
   border: 2px $accentColor solid;
   border-radius: 5px;
-  background-color: $accentColorLight;
+  background-color: $mainColorLight;
   color: $mainColor;
 }
 

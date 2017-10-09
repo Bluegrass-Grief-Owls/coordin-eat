@@ -50,6 +50,7 @@ class BuildTrip extends React.Component {
 						<FormGroup controlId="tripForm">
 							<ControlLabel>Trip Name</ControlLabel>
 							<FormControl
+								className = 'fontAccentColor'
 								type="text"
 								name="tripName"
 								placeholder="Enter trip name"
@@ -61,7 +62,7 @@ class BuildTrip extends React.Component {
 								this.props.user.friend.map(friend =>{
 									friendCounter++
 									return(
-										<Checkbox id={'check'+friendCounter} key={friend.id}>{friend.name}</Checkbox>
+										<Checkbox id={'check'+friendCounter} className='fontMaintColorLight' key={friend.id}>{friend.name}</Checkbox>
 									)
 								})
 							}

@@ -16,14 +16,14 @@ const Main = (props) => {
 
 	return (
 		<div>
-			<div className='backgroundMainColor fontAccentColorLight'>
+			<div className='backgroundAccentColor'>
 				<Link className='linkOnNav' to='/home'><h1 className='noMargin marginLeft15'>Coordin-EAT</h1></Link>
 				<nav>
 					{
 						isLoggedIn
 							? <div>
 								{/* The navbar will show these links after you log in */}
-								<a className='linkOnNav' href='#' onClick={handleClick}>Logout</a>
+								<a className='linkOnNav fontMainColor' href='#' onClick={handleClick}>Logout</a>
 								<Link className='linkOnNav' to='/build_trip'>Build a Trip</Link>
 								<Link className='linkOnNav' to='/friends'>Friends</Link>
 							</div>
@@ -36,7 +36,7 @@ const Main = (props) => {
 				</nav>
 			</div>
 			<hr className='noMargin hrColor'/>
-			<div className='backgroundMainColorLight fontAccentColor contentDiv'>
+			<div className='backgroundAccentColorLight fontAccentColor contentDiv'>
 				{children}
 			</div>
 		</div>

@@ -31,13 +31,13 @@ class UserHome extends Component {
 									//TODO: if trip gets deleted need to specify that all associated attendences need to be deleted
 									return(
 										<ListGroupItem key={theTrip.id} className='noPaddingBottom myTripList' onClick={() => {history.push(`/trip/${theTrip.id}`)}}>
-											<h3 className='noMargin fontAccentColorLight'>{theTrip.name}</h3>
-											<h5 className='fontAccentColorLight'>Date: {theTrip.readableDate}</h5>
-											<h5 className='fontAccentColorLight'>Time: {theTrip.time}</h5>
+											<h3 className='noMargin fontMainColor'>{theTrip.name}</h3>
+											<h5 className='fontMainColor'>Date: {theTrip.readableDate}</h5>
+											<h5 className='fontMainColor'>Time: {theTrip.time}</h5>
 										</ListGroupItem>
 									)
 								}) : <ListGroupItem key='noTrips' className='noPaddingBottom myTripList'>
-									<h3 className='noMargin fontAccentColorLight'>You have no trips yet!</h3>
+									<h3 className='noMargin fontMainColor'>You have no trips yet!</h3>
 								</ListGroupItem>
 							}
 						</ListGroup>
