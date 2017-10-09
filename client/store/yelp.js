@@ -27,7 +27,7 @@ export const getYelpList = (coords) =>
 			.then(results => {
 				dispatch(getYelpListAction(results.data))
 			})
-			.catch(err => console.log(err))
+			.catch(console.error.bind(console))
 
 /**
  * REDUCER

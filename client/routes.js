@@ -38,23 +38,13 @@ class Routes extends Component {
 						{/* Routes placed here are available to all visitors */}
 						<Route path='/login' component={Login} />
 						<Route path='/signup' component={Signup} />
-						{
-							isLoggedIn &&
-							<Switch>
-								{/* Routes placed here are only available after logging in */}
-								<Route path='/home' component={UserHome} />
-								<Route path='/build_trip' component={BuildTrip} />
-								<Route path='/addfriends' component={InviteFriends} />
-								<Route path='/trip/:tripId' component={SingleTrip} />
-								<Route path='/friends' component={FriendsList} />
-								<Redirect to='/home' />
-								<Route></Route>
-							</Switch>
-						}
-						{/* Displays our Login component as a fallback */}
+						<Route path='/home' component={UserHome} />
+						<Route path='/build_trip' component={BuildTrip} />
+						<Route path='/addfriends' component={InviteFriends} />
+						<Route path='/trip/:tripId' component={SingleTrip} />
+						<Route path='/friends' component={FriendsList} />
+						<Redirect to='/home' />
 						<Redirect to='/login' />
-
-
 					</Switch>
 				</Main>
 			</Router>

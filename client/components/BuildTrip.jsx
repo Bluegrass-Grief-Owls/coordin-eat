@@ -37,11 +37,17 @@ class BuildTrip extends React.Component {
 		if(this.props.user.friend){
 			return (
 				<div>
+
+					<h3 className='marginLeft15'>Pick a Date</h3>
 					<DatePicker selected={this.state.startDate}
-						onChange={this.handleChange}
-						showTimeSelect
-						dateFormat="LLL"
-					/>
+					onChange={this.handleChange}
+					showTimeSelect
+					dateFormat="LLL"
+					style={{width: 20}}
+					className='marginLeft15'
+				/>
+
+
 
 					{//needto give this sythetic event onsubmit access to state props
 					}
@@ -55,7 +61,8 @@ class BuildTrip extends React.Component {
 								name="tripName"
 								placeholder="Enter trip name"
 							/>
-							<ControlLabel>Month</ControlLabel>
+
+
 
 							<ControlLabel>Invite Your Friends!</ControlLabel>
 							{
@@ -103,7 +110,6 @@ const mapDispatch = (dispatch) => {
 			let invitedIdArray = [+ownerId]
 			for(var i = 1; i <= friendCounter; i++){
 				let name = 'check' + i
-				console.log(name)
 				let target = document.getElementById(name)
 				if(target.checked){
 					invitedIdArray.push(friends[i - 1].id)

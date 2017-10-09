@@ -77,7 +77,6 @@ const mapDispatch = dispatch => {
 			dispatch(fetchUsers())
 		},
 		handleClick(myId, friendId) {
-			// console.log(id)
 			dispatch(postFriend(myId, friendId))
 		}
 	}
