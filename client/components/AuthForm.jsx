@@ -14,16 +14,16 @@ const AuthForm = (props) => {
 		<div>
 			<form onSubmit={handleSubmit} name={name}>
 				{needsname ? <div className='displayBlock'>
-					<label htmlFor='submitName'><small>Name</small></label>
-					<input className='backgroundAccentColorLight' name='submitName' type='text' />
+					<label htmlFor='submitName'><small className='fontMainColorLight'>Name</small></label>
+					<input className='backgroundMainColor' name='submitName' type='text' />
 				</div> : <div />}
 				<div className='displayBlock'>
-					<label htmlFor='email'><small>Email</small></label>
-					<input className='backgroundAccentColorLight' name='email' type='text' />
+					<label htmlFor='email'><small className='fontMainColorLight'>Email</small></label>
+					<input className='backgroundMainColor' name='email' type='text' />
 				</div>
 				<div className='displayBlock'>
-					<label htmlFor='password'><small>Password</small></label>
-					<input className='backgroundAccentColorLight' name='password' type='password' />
+					<label htmlFor='password'><small className='fontMainColorLight'>Password</small></label>
+					<input className='backgroundMainColor' name='password' type='password' />
 				</div>
 				<div className='displayBlock'>
 					<Button className='tripButton' type='submit'>{displayName}</Button>

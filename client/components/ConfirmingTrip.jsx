@@ -68,17 +68,15 @@ const ConfirmTrip = (props) => {
 		if (props.currentLocation[0] !== null) {
 			return (
 				<Row>
-					<Col xs={1}></Col>
-					<Col xs={10}>
+					<Col xs={12}>
 						<h5>Center the map on your starting point.</h5>
 						<ConfirmingTripMap coordinates={props.currentLocation}/>
 					</Col>
-					<Col xs={1}></Col>
 				</Row>
 			)
 		} else {
 			return(
-				<h3 id='putMapHere'>Loading . . .</h3>
+				<h3 id='putMapHere' className='marginLeft15'>Loading . . .</h3>
 			)
 		}
 	}

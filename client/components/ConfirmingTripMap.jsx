@@ -36,8 +36,7 @@ class ConfirmTripMap extends React.Component {
 
 		return (
 			<Row>
-				<Col xs={1}></Col>
-				<Col xs={10}>
+				<Col xs={12} className='noPaddingRight noPaddingLeft'>
 					<div id='putMapHere' className='theMapBox'>
 						<img className='mapPin' src='../Pin.png'/>
 					</div>
@@ -46,7 +45,6 @@ class ConfirmTripMap extends React.Component {
 						isTripOwner ? <div /> : <Button className='tripButton displayBlock' onClick={() => this.props.removeSelf(this.props.currentTrip.id, this.props.user.id)}>I cannot attend</Button>
 					}
 				</Col>
-				<Col xs={1}></Col>
 			</Row>
 		)
 	}
