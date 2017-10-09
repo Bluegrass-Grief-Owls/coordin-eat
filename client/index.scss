@@ -106,17 +106,21 @@ body {
 }
 
 .table>thead{
-  background-color: $mainColor;
-  color: $accentColorLight;
+  background-color: $accentColor;
+  color: $mainColor;
 }
 
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
   border-color: $accentColor;
 }
 
-.panel-default>.panel-heading {
+tbody {
   background-color: $mainColor;
-  color: $accentColorLight;
+}
+
+.panel-default>.panel-heading {
+  background-color: $accentColor;
+  color: $mainColor;
 }
 
 .panel-default>.panel-heading+.panel-collapse>.panel-body {
@@ -130,8 +134,8 @@ body {
 }
 
 .panel-body {
-  background-color: $accentColorLight;
-  color: $mainColor;
+  background-color: $mainColor;
+  color: $mainColorLight;
 }
 
 .backgroundMainColor {
@@ -201,6 +205,10 @@ body {
   display: block;
 }
 
+.displayInline {
+  display: inline;
+}
+
 .noMargin {
   margin: 0;
 }
@@ -233,6 +241,7 @@ body {
   color: $mainColor;
 }
 
+//working with no 'position: absolute'
 .theMapBox {
   height: 260px;
   width: 100%;
@@ -258,7 +267,9 @@ body {
 .destButton {
   vertical-align: bottom;
   float: right;
-  margin: 0 10px 10px 0;
+  border-color: $accentColor;
+  color: $mainColor;
+  background-color: $mainColorLight;
 }
 
 .mapboxgl-canvas {
@@ -279,6 +290,6 @@ body {
   border-radius: 5px;
   margin-top: 50px;
   padding-bottom: 10px;
-  color: $accentColorLight;
+  color: $mainColorLight;
   background-color: $mainColor;
 }
