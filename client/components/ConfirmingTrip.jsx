@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
-import {setCurrentCoords, declineInvitation, updateTrip} from './../store'
+import {setCurrentCoords, declineInvitation} from './../store'
 import {ConfirmingTripMap} from './index.js'
 
 const ConfirmTrip = (props) => {
@@ -109,9 +109,6 @@ const mapDispatch = (dispatch) => {
 					dispatch(declineInvitation(trip.id, attendee.userId))
 				}
 			})
-			//We should use a midpoint formula, but for now I'm just gonna pick a random coord
-			// let meetup = originArray[Math.floor(Math.random() * originArray.length)]
-			// dispatch(updateTrip({status: 'voting', meetup}, trip.id))
 		}
 	}
 }

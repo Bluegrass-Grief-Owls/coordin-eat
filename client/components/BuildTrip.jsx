@@ -100,8 +100,6 @@ class BuildTrip extends React.Component {
 						/>
 					</div>
 
-
-
 					{//needto give this sythetic event onsubmit access to state props
 					}
 					<form onSubmit={(evt) => {this.props.handleSubmit(evt, this.props.user.id,
