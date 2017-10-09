@@ -12,7 +12,7 @@ class TripDirections extends React.Component {
 
 	componentWillReceiveProps(newProps) {
 		this.meetingPlace = JSON.parse(newProps.meetingPlace)
-
+		console.log("MMMMMMMMMMMM", this.meetingPlace)
 		const me = newProps.currentTrip
 			.attendees
 			.find((attendee) => {
@@ -57,6 +57,9 @@ class TripDirections extends React.Component {
 	}
 
 	render() {
+
+		console.log('qqqqqqqq',this.props)
+
 		const googleMapsUrl =
 			`https://www.google.com/maps/dir/${this.currentLat},+${this.currentLong}/${this.meetingPlace.coordinates.latitude},${this.meetingPlace.coordinates.longitude}`
 

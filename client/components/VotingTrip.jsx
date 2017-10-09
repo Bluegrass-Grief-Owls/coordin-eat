@@ -22,6 +22,9 @@ class VotingTrip extends Component {
 	}
 
 	render () {
+		console.log('from voting page woo woo WOOOOOOO', this.props)
+
+
 		if(this.props.currentTrip.id){
 			let isTripOwner = false
 			if(this.props.currentTrip.ownerId === this.props.user.id){
@@ -95,7 +98,7 @@ class VotingTrip extends Component {
 						<div className='marginLeft15'>We couldn't find anything at this location!</div>
 					)
 				}
-				
+
 			} else {
 				return (
 					<div>
