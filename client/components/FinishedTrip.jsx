@@ -18,10 +18,10 @@ const TripDetails = (props) => {
 			<Col xs={1}>
 			</Col>
 			<Col xs={10} className='finishedContainer'>
-				<h3>{theTrip.name}</h3>
-				<h5>Destination: <a className='fontAccentColor' href={theYelp.url}>{theYelp.name}</a></h5>
-				<h5>Date: {theTrip.readableDate} at {theTrip.time}</h5>
-				<h5>Attendees: {attendeeString}</h5>
+				<h2>{theTrip.name}</h2>
+				<h4>Destination: <a className='fontAccentColor' href={theYelp.url}>{theYelp.name}</a></h4>
+				<h4>Date: {theTrip.readableDate} at {theTrip.time}</h4>
+				<h4>Attendees: {attendeeString}</h4>
 			</Col>
 			<Col xs={1}>
 			</Col>
