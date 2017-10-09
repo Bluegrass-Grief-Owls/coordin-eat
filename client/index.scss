@@ -8,7 +8,7 @@ $datepicker__text-color: #000 !default;
 $datepicker__border-radius: .3rem !default;
 $datepicker__day-margin: .166rem !default;
 $datepicker__font-size: .8rem !default;
-$datepicker__item-size: 1.7rem !default;
+$datepicker__item-size: 2rem !default;
 $datepicker__margin: .4rem !default;
 $datepicker__navigation-size: .45rem !default;
 $datepicker__triangle-size: 8px !default;
@@ -439,7 +439,7 @@ body {
     background: white;
 
     .react-datepicker__time-box {
-      width: 70px;
+      width: 170px;
       overflow-x: hidden;
       ul.react-datepicker__time-list {
         list-style: none;
