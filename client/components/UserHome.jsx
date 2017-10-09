@@ -12,7 +12,12 @@ class UserHome extends Component {
 
 	componentDidMount () {
 		this.props.loadInitialData(+this.props.user.id)
+	}
 
+	componentDidUpdate(newProps) {
+		if(!newProps.myTrips[0]){
+			this.props.loadTrips(+this.props.user.id)
+		}
 	}
 
 	render () {
@@ -63,9 +68,16 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
 	return {
 		loadInitialData (userId) {
-			dispatch(fetchMyTrips(userId))
 			dispatch(resetCurrentTrip())
 			dispatch(resetYelpList())
+			if(userId){
+				dispatch(fetchMyTrips(userId))
+			}
+		},
+		loadTrips (userId) {
+			if(userId){
+				dispatch(fetchMyTrips(userId))
+			}
 		}
 	}
 }
