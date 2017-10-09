@@ -1,12 +1,13 @@
 
 import React, { Component } from 'react'
+import DatePicker from 'react-mobile-datepicker'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import FriendForm from './FriendForm.jsx'
 import {postTrip, resetCurrentTrip, resetYelpList} from '../store'
-import {Col, FormGroup, FormControl, ControlLabel, Button, Checkbox} from 'react-bootstrap'
+import {Col, FormGroup, FormControl, ControlLabel, Button, Checkbox, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import history from './../history'
-import DatePicker from 'react-datepicker'
+import MobileDatePicker from 'react-mobile-datepicker'
 import moment from 'moment'
 
 
@@ -16,43 +17,93 @@ class BuildTrip extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			startDate: moment(),
+			time: new Date(),
 			friendCounter:0,
 			//date as a string
-			dateToGive: ''
+			dateToGive: '',
+			isDateOpen: false
 		}
-		this.handleChange = this.handleChange.bind(this)
+		this.handleDateClick = this.handleDateClick.bind(this)
+		this.handleDateCancel = this.handleDateCancel.bind(this)
+		this.handleDateSelect = this.handleDateSelect.bind(this)
+		this.handleTimeClick = this.handleTimeClick.bind(this)
+		this.handleTimeCancel = this.handleTimeCancel.bind(this)
+		this.handleTimeSelect = this.handleTimeSelect.bind(this)
 	}
 
-	handleChange(date) {
-		this.setState({
-			startDate: date,
-			dateToGive: date._d
-		})
+	handleDateClick = () => {
+		this.setState({ isDateOpen: true });
+	}
+
+	handleDateCancel = () => {
+		this.setState({ isDateOpen: false });
+	}
+
+	handleDateSelect = (time) => {
+		this.setState({ time, isDateOpen: false });
+	}
+
+	handleTimeClick = () => {
+		this.setState({ isTimeOpen: true });
+	}
+
+	handleTimeCancel = () => {
+		this.setState({ isTimeOpen: false });
+	}
+
+	handleTimeSelect = (time) => {
+		this.setState({ time, isTimeOpen: false });
 	}
 
 	render() {
-		// console.log("THIS IS THE DATE", this.state.dateToGive)
+		console.log("THIS IS THE STATE", this.state)
 		friendCounter = 0
 		if(this.props.user.friend){
 			return (
 				<div>
 
 					<h3 className='marginLeft15'>Pick a Date</h3>
-					<DatePicker selected={this.state.startDate}
-						onChange={this.handleChange}
-						showTimeSelect
-						dateFormat="LLL"
-						style={{width: 20}}
-						className='marginLeft15'
-					/>
+					<h6 className='marginLeft15'>{this.state.time.toString().slice(0,-15)}</h6>
+					<div className="marginLeft15">
+						<ButtonToolbar>
+					      <ButtonGroup>
+					        <Button
+								className="select-btn"
+								onClick={this.handleDateClick}>
+								Set Date
+							</Button>
+							<Button
+								className="select-btn"
+								onClick={this.handleTimeClick}>
+								Set Time
+							</Button>
+					      </ButtonGroup>
+					    </ButtonToolbar>
 
-
+						<MobileDatePicker
+							value={this.state.time}
+							isOpen={this.state.isDateOpen}
+							onSelect={this.handleDateSelect}
+							onCancel={this.handleDateCancel} 
+							confirmText="Confirm"
+							cancelText="Cancel"
+							dateFormat={['M', 'D', 'YYYY']}
+						/>
+						<MobileDatePicker
+							value={this.state.time}
+							isOpen={this.state.isTimeOpen}
+							onSelect={this.handleTimeSelect}
+							onCancel={this.handleTimeCancel} 
+							confirmText="Confirm"
+							cancelText="Cancel"
+							dateFormat={['hh', 'mm']}
+						/>
+					</div>
 
 					{//needto give this sythetic event onsubmit access to state props
 					}
 					<form onSubmit={(evt) => {this.props.handleSubmit(evt, this.props.user.id,
-						this.props.user.friend, this.state.dateToGive)}}>
+						this.props.user.friend, this.state.time)}}>
 						<FormGroup controlId="tripForm">
 							<ControlLabel>Trip Name</ControlLabel>
 							<FormControl
