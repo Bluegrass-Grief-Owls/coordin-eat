@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import mapboxgl from 'mapbox-gl'
-import { Col, Row } from 'react-bootstrap'
+import {updateTrip} from './../store'
+import { Col, Row, Button } from 'react-bootstrap'
 
 class TripDirections extends React.Component {
 	constructor(props) {
@@ -60,6 +61,10 @@ class TripDirections extends React.Component {
 		const googleMapsUrl =
 			`https://www.google.com/maps/dir/${this.currentLat},+${this.currentLong}/${this.meetingPlace.coordinates.latitude},${this.meetingPlace.coordinates.longitude}`
 
+		let isOwner = false
+		if(this.props.userId === this.props.currentTrip.ownerId){
+			isOwner = true
+		}
 		return (
 			<Row>
 				<Col xs={12}>
@@ -68,6 +73,12 @@ class TripDirections extends React.Component {
 				</Col>
 				<Col xs={12}>
 					<div id='putMapHere' className='theMapBox'></div>
+				</Col>
+				<Col xs={12}>
+					{
+						isOwner ? (<Button className='tripButton' onClick={() => {
+							this.props.moveToFinished(this.props.currentTrip)}}>Conclude the Trip</Button>) : ''
+					}
 				</Col>
 			</Row>
 		)
@@ -87,7 +98,15 @@ const mapState = state => {
 	}
 }
 
-export default connect(mapState)(TripDirections)
+const mapDispatch = (dispatch) => {
+	return {
+		moveToFinished(trip){
+			dispatch(updateTrip({status: 'finished'}, trip.id))
+		}
+	}
+}
+
+export default connect(mapState, mapDispatch)(TripDirections)
 
 /**
  * PROP TYPES
