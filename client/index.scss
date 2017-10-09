@@ -8,7 +8,7 @@ $datepicker__text-color: #000 !default;
 $datepicker__border-radius: .3rem !default;
 $datepicker__day-margin: .166rem !default;
 $datepicker__font-size: .8rem !default;
-$datepicker__item-size: 4.7rem !default;
+$datepicker__item-size: 1.7rem !default;
 $datepicker__margin: .4rem !default;
 $datepicker__navigation-size: .45rem !default;
 $datepicker__triangle-size: 8px !default;
@@ -17,7 +17,7 @@ $datepicker__triangle-size: 8px !default;
 
 //Color Setup
 $colorArray: orange banana pear blueberry blackberry dragonfruit watermelon;
-$colorChoice: nth($colorArray, 1);
+$colorChoice: nth($colorArray, 6);
 //colorArray index starts at 1, not 0
 
 $mainColor: null;
@@ -267,7 +267,6 @@ body {
   background-color: $mainColor;
 }
 
-
 .react-datepicker-wrapper {
   display: inline-block;
 }
@@ -440,15 +439,15 @@ body {
     background: white;
 
     .react-datepicker__time-box {
-      width: 200px;
+      width: 70px;
       overflow-x: hidden;
       ul.react-datepicker__time-list {
         list-style: none;
         margin: 0;
-        height: calc(495px + calc(#{$datepicker__item-size} / 2));
+        height: calc(195px + calc(#{$datepicker__item-size} / 2));
         overflow-y: scroll;
-        padding-right: 60px;
-        width: 150%;
+        padding-right: 30px;
+        width: 100%;
 
         li.react-datepicker__time-list-item {
           padding: 5px 10px;
@@ -826,53 +825,3 @@ body {
     border-top-color: $datepicker__border-color;
   }
 }
-
-.mapboxgl-popup-content {
-  border: $accentColor solid 1px;
-  border-radius: 3px;
-  background: $mainColorLight !important;
-  color: $accentColor;
-}
-
-.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
-  border-left-color: $accentColor !important;
-}
-
-.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
-  border-right-color: $accentColor !important;
-}
-
-.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
-  border-bottom-color: $accentColor !important;
-}
-
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  border-top-color: $accentColor !important;
-}
-
-.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip {
-  border-bottom-color: $accentColor !important;
-}
-
-.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
-  border-bottom-color: $accentColor !important;
-}
-
-.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip {
-  border-top-color: $accentColor !important;
-}
-
-.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
-  border-top-color: $accentColor !important;
-}
-
-.mapMarker {
-  z-index: 1;
-  width: 19px;
-  height: 36px;
-}
-
-.mapboxgl-map {
-  position: relative;
-}
-

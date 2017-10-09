@@ -37,11 +37,7 @@ class BuildTrip extends React.Component {
 		if(this.props.user.friend){
 			return (
 				<div>
-					<DatePicker selected={this.state.startDate}
-						onChange={this.handleChange}
-						showTimeSelect
-						dateFormat="LLL"
-					/>
+
 
 					{//needto give this sythetic event onsubmit access to state props
 					}
@@ -54,7 +50,12 @@ class BuildTrip extends React.Component {
 								name="tripName"
 								placeholder="Enter trip name"
 							/>
-							<ControlLabel>Month</ControlLabel>
+
+							<DatePicker selected={this.state.startDate}
+							onChange={this.handleChange}
+							showTimeSelect
+							dateFormat="LLL"
+						/>
 
 							<ControlLabel>Invite Your Friends!</ControlLabel>
 							{
