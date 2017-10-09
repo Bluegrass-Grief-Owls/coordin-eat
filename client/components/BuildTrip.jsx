@@ -40,12 +40,12 @@ class BuildTrip extends React.Component {
 
 					<h3 className='marginLeft15'>Pick a Date</h3>
 					<DatePicker selected={this.state.startDate}
-					onChange={this.handleChange}
-					showTimeSelect
-					dateFormat="LLL"
-					style={{width: 20}}
-					className='marginLeft15'
-				/>
+						onChange={this.handleChange}
+						showTimeSelect
+						dateFormat="LLL"
+						style={{width: 20}}
+						className='marginLeft15'
+					/>
 
 
 

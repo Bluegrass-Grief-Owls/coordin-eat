@@ -64,7 +64,7 @@ class TripDirections extends React.Component {
 			<Row>
 				<Col xs={12}>
 					<h3 className='alignCenter'>Let's meet at {this.meetingPlace.name}</h3>
-					<h4 className='alignCenter'><a href={googleMapsUrl}>Click here for directions</a></h4>
+					<h4 className='alignCenter'><a className='fontMainColorLight' href={googleMapsUrl}>Click <h4 className='fontAccentColor displayInline'>here</h4> for directions</a></h4>
 				</Col>
 				<Col xs={12}>
 					<div id='putMapHere' className='theMapBox'></div>
