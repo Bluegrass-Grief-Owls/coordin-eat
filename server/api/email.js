@@ -6,14 +6,26 @@ const Promise = require('bluebird')
 
 module.exports = router
 
-let transporter = nodeMailer.createTransport({
-	host: process.env.MAIL_HOST,
-	port: process.env.MAIL_PORT,
-	auth: {
-		user: process.env.MAIL_USER,
-		pass: process.env.MAIL_PASS
-	}
-})
+let transporter
+
+if (process.env.NODE_ENV === 'development') {	
+	transporter = nodeMailer.createTransport({
+		host: process.env.MAIL_HOST,
+		port: process.env.MAIL_PORT,
+		auth: {
+			user: process.env.MAIL_USER,
+			pass: process.env.MAIL_PASS
+		}
+	})
+} else {
+	transporter = nodeMailer.createTransport({
+		service: process.env.MAIL_SERVICE,
+		auth: {
+			user: process.env.MAIL_USER,
+			pass: process.env.MAIL_PASS
+		}
+	})
+}
 
 router.post('/invite', isTripOwner, (req, res, next) => { //just using post because it allows request to have a body
 	const domain = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'http://coordin-Eat.herokuapp.com'
@@ -34,10 +46,11 @@ router.post('/invite', isTripOwner, (req, res, next) => { //just using post beca
 
 function sendMail(url, senderName, recipient, callback) {
 	transporter.sendMail({
-		from: 'noreply@coordin-eat.com',
+		from: 'coordinEat.noreply@gmail.com',
 		to: recipient,
 		subject: senderName + ' has invited you',
 		text: 'Use this link to accept or decline: ' + url,
 		html: `<p>Use this link to accept or decline: <a href="${url}">${url}</a></p>`
 	}, callback)
 }
+
