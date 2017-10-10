@@ -177,8 +177,25 @@ tbody {
 }
 
 .faveFood {
-  color: 'green';
-  font-family: 'impact';
+  // color: 'green';
+  // font-family: 'impact';
+  // border-style: solid;
+  // border-color: goldenrod;
+  // border-width: 10px;
+  border: 7px solid #aa0813;
+  -webkit-animation: mymove 3s infinite; /* Chrome, Safari, Opera */
+  animation: mymove 3s infinite;
+
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+  50% {border-color: yellow;}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+  50% {border-color: yellow;}
 }
 
 .listMed {

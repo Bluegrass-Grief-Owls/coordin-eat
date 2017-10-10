@@ -48,7 +48,7 @@ class VotingTrip extends Component {
 									isTripOwner ? (<Button className='tripButton' onClick={() => {
 										this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
 								}
-								<h3 className='faveFood'>Choices</h3>
+								<h3>Choices</h3>
 							</Col>
 							<Col xs={1}></Col>
 							<Col xs={12}>
