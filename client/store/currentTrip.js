@@ -11,6 +11,9 @@ const DECLINE_INVITATION = 'DECLINE_INVITATION'
 const SET_COORDINATES = 'SET_COORDINATES'
 const VOTED = 'VOTED'
 const UPDATE_TRIP = 'UPDATE_TRIP'
+const IS_LOADING = 'IS_LOADING'
+const DONE_LOADING = 'DONE_LOADING'
+
 
 /**
  * INITIAL STATE
@@ -28,6 +31,8 @@ const setCoordinatesAction = (coordsArray) => ({type: SET_COORDINATES, coordsArr
 const voteAction = (choiceObj) => ({type: VOTED, choiceObj})
 const updateTripAction = (updatedTrip) => ({type: UPDATE_TRIP, updatedTrip})
 export const resetCurrentTrip = () => ({type: GET_TRIP, trip: {}})
+const loadingAction = () => ({type: IS_LOADING})
+const doneLoadingAction = () => ({type: DONE_LOADING})
 
 
 // //THUNKS
@@ -44,16 +49,19 @@ export function setCoordinates(coords, tripId, userId){
 				let RVSPDone = theTrip.data.attendees.every(attendee => {
 					return attendee.origin !== null
 				})
+
 				if(RVSPDone){
 					//Putting origin pairs into an array
 					let originArray = []
 					theTrip.data.attendees.forEach(attendee => {
 						originArray.push(attendee.origin)
 					})
+					dispatch(loadingAction())
 					axios.post('/api/meetup', {origins: originArray})
 						.then((meetup) => {
 							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
 						})
+						.then(() => dispatch(doneLoadingAction()))
 						.catch(console.error.bind(console))
 				}
 			})
@@ -77,10 +85,12 @@ export function declineInvitation(tripId, userId) {
 					theTrip.data.attendees.forEach(attendee => {
 						originArray.push(attendee.origin)
 					})
+					dispatch(loadingAction())
 					axios.post('/api/meetup', {origins: originArray})
 						.then((meetup) => {
 							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
 						})
+						.then(() => dispatch(doneLoadingAction()))
 				}
 			})
 			.catch(console.error.bind(console))
@@ -217,8 +227,11 @@ export default function (state = currentTrip, action) {
 		})})
 	case UPDATE_TRIP:
 		return action.updatedTrip
+	case IS_LOADING:
+		return  Object.assign({}, state, {loading: true})
+	case DONE_LOADING:
+		return  Object.assign({}, state, {loading: false})
 	default:
 		return state
-
 	}
 }
