@@ -11,7 +11,8 @@ router.post('/login', (req, res, next) => {
 				res.status(401).send('Incorrect password')
 			} else {
 				//Returns user info, but not the password or salt
-				req.login(user, err => err ? next(err) : res.json({id: user.id, email: user.name, name: user.name, favoriteFood: user.favoriteFood}))
+				console.log(user)
+				req.login(user, err => err ? next(err) : res.json({id: user.id, email: user.name, name: user.name, favoriteFood: user.favoriteFood, friend: user.friend}))
 			}
 		})
 		.catch(next)
