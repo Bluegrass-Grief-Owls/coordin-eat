@@ -60,7 +60,11 @@ class BuildTrip extends React.Component {
 		displayTime = displayTime.substring(0, displayTime.lastIndexOf(':'))
 
 		friendCounter = 0
+		let arrayOfFriends = []
 		if(this.props.user.friend){
+			arrayOfFriends = this.props.user.friend
+		}
+		if(this.props.user){
 			return (
 				<div>
 
@@ -121,7 +125,7 @@ class BuildTrip extends React.Component {
 
 							<ControlLabel>Invite Your Friends!</ControlLabel>
 							{
-								this.props.user.friend.map(friend =>{
+								arrayOfFriends.map(friend =>{
 									friendCounter++
 									return(
 										<Checkbox id={'check'+friendCounter} className='fontMaintColorLight' key={friend.id}><h4 className='displayInline'>{friend.name}</h4></Checkbox>
