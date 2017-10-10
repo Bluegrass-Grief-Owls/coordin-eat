@@ -18,7 +18,7 @@ const navbarInstance = (props) => {
 					? <div>
 						<Navbar.Collapse className='noPadding'>
 							<Nav>
-								<NavItem eventKey={1} href='#' onClick={handleClick}>
+								<NavItem eventKey={1}>
 									<a href='#' onClick={handleClick}><h4 className="fontMainColor displayInline">Logout</h4></a>
 								</NavItem>
 								<NavItem eventKey={2}>
