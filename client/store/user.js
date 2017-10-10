@@ -7,6 +7,8 @@ import history from '../history'
 const GET_ME = 'GET_ME'
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const SET_ONE_FAV = 'SET_ONE_FAV'
+const UPDATE_FAVS = 'UPDATE_FAVS'
 
 /**
  * INITIAL STATE
@@ -19,6 +21,8 @@ const defaultUser = {}
 const getMe = myself => ({type: GET_ME, myself})
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+export const setOneFav = favArray => ({type: SET_ONE_FAV, favoriteFood: favArray})
+const updatFavsAction = () => ({type: UPDATE_FAVS})
 
 /**
  * THUNK CREATORS
@@ -55,6 +59,15 @@ export const postFriend = (friendId) =>
 			.then(() => dispatch(me()))
 			.catch(err => console.log(err))
 
+export const updateFavs = (user, userId) =>
+	dispatch =>
+		axios.put(`api/users/${userId}`, user) 
+			.then(() => {
+				dispatch(updatFavsAction())
+				history.push('/profile')
+			})
+			.catch(err => console.log(err))
+
 /**
  * REDUCER
  */
@@ -66,6 +79,11 @@ export default function (state = defaultUser, action) {
 		return action.user
 	case REMOVE_USER:
 		return defaultUser
+	case SET_ONE_FAV:
+		return Object.assign({}, state, {favoriteFood: action.favoriteFood})
+	case UPDATE_FAVS:
+		//No change to state, just saving changes to DB
+		return state
 	default:
 		return state
 	}
