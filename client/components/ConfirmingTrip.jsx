@@ -20,9 +20,8 @@ const ConfirmTrip = (props) => {
 	if(myAttendance && myAttendance.origin){
 		return(
 			<Row>
-				<Col xs={1}></Col>
-				<Col xs={10}>
-					<h3>Here's Who's Coming!</h3>
+				<Col xs={12} className='noPaddingLeft noPaddingRight'>
+					<h3 className='marginLeft15'>Here's Who's Coming!</h3>
 					<Table responsive>
 						<thead>
 							<tr>
@@ -47,11 +46,10 @@ const ConfirmTrip = (props) => {
 						</tbody>
 					</Table>
 					{
-						isTripOwner ? (<Button className='tripButton' onClick={() => {
+						isTripOwner ? (<Button className='marginLeft15 tripButton' onClick={() => {
 							props.moveToVoting(props.currentTrip)}}>Procced to Voting</Button>) : ''
 					}
 				</Col>
-				<Col xs={1}></Col>
 			</Row>
 		)
 	} else {

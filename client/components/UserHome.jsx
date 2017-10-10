@@ -25,29 +25,25 @@ class UserHome extends Component {
 			<Row className=''>
 				<h3 className='noMargin welcomeUser'>Welcome, {this.props.user.name}!</h3>
 				<Row>
-					<Col xs={1}>
-					</Col>
-					<Col xs={10}>
-						<ListGroup className='myTripList'>
+					<Col xs={12} className='noPaddingLeft noPaddingRight'>
+						<div className='myTripList'>
 							{ this.props.myTrips.length ?
 								this.props.myTrips.map(attendance => {
 									//This is actually a list of attendances attached with the trip they attended
 									let theTrip = attendance.trip
 									//TODO: if trip gets deleted need to specify that all associated attendences need to be deleted
 									return(
-										<ListGroupItem key={theTrip.id} className='noPaddingBottom myTripList' onClick={() => {history.push(`/trip/${theTrip.id}`)}}>
-											<h3 className='noMargin fontMainColor'>{theTrip.name}</h3>
-											<h5 className='fontMainColor'>Date: {theTrip.readableDate}</h5>
-											<h5 className='fontMainColor'>Time: {theTrip.time}</h5>
-										</ListGroupItem>
+										<div key={theTrip.id} className='noPaddingBottom myTripList' onClick={() => {history.push(`/trip/${theTrip.id}`)}}>
+											<h3 className='marginLeft15 marginTop10 fontMainColor'>{theTrip.name}</h3>
+											<h5 className='marginLeft15 fontMainColor'>Date: {theTrip.readableDate}</h5>
+											<h5 className='marginLeft15 fontMainColor'>Time: {theTrip.time}</h5>
+										</div>
 									)
-								}) : <ListGroupItem key='noTrips' className='noPaddingBottom myTripList'>
-									<h3 className='noMargin fontMainColor'>You have no trips yet!</h3>
-								</ListGroupItem>
+								}) : <div key='noTrips' className='noPaddingBottom myTripList'>
+									<h3 className='noMargin marginLeft15 fontMainColor'>You have no trips yet!</h3>
+								</div>
 							}
-						</ListGroup>
-					</Col>
-					<Col xs={1}>
+						</div>
 					</Col>
 				</Row>
 			</Row>

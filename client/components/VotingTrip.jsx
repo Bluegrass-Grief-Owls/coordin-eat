@@ -49,6 +49,9 @@ class VotingTrip extends Component {
 										this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
 								}
 								<h3 className='faveFood'>Choices</h3>
+							</Col>
+							<Col xs={1}></Col>
+							<Col xs={12}>
 								<Accordion>
 									{
 										this.props.yelpList.map((buissness, idx) => {
@@ -60,13 +63,13 @@ class VotingTrip extends Component {
 											//assign user fave food here--first worry about getting an individual panel to have the right class, then worry about overriding color
 											tagList = tagList.slice(2)
 											return(
-												<Panel className='faveFood' header={buissness.name} key={idx} eventKey={buissness.id}>
+												<Panel className='faveFood' header={'\u25BC' + '   ' + buissness.name} key={idx} eventKey={buissness.id}>
 													<Row>
 														<Col className='noPaddingRight noPaddingLeft' xs={12} sm={6}>
 															<img className='buissnessImage' src={buissness.image_url} alt= {buissness.name + ' image'} />
 														</Col>
 														<Col xs={12} sm={6} className='noPaddingLeft'>
-															<ul>
+															<ul className='text16px'>
 																<li>Tags: {tagList}</li>
 																<li>Rating: {buissness.rating} | Price: {buissness.price}</li>
 																<li>Phone: {buissness.display_phone}</li>
@@ -84,7 +87,7 @@ class VotingTrip extends Component {
 															{myVote !== -1 ? 'I changed my mind' : 'I Pick This One!'}
 														</Button>
 														:
-														<Button bsStyle="success" disabled>You voted for this</Button>
+														<Button bsStyle="success fontSize22" disabled>You voted for this</Button>
 													}
 												</Panel>
 											)
@@ -92,7 +95,6 @@ class VotingTrip extends Component {
 									}
 								</Accordion>
 							</Col>
-							<Col xs={1}></Col>
 						</Row>
 					)
 				} else {
