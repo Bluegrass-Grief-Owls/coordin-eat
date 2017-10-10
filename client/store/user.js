@@ -30,8 +30,12 @@ const updatFavsAction = () => ({type: UPDATE_FAVS})
 export const me = () =>
 	dispatch =>
 		axios.get('/auth/me')
-			.then(res =>
-				dispatch(getMe(res.data || defaultUser)))
+			.then(res => {
+				dispatch(getMe(res.data || defaultUser))
+				if (res.data.name === 'not logged in'){
+					history.push('/login')
+				}
+			})
 			.catch(err => console.log(err))
 
 export const auth = (email, password, name, method) =>

@@ -42,7 +42,7 @@ router.get('/me', (req, res, next) => {
 			})
 			.catch(next)
 	} else {
-		res.json(undefined)
+		res.json({name: 'not logged in'})
 	}
 })
 
