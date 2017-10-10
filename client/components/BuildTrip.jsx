@@ -125,7 +125,7 @@ class BuildTrip extends React.Component {
 
 
 							{hasFriends ? <ControlLabel>Invite Your Friends!</ControlLabel>
-								: <Link to='/friends' ><Button className='tripButton displayBlock'>+ Friends</Button></Link>}
+								: <Link to='/friends' ><Button className='tripButtonSmall displayBlock'>+ Friends</Button></Link>}
 	
 							{
 								arrayOfFriends.map(friend =>{
