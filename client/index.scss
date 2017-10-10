@@ -232,6 +232,10 @@ tbody {
   margin-left: 15px;
 }
 
+.marginTop25 {
+  margin-top: 25px;
+}
+
 .alignCenter {
   text-align: center;
 }
@@ -255,6 +259,10 @@ tbody {
   padding: 0;
 }
 
+.navbar-nav {
+  margin: 0;
+}
+
 .container {
   background-color: $mainColorLight;
 }
@@ -276,7 +284,8 @@ tbody {
 }
 
 .linkOnNav {
-  margin: 0 0 15px 15px;
+  margin-bottom: 25px;
+  display: block;
   color: $mainColor;
 }
 
