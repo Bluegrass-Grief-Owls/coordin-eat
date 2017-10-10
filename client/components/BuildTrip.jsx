@@ -56,13 +56,16 @@ class BuildTrip extends React.Component {
 	}
 
 	render() {
+		let displayTime = this.state.time.toString()
+		displayTime = displayTime.substring(0, displayTime.lastIndexOf(':'))
+
 		friendCounter = 0
 		if(this.props.user.friend){
 			return (
 				<div>
 
 					<h3 className='marginLeft15'>Pick a Date</h3>
-					<h4 className='marginLeft15'>{this.state.time.toString().slice(0,-15)}</h4>
+					<h4 className='marginLeft15'>{displayTime}</h4>
 					<div className="marginLeft15">
 						<ButtonToolbar>
 					      <ButtonGroup>
