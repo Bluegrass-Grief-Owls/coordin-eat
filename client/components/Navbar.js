@@ -4,7 +4,6 @@ import { Link} from 'react-router-dom'
 
 const navbarInstance = (props) => {
 	const {isLoggedIn, handleClick} = props
-	console.log(isLoggedIn)
 
 	return (
 		<Navbar collapseOnSelect fixedTop={true} className="noMargin">
