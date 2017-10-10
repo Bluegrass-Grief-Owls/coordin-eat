@@ -357,6 +357,15 @@ tbody {
   color: $mainColor;
 }
 
+.tripButtonSmall {
+  font-size: 18px;
+  margin-top: 10px;
+  border: 2px $accentColor solid;
+  border-radius: 5px;
+  background-color: $mainColorLight;
+  color: $mainColor;
+}
+
 .finishedContainer {
   border: $accentColor solid 2px;
   border-radius: 5px;
