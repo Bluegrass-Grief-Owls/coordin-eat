@@ -51,12 +51,12 @@ export function setCoordinates(coords, tripId, userId){
 				})
 
 				if(RVSPDone){
-					dispatch(loadingAction())
 					//Putting origin pairs into an array
 					let originArray = []
 					theTrip.data.attendees.forEach(attendee => {
 						originArray.push(attendee.origin)
 					})
+					dispatch(loadingAction())
 					axios.post('/api/meetup', {origins: originArray})
 						.then((meetup) => {
 							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
@@ -85,10 +85,12 @@ export function declineInvitation(tripId, userId) {
 					theTrip.data.attendees.forEach(attendee => {
 						originArray.push(attendee.origin)
 					})
+					dispatch(loadingAction())
 					axios.post('/api/meetup', {origins: originArray})
 						.then((meetup) => {
 							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
 						})
+						.then(() => dispatch(doneLoadingAction()))
 				}
 			})
 			.catch(console.error.bind(console))

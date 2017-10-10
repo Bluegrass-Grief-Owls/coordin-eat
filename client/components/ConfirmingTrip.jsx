@@ -6,7 +6,6 @@ import {setCurrentCoords, declineInvitation} from './../store'
 import {ConfirmingTripMap} from './index.js'
 
 const ConfirmTrip = (props) => {
-
 	let isTripOwner = false
 	if(props.currentTrip.ownerId === props.user.id){
 		isTripOwner = true
@@ -46,8 +45,16 @@ const ConfirmTrip = (props) => {
 						</tbody>
 					</Table>
 					{
-						isTripOwner ? (<Button className='marginLeft15 tripButton' onClick={() => {
-							props.moveToVoting(props.currentTrip)}}>Procced to Voting</Button>) : ''
+						isTripOwner ? (
+							<Button 
+								className='marginLeft15 tripButton' 
+								onClick={() => {
+									props.moveToVoting(props.currentTrip)
+								}}
+								disabled={props.loading}
+							>
+								{props.loading ? 'Calculating results...' : 'Procced to Voting'}
+							</Button>) : ''
 					}
 				</Col>
 			</Row>
@@ -89,7 +96,8 @@ const mapState = (state) => {
 	return {
 		user: state.user,
 		currentTrip: state.currentTrip,
-		currentLocation: state.currentLocation
+		currentLocation: state.currentLocation,
+		loading: !!state.currentTrip.loading
 	}
 }
 
