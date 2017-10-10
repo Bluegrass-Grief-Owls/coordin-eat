@@ -7,10 +7,10 @@ const navbarInstance = (props) => {
 	console.log(isLoggedIn)
 
 	return (
-		<Navbar collapseOnSelect>
+		<Navbar collapseOnSelect className="noMargin">
 			<Navbar.Header>
 				<Navbar.Brand className="noMargin">
-					<Link to="/home">React-Bootstrap</Link>
+					<Link to="/home">Coordin-EAT</Link>
 				</Navbar.Brand>
 				<Navbar.Toggle />
 			</Navbar.Header>
@@ -19,14 +19,14 @@ const navbarInstance = (props) => {
 					? <div>
 						<Navbar.Collapse>
 							<Nav>
-								<NavItem eventKey={1}>
-									<a className='noMargin noPadding' href='#' onClick={handleClick}>Logout</a>
+								<NavItem className='noMargin noPadding' eventKey={1}>
+									<a className='noMargin noPadding' href='#' onClick={handleClick}><h4 className="displayInline">Logout</h4></a>
 								</NavItem>
-								<NavItem eventKey={1}>
-									<Link className='noMargin noPadding' to='/build_trip'>Build a Trip</Link>
+								<NavItem className='noMargin noPadding' eventKey={1}>
+									<Link className='noMargin noPadding' to='/build_trip'><h4 className="displayInline">Build a Trip</h4></Link>
 								</NavItem>
-								<NavItem eventKey={1}>
-									<Link className='noMargin noPadding' to='/friends'>Friends</Link>
+								<NavItem className='noMargin noPadding' eventKey={1}>
+									<Link className='noMargin noPadding' to='/friends'><h4 className="displayInline">Friends</h4></Link>
 								</NavItem>																
 							</Nav>
 						</Navbar.Collapse>
@@ -39,21 +39,3 @@ const navbarInstance = (props) => {
 }
 
 export default navbarInstance
-
-// <Link className='linkOnNav' to='/home'><h1 className='noMargin marginLeft15'>Coordin-EAT</h1></Link>
-// 				<nav>
-// 					{
-// 						isLoggedIn
-// 							? <div>
-// 								{/* The navbar will show these links after you log in */}
-// 								<a className='linkOnNav fontMainColor' href='#' onClick={handleClick}>Logout</a>
-// 								<Link className='linkOnNav' to='/build_trip'>Build a Trip</Link>
-// 								<Link className='linkOnNav' to='/friends'>Friends</Link>
-// 							</div>
-// 							: <div>
-// 								{/* The navbar will show these links before you log in */}
-// 								<Link className='linkOnNav' to='/login'>Login</Link>
-// 								<Link className='linkOnNav' to='/signup'>Sign Up</Link>
-// 							</div>
-// 					}
-// 				</nav>
