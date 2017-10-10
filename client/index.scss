@@ -176,6 +176,36 @@ tbody {
   border-radius: 5px;
 }
 
+.faveFood {
+  // color: 'green';
+  // font-family: 'impact';
+  // border-style: solid;
+  // border-color: goldenrod;
+  // border-width: 10px;
+  border: 7px solid $accentColor;
+  -webkit-animation: mymove 3s infinite; /* Chrome, Safari, Opera */
+  animation: mymove 3s infinite;
+
+}
+
+.faveFoodKey {
+  color: $accentColor;
+  -webkit-animation: mymove 3s infinite; /* Chrome, Safari, Opera */
+  animation: mymove 3s infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+  50% {border-color: yellow;}
+  50% {color: yellow;}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+  50% {border-color: yellow;}
+  50% {color: yellow;}
+}
+
 .listMed {
   height: 45px;
 }
@@ -210,6 +240,10 @@ tbody {
 
 .displayBlock {
   display: block;
+}
+
+.displayInlineBlock {
+  display: inline-block;
 }
 
 .displayInline {
@@ -329,6 +363,15 @@ tbody {
 .tripButton {
   font-size: 24px;
   margin-top: 15px;
+  border: 2px $accentColor solid;
+  border-radius: 5px;
+  background-color: $mainColorLight;
+  color: $mainColor;
+}
+
+.tripButtonSmall {
+  font-size: 18px;
+  margin-top: 10px;
   border: 2px $accentColor solid;
   border-radius: 5px;
   background-color: $mainColorLight;

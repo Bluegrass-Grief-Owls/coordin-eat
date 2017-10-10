@@ -11,7 +11,7 @@ router.post('/login', (req, res, next) => {
 				res.status(401).send('Incorrect password')
 			} else {
 				//Returns user info, but not the password or salt
-				req.login(user, err => err ? next(err) : res.json({id: user.id, email: user.name, name: user.name, friend: user.friend}))
+				req.login(user, err => err ? next(err) : res.json({id: user.id, email: user.name, name: user.name, friend: user.friend, favoriteFood: user.favoriteFood}))
 			}
 		})
 		.catch(next)
@@ -36,7 +36,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/me', (req, res, next) => {
 	if(req.user){
-		User.findOne({where: {id: req.user.id}, include: [{model: User, as: 'friend', attributes: ['id', 'email', 'name']}], attributes: ['id', 'email', 'name']})
+		User.findOne({where: {id: req.user.id}, include: [{model: User, as: 'friend', attributes: ['id', 'email', 'name']}], attributes: ['id', 'email', 'name', 'favoriteFood', 'Home']})
 			.then(user =>{
 				res.json(user)
 			})

@@ -10,12 +10,11 @@ import {
 	Signup,
 	UserHome,
 	BuildTrip,
-	YelpTest,
-	DestinationPage,
 	SingleTrip,
 	FriendsList,
 	InviteFriends,
-	ConfirmingTrip
+	UserProfile,
+	EditFavorites
 } from './components'
 import { me } from './store'
 
@@ -43,6 +42,8 @@ class Routes extends Component {
 						<Route path='/addfriends' component={InviteFriends} />
 						<Route path='/trip/:tripId' component={SingleTrip} />
 						<Route path='/friends' component={FriendsList} />
+						<Route path='/profile' component={UserProfile} />
+						<Route path='/editFavorites' component={EditFavorites} />
 						<Redirect to='/home' />
 						<Redirect to='/login' />
 					</Switch>

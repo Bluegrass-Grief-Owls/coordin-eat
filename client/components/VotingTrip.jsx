@@ -22,6 +22,7 @@ class VotingTrip extends Component {
 	}
 
 	render () {
+
 		if(this.props.currentTrip.id){
 			let isTripOwner = false
 			if(this.props.currentTrip.ownerId === this.props.user.id){
@@ -37,6 +38,7 @@ class VotingTrip extends Component {
 			}
 			if(this.props.yelpList[0] !== null && myVote !== null){
 				if(this.props.yelpList.length) {
+					let hasFav = false
 					return (
 						<Row>
 							<Col xs={1}></Col>
@@ -45,7 +47,18 @@ class VotingTrip extends Component {
 									isTripOwner ? (<Button className='tripButton' onClick={() => {
 										this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
 								}
-								<h3>Choices</h3>
+
+								<h3 className='displayInlineBlock'>Choices</h3>
+								{
+									this.props.yelpList.forEach(yelp => {
+										yelp.categories.forEach(cat =>{
+											if(this.props.user.favoriteFood.includes(cat.title)){
+												hasFav = true
+											}
+										})
+									})
+								}
+								{	hasFav ? <h4 className='faveFoodKey displayInline marginLeft15'>(Favorite Foods)</h4> : <div />}
 							</Col>
 							<Col xs={1}></Col>
 							<Col xs={12}>
@@ -53,12 +66,15 @@ class VotingTrip extends Component {
 									{
 										this.props.yelpList.map((buissness, idx) => {
 											let tagList = ''
+											let faveFood = false
 											for (var tag in buissness.categories){
 												tagList += (', ' + buissness.categories[tag].title)
+												if (this.props.user.favoriteFood.includes(buissness.categories[tag].title))
+													faveFood = true
 											}
 											tagList = tagList.slice(2)
 											return(
-												<Panel header={'\u25BC' + '   ' + buissness.name} key={idx} eventKey={buissness.id}>
+												<Panel className={faveFood ? 'faveFood' : ''} header={'\u25BC' + '   ' + buissness.name} key={idx} eventKey={buissness.id}>
 													<Row>
 														<Col className='noPaddingRight noPaddingLeft' xs={12} sm={6}>
 															<img className='buissnessImage' src={buissness.image_url} alt= {buissness.name + ' image'} />
@@ -97,7 +113,7 @@ class VotingTrip extends Component {
 						<div className='marginLeft15'>We couldn't find anything at this location!</div>
 					)
 				}
-				
+
 			} else {
 				return (
 					<div>
