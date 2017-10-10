@@ -1,19 +1,3 @@
-$datepicker__background-color: #f0f0f0 !default;
-$datepicker__border-color: #aeaeae !default;
-$datepicker__highlighted-color: #3dcc4a !default;
-$datepicker__muted-color: #ccc !default;
-$datepicker__selected-color: #216ba5 !default;
-$datepicker__text-color: #000 !default;
-
-$datepicker__border-radius: .3rem !default;
-$datepicker__day-margin: .166rem !default;
-$datepicker__font-size: .8rem !default;
-$datepicker__item-size: 2rem !default;
-$datepicker__margin: .4rem !default;
-$datepicker__navigation-size: .45rem !default;
-$datepicker__triangle-size: 8px !default;
-
-
 
 //Color Setup
 $colorArray: orange banana pear blueberry blackberry dragonfruit watermelon original;
@@ -103,6 +87,7 @@ body {
 .table-responsive {
   border-color: $accentColor;
   margin-top: 10px;
+  font-size: 18px;
 }
 
 .table>thead{
@@ -124,13 +109,17 @@ tbody {
 }
 
 .panel-default>.panel-heading+.panel-collapse>.panel-body {
-    border-top-color: $accentColor;
+  border-top-color: $accentColor;
 }
 
 .panel-default {
   border-color: $accentColor;
   background-color: $mainColor;
   color: $accentColorLight;
+}
+
+.panel-title>a {
+  font-size: 20px;
 }
 
 .panel-body {
@@ -170,6 +159,12 @@ tbody {
   color: $accentColorLight;
 }
 
+.authInput {
+  width: 100%;
+  line-height: 1.7;
+  font-size: 24px;
+}
+
 .checkbox label {
   color: $mainColorLight;
 }
@@ -201,6 +196,10 @@ tbody {
   padding: 0;
 }
 
+.marginRight10 {
+  margin-right: 10px;
+}
+
 .floatRight {
   float: right;
 }
@@ -215,6 +214,14 @@ tbody {
 
 .noMargin {
   margin: 0;
+}
+
+.marginTop10 {
+  margin-top: 10px;
+}
+
+.text16px {
+  font-size: 16px;
 }
 
 .marginLeft15 {
@@ -234,8 +241,8 @@ tbody {
 }
 
 .myTripList {
-  border: 2px solid $accentColor;
-  border-radius: 5px;
+  border-top: 2px solid $accentColor;
+  border-bottom: 2px solid $accentColor;
   color: $mainColor;
   background-color: $mainColorLight;
 }
@@ -263,17 +270,27 @@ tbody {
 
 }
 
+#tripForm {
+  width: 100%;
+  margin: 0;
+  padding: 15px;
+}
+
 .welcomeUser {
-  margin: 0 0 15px 15px;
-  padding-top: 20px;
+  margin: 15px 0 15px 15px;
 }
 
 .destButton {
   vertical-align: bottom;
+  font-size: 22px;
   float: right;
   border-color: $accentColor;
   color: $mainColor;
   background-color: $mainColorLight;
+}
+
+.fontSize22 {
+  font-size: 22px;
 }
 
 .mapboxgl-canvas {
@@ -282,6 +299,7 @@ tbody {
 }
 
 .tripButton {
+  font-size: 24px;
   margin-top: 15px;
   border: 2px $accentColor solid;
   border-radius: 5px;

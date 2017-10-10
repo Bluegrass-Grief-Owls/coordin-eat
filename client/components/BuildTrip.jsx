@@ -56,24 +56,23 @@ class BuildTrip extends React.Component {
 	}
 
 	render() {
-		console.log("THIS IS THE STATE", this.state)
 		friendCounter = 0
 		if(this.props.user.friend){
 			return (
 				<div>
 
 					<h3 className='marginLeft15'>Pick a Date</h3>
-					<h6 className='marginLeft15'>{this.state.time.toString().slice(0,-15)}</h6>
+					<h4 className='marginLeft15'>{this.state.time.toString().slice(0,-15)}</h4>
 					<div className="marginLeft15">
 						<ButtonToolbar>
 					      <ButtonGroup>
 					        <Button
-								className="select-btn"
+								className="select-btn tripButton"
 								onClick={this.handleDateClick}>
 								Set Date
 							</Button>
 							<Button
-								className="select-btn"
+								className="select-btn tripButton"
 								onClick={this.handleTimeClick}>
 								Set Time
 							</Button>
@@ -106,10 +105,10 @@ class BuildTrip extends React.Component {
 					}
 					<form onSubmit={(evt) => {this.props.handleSubmit(evt, this.props.user.id,
 						this.props.user.friend, this.state.time)}}>
-						<FormGroup controlId="tripForm">
+						<FormGroup controlId="tripForm" id="tripForm">
 							<ControlLabel>Trip Name</ControlLabel>
 							<FormControl
-								className = 'fontAccentColor'
+								className = 'fontAccentColor authInput'
 								type="text"
 								name="tripName"
 								placeholder="Enter trip name"
@@ -122,7 +121,7 @@ class BuildTrip extends React.Component {
 								this.props.user.friend.map(friend =>{
 									friendCounter++
 									return(
-										<Checkbox id={'check'+friendCounter} className='fontMaintColorLight' key={friend.id}>{friend.name}</Checkbox>
+										<Checkbox id={'check'+friendCounter} className='fontMaintColorLight' key={friend.id}><h4 className='displayInline'>{friend.name}</h4></Checkbox>
 									)
 								})
 							}
