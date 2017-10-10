@@ -56,7 +56,6 @@ class BuildTrip extends React.Component {
 	}
 
 	render() {
-		console.log("THIS IS THE STATE", this.state)
 		friendCounter = 0
 		if(this.props.user.friend){
 			return (

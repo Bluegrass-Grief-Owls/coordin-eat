@@ -14,9 +14,9 @@ const TripDetails = (props) => {
 				<Col xs={1}>
 				</Col>
 				<Col xs={10}>
-					<h4>{theTrip.name}</h4>
-					<h5>Party Size: {theTrip.attendees.length}</h5>
-					<h5>{theTrip.readableDate} at {theTrip.time}</h5>
+					<h3>{theTrip.name}</h3>
+					<h4 className='fontMainColorLight'>Party Size: {theTrip.attendees.length}</h4>
+					<h4 className='fontMainColorLight'>{theTrip.readableDate} at {theTrip.time}</h4>
 				</Col>
 				<Col xs={1}>
 				</Col>

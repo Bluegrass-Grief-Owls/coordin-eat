@@ -14,23 +14,23 @@ const AuthForm = (props) => {
 		<div>
 			<form onSubmit={handleSubmit} name={name}>
 				{needsname ? <div className='displayBlock'>
-					<label htmlFor='submitName'><small className='fontMainColorLight'>Name</small></label>
-					<input className='backgroundMainColor' name='submitName' type='text' />
+					<label htmlFor='submitName'><h4 className='fontMainColorLight'>Name</h4></label>
+					<input className='backgroundMainColor authInput' name='submitName' type='text' />
 				</div> : <div />}
 				<div className='displayBlock'>
-					<label htmlFor='email'><small className='fontMainColorLight'>Email</small></label>
-					<input className='backgroundMainColor' name='email' type='text' />
+					<label htmlFor='email'><h4 className='fontMainColorLight'>Email</h4></label>
+					<input className='backgroundMainColor authInput' name='email' type='text' />
 				</div>
 				<div className='displayBlock'>
-					<label htmlFor='password'><small className='fontMainColorLight'>Password</small></label>
-					<input className='backgroundMainColor' name='password' type='password' />
+					<label htmlFor='password'><h4 className='fontMainColorLight'>Password</h4></label>
+					<input className='backgroundMainColor authInput' name='password' type='password' />
 				</div>
 				<div className='displayBlock'>
 					<Button className='tripButton' type='submit'>{displayName}</Button>
 				</div>
 				{error && error.response && <div> {error.response.data} </div>}
 			</form>
-			<a className='fontAccentColor marginLeft15' href='/auth/google'>{displayName} with Google</a>
+			<a href='/auth/google'><h4 className='fontAccentColor marginLeft15'>{displayName} with Google</h4></a>
 		</div>
 	)
 }
