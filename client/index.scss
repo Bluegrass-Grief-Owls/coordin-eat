@@ -163,6 +163,7 @@ tbody {
   width: 100%;
   line-height: 1.7;
   font-size: 24px;
+  height: 40px;
 }
 
 .checkbox label {
@@ -253,6 +254,10 @@ tbody {
 .navbar-default .navbar-nav>li>a {
   margin: 0;
   padding: 0;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: $mainColorLight;
 }
 
 .container {
