@@ -59,7 +59,7 @@ class VotingTrip extends Component {
 											let faveFood = false
 											for (var tag in buissness.categories){
 												tagList += (', ' + buissness.categories[tag].title)
-												if (this.props.user.favoriteFood == buissness.categories[tag].title)
+												if (this.props.user.favoriteFood.includes(buissness.categories[tag].title))
 													faveFood = true
 											}
 											tagList = tagList.slice(2)

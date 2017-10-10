@@ -22,7 +22,7 @@ const User = db.define('user', {
 		type: Sequelize.STRING
 	},
 	favoriteFood: {
-		type: Sequelize.STRING
+		type: Sequelize.ARRAY(Sequelize.STRING)
 	}
 
 
