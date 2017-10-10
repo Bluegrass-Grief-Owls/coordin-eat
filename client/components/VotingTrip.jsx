@@ -59,11 +59,12 @@ class VotingTrip extends Component {
 											let faveFood = false
 											for (var tag in buissness.categories){
 												tagList += (', ' + buissness.categories[tag].title)
+												if (this.props.user.favoriteFood == buissness.categories[tag].title)
+													faveFood = true
 											}
-											//assign user fave food here--first worry about getting an individual panel to have the right class, then worry about overriding color
 											tagList = tagList.slice(2)
 											return(
-												<Panel className='faveFood' header={'\u25BC' + '   ' + buissness.name} key={idx} eventKey={buissness.id}>
+												<Panel className={faveFood ? 'faveFood' : ''} header={'\u25BC' + '   ' + buissness.name} key={idx} eventKey={buissness.id}>
 													<Row>
 														<Col className='noPaddingRight noPaddingLeft' xs={12} sm={6}>
 															<img className='buissnessImage' src={buissness.image_url} alt= {buissness.name + ' image'} />
