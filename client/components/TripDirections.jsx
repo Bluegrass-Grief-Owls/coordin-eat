@@ -9,15 +9,11 @@ class TripDirections extends React.Component {
 	constructor(props) {
 		super(props)
 		this.meetingPlace = JSON.parse(props.meetingPlace)
-	}
 
-	componentWillReceiveProps(newProps) {
-		this.meetingPlace = JSON.parse(newProps.meetingPlace)
-
-		const me = newProps.currentTrip
+		const me = props.currentTrip
 			.attendees
 			.find((attendee) => {
-				return (attendee.userId === newProps.userId)
+				return (attendee.userId === props.userId)
 			})
 
 		if (me) {
