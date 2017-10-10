@@ -48,17 +48,19 @@ class VotingTrip extends Component {
 									isTripOwner ? (<Button className='tripButton' onClick={() => {
 										this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
 								}
-								<h3>Choices</h3>
+								<h3 className='faveFood'>Choices</h3>
 								<Accordion>
 									{
 										this.props.yelpList.map((buissness, idx) => {
 											let tagList = ''
+											let faveFood = false
 											for (var tag in buissness.categories){
 												tagList += (', ' + buissness.categories[tag].title)
 											}
+											//assign user fave food here--first worry about getting an individual panel to have the right class, then worry about overriding color
 											tagList = tagList.slice(2)
 											return(
-												<Panel header={buissness.name} key={idx} eventKey={buissness.id}>
+												<Panel className='faveFood' header={buissness.name} key={idx} eventKey={buissness.id}>
 													<Row>
 														<Col className='noPaddingRight noPaddingLeft' xs={12} sm={6}>
 															<img className='buissnessImage' src={buissness.image_url} alt= {buissness.name + ' image'} />
