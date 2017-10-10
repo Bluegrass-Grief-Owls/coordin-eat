@@ -22,16 +22,26 @@ const navbarInstance = (props) => {
 								<NavItem eventKey={1}>
 									<a href='#' onClick={handleClick}><h4 className="fontMainColor displayInline">Logout</h4></a>
 								</NavItem>
-								<NavItem eventKey={1}>
+								<NavItem eventKey={2}>
 									<Link to='/build_trip'><h4 className="fontMainColor displayInline">Build a Trip</h4></Link>
 								</NavItem>
-								<NavItem eventKey={1}>
+								<NavItem eventKey={3}>
 									<Link to='/friends'><h4 className="fontMainColor displayInline">Friends</h4></Link>
 								</NavItem>																
 							</Nav>
 						</Navbar.Collapse>
 					</div>
 					: <div>
+						<Navbar.Collapse className='noPadding'>
+							<Nav>
+								<NavItem eventKey={1}>
+									<Link to='/login'><h4 className="fontMainColor displayInline">Login</h4></Link>
+								</NavItem>
+								<NavItem eventKey={2}>
+									<Link to='/signup'><h4 className="fontMainColor displayInline">Sign-up</h4></Link>
+								</NavItem>
+							</Nav>
+						</Navbar.Collapse>
 					</div>
 			}
 		</Navbar>
