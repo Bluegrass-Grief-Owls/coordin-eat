@@ -182,20 +182,28 @@ tbody {
   // border-style: solid;
   // border-color: goldenrod;
   // border-width: 10px;
-  border: 7px solid #aa0813;
+  border: 7px solid $accentColor;
   -webkit-animation: mymove 3s infinite; /* Chrome, Safari, Opera */
   animation: mymove 3s infinite;
 
 }
 
+.faveFoodKey {
+  color: $accentColor;
+  -webkit-animation: mymove 3s infinite; /* Chrome, Safari, Opera */
+  animation: mymove 3s infinite;
+}
+
 /* Chrome, Safari, Opera */
 @-webkit-keyframes mymove {
   50% {border-color: yellow;}
+  50% {color: yellow;}
 }
 
 /* Standard syntax */
 @keyframes mymove {
   50% {border-color: yellow;}
+  50% {color: yellow;}
 }
 
 .listMed {
@@ -232,6 +240,10 @@ tbody {
 
 .displayBlock {
   display: block;
+}
+
+.displayInlineBlock {
+  display: inline-block;
 }
 
 .displayInline {

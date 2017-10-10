@@ -38,6 +38,7 @@ class VotingTrip extends Component {
 			}
 			if(this.props.yelpList[0] !== null && myVote !== null){
 				if(this.props.yelpList.length) {
+					let hasFav = false
 					return (
 						<Row>
 							<Col xs={1}></Col>
@@ -46,7 +47,18 @@ class VotingTrip extends Component {
 									isTripOwner ? (<Button className='tripButton' onClick={() => {
 										this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
 								}
-								<h3>Choices</h3>
+
+								<h3 className='displayInlineBlock'>Choices</h3>
+								{
+									this.props.yelpList.forEach(yelp => {
+										yelp.categories.forEach(cat =>{
+											if(this.props.user.favoriteFood.includes(cat.title)){
+												hasFav = true
+											}
+										})
+									})
+								}
+								{	hasFav ? <h4 className='faveFoodKey displayInline marginLeft15'>(Favorite Foods)</h4> : <div />}
 							</Col>
 							<Col xs={1}></Col>
 							<Col xs={12}>
