@@ -98,7 +98,7 @@ class VotingTrip extends Component {
 															{myVote !== -1 ? 'I changed my mind' : 'I Pick This One!'}
 														</Button>
 														:
-														<Button bsStyle="success fontSize22" disabled>You voted for this</Button>
+														<Button bsStyle="success" className='fontSize22' disabled>You voted for this</Button>
 													}
 												</Panel>
 											)
