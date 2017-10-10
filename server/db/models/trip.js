@@ -34,9 +34,11 @@ const Trip = db.define('trip', {
 		},
 		time() {
 			let temp = this.date.toString().slice(11)
+			let timeZone = Number(temp.slice(18,20))
 			let theTime = temp.slice(5,10)
 			let minute = theTime.slice(2)
 			let hour = Number(theTime.slice(0,2))
+			if (timeZone !== 4) hour = (hour + 20) % 24
 			let amorpm = ' am'
 			if (hour >= 12){
 				amorpm = ' pm'
