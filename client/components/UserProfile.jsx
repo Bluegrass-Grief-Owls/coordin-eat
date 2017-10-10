@@ -31,9 +31,6 @@ const TripDetails = (props) => {
 						<h4 className='fontMainColorLight'><b className='fontAccentColor'>Favorites:</b> {favString}</h4>
 
 
-						<h4 className='fontMainColorLight'><b className='fontAccentColor'>Home Location:</b> {userHome}</h4>
-
-
 
 						<Button className='tripButtonSmall' onClick={() => {
 							history.push('/editFavorites')
