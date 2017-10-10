@@ -19,9 +19,9 @@ const fetchTripAction = (trips) => ({type: GET_MY_TRIPS, trips})
 
 // //THUNKS
 
-export function fetchMyTrips(userId){
+export function fetchMyTrips(){
 	return function thunk (dispatch) {
-		return axios.get(`/api/attendee/${userId}`)
+		return axios.get('/api/attendee')
 			.then(res => res.data)
 			.then(trips => {
 				//This is actually a list of attendances attached with the trip they attended

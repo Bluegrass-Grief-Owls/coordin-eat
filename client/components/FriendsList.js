@@ -17,25 +17,24 @@ const FriendsList = (props) => {
 	const meId = props.user.id
 	return (
 		<Row>
-			<Col xs={1}></Col>
-			<Col xs={10}>
+			<Col xs={12}>
 				<h3>Friends</h3>
 				<Accordion>
 					<Panel header="+ Add a Friend" key="add" eventKey="77" onSelect={handleSelect}>
 						<Row>
 							<Col xs={12} sm={6} className='noPaddingLeft'>
-								<ul>
+								<ul className="listPaddingLeft">
 									{users.map(user => {
 										return <li key={user.id} className='listMed'>
 											{user.name}
-											<br />
-											{user.email}
 											<Button 
 												bsSize='small' 
-												className='floatRight backgroundMainColor fontAccentColorLight'
-												onClick={() => handleClick(meId, user.id)}>
+												className='floatRight marginTop10 backgroundMainColor fontAccentColorLight'
+												onClick={() => handleClick(user.id)}>
 												+
 											</Button>
+											<br />
+											{user.email}
 										</li>
 									})
 									}
@@ -45,7 +44,7 @@ const FriendsList = (props) => {
 					</Panel>
 					{friends.map((friend, index) => {
 						return (
-							<Panel header={friend.name} key={index} eventKey={friend.id}>
+							<Panel header={'\u25BC' + '   ' + friend.name} key={index} eventKey={friend.id}>
 								<Row>
 									<Col xs={12} sm={6} className='noPaddingLeft'>
 										<ul>
@@ -58,7 +57,6 @@ const FriendsList = (props) => {
 					})}
 				</Accordion>
 			</Col>
-			<Col xs={1}></Col>
 		</Row>
 	)	
 }
@@ -76,8 +74,8 @@ const mapDispatch = dispatch => {
 		handleSelect() {
 			dispatch(fetchUsers())
 		},
-		handleClick(myId, friendId) {
-			dispatch(postFriend(myId, friendId))
+		handleClick(friendId) {
+			dispatch(postFriend(friendId))
 		}
 	}
 }

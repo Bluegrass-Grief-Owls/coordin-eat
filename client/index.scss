@@ -185,6 +185,10 @@ tbody {
   height: 45px;
 }
 
+.listPaddingLeft {
+  padding-left: 10px;
+}
+
 .noPaddingLeft {
   padding-left: 0;
 }
@@ -238,7 +242,31 @@ tbody {
 }
 
 .hrColor {
+  margin-top: 52px;
   border-top: 2px solid $accentColor;
+}
+
+.navbar-default {
+  border: 2px solid $accentColor;
+}
+
+.navbar-default .navbar-brand {
+  font-size: 26px;
+  color: $mainColor;
+}
+
+.navbar-default .navbar-nav>li>a {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background-color: $mainColorLight;
+}
+
+.navbar-header {
+  background-color: $accentColor;
+
 }
 
 .contentDiv {
