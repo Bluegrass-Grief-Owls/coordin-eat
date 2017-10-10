@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
+import Navbar from './Navbar'
 
 
 /**
@@ -17,23 +18,7 @@ const Main = (props) => {
 	return (
 		<div>
 			<div className='backgroundAccentColor'>
-				<Link className='linkOnNav' to='/home'><h1 className='noMargin marginLeft15'>Coordin-EAT</h1></Link>
-				<nav>
-					{
-						isLoggedIn
-							? <div>
-								{/* The navbar will show these links after you log in */}
-								<a className='linkOnNav fontMainColor' href='#' onClick={handleClick}>Logout</a>
-								<Link className='linkOnNav' to='/build_trip'>Build a Trip</Link>
-								<Link className='linkOnNav' to='/friends'>Friends</Link>
-							</div>
-							: <div>
-								{/* The navbar will show these links before you log in */}
-								<Link className='linkOnNav' to='/login'>Login</Link>
-								<Link className='linkOnNav' to='/signup'>Sign Up</Link>
-							</div>
-					}
-				</nav>
+				<Navbar isLoggedIn={isLoggedIn} handleClick={handleClick}/>
 			</div>
 			<hr className='noMargin hrColor'/>
 			<div className='backgroundAccentColorLight fontAccentColor contentDiv'>

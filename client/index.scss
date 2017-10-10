@@ -197,6 +197,14 @@ tbody {
   padding-bottom: 0;
 }
 
+.noPadding {
+  padding: 0;
+}
+
+.marginRight10 {
+  margin-right: 10px;
+}
+
 .floatRight {
   float: right;
 }
@@ -265,6 +273,12 @@ tbody {
   top: 42%;
   left: 48%;
 
+}
+
+#tripForm {
+  width: 100%;
+  margin: 0;
+  padding: 15px;
 }
 
 .welcomeUser {
