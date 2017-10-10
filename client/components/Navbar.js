@@ -4,7 +4,6 @@ import { Link} from 'react-router-dom'
 
 const navbarInstance = (props) => {
 	const {isLoggedIn, handleClick} = props
-	console.log(isLoggedIn)
 
 	return (
 		<Navbar collapseOnSelect fixedTop={true} className="noMargin">
@@ -20,14 +19,17 @@ const navbarInstance = (props) => {
 						<Navbar.Collapse className='noPadding'>
 							<Nav>
 								<NavItem eventKey={1}>
-									<a href='#' onClick={handleClick}><h4 className="fontMainColor displayInline">Logout</h4></a>
-								</NavItem>
-								<NavItem eventKey={2}>
 									<Link to='/build_trip'><h4 className="fontMainColor displayInline">Build a Trip</h4></Link>
 								</NavItem>
-								<NavItem eventKey={3}>
+								<NavItem eventKey={2}>
 									<Link to='/friends'><h4 className="fontMainColor displayInline">Friends</h4></Link>
-								</NavItem>																
+								</NavItem>
+								<NavItem eventKey={3}>
+									<Link to='/profile'><h4 className="fontMainColor displayInline">Profile</h4></Link>
+								</NavItem>
+								<NavItem eventKey={4}>
+									<a href='#' onClick={handleClick}><h4 className="fontMainColor displayInline">Logout</h4></a>
+								</NavItem>															
 							</Nav>
 						</Navbar.Collapse>
 					</div>

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Row, Col, Button} from 'react-bootstrap'
-import history from './../history'
 
 
 const TripDetails = (props) => {

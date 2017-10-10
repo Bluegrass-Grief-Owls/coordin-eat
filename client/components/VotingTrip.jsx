@@ -22,8 +22,6 @@ class VotingTrip extends Component {
 	}
 
 	render () {
-		console.log('from voting page woo woo WOOOOOOO', this.props)
-
 
 		if(this.props.currentTrip.id){
 			let isTripOwner = false
