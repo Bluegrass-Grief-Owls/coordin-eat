@@ -108,7 +108,7 @@ class BuildTrip extends React.Component {
 						<FormGroup controlId="tripForm" id="tripForm">
 							<ControlLabel>Trip Name</ControlLabel>
 							<FormControl
-								className = 'fontAccentColor authInput'
+								className = 'fontAccentColor authInput tripNameIn'
 								type="text"
 								name="tripName"
 								placeholder="Enter trip name"
