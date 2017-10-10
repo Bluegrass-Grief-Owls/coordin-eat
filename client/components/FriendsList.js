@@ -30,7 +30,7 @@ const FriendsList = (props) => {
 											<Button 
 												bsSize='small' 
 												className='floatRight marginTop10 backgroundMainColor fontAccentColorLight'
-												onClick={() => handleClick(meId, user.id)}>
+												onClick={() => handleClick(user.id)}>
 												+
 											</Button>
 											<br />
@@ -74,8 +74,8 @@ const mapDispatch = dispatch => {
 		handleSelect() {
 			dispatch(fetchUsers())
 		},
-		handleClick(myId, friendId) {
-			dispatch(postFriend(myId, friendId))
+		handleClick(friendId) {
+			dispatch(postFriend(friendId))
 		}
 	}
 }
