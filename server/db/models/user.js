@@ -23,8 +23,10 @@ const User = db.define('user', {
 	},
 	favoriteFood: {
 		type: Sequelize.ARRAY(Sequelize.STRING)
+	},
+	Home: {
+		type: Sequelize.ARRAY(Sequelize.FLOAT)
 	}
-
 
 })
 

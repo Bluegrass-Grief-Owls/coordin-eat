@@ -36,7 +36,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/me', (req, res, next) => {
 	if(req.user){
-		User.findOne({where: {id: req.user.id}, include: [{model: User, as: 'friend', attributes: ['id', 'email', 'name']}], attributes: ['id', 'email', 'name', 'favoriteFood']})
+		User.findOne({where: {id: req.user.id}, include: [{model: User, as: 'friend', attributes: ['id', 'email', 'name']}], attributes: ['id', 'email', 'name', 'favoriteFood', 'Home']})
 			.then(user =>{
 				res.json(user)
 			})
