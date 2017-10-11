@@ -10,11 +10,11 @@ const chance = new Chance()
 const chalk = require('chalk')
 // const initDB = require('./index') 
 
-const promisesUsers = [], 
-	promisesLocations = [], 
-	promisesFriends = [], 
-	promisesTrips = [],
-	promisesAttend = []
+const promisesUsers = [],
+	promisesFriends = []
+// promisesLocations = [], 
+// promisesTrips = [],
+// promisesAttend = []
 
 db.sync({force: true})
 	.then(() => {
@@ -24,7 +24,7 @@ db.sync({force: true})
 
 		//One known user
 		userName.push('User')
-		userEmail.push('user@gmail.com')
+		userEmail.push('user@example.com')
 		password.push('123')
 
 		//Fourteen random users
@@ -32,7 +32,7 @@ db.sync({force: true})
 			const first = chance.first()
 			const firstLower = first.toLowerCase()
 			userName.push(first)
-			userEmail.push(`${firstLower}@gmail.com`)
+			userEmail.push(`${firstLower}@example.com`)
 			password.push('123')
 
 		}
