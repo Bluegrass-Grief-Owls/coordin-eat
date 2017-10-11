@@ -12,7 +12,7 @@ function isLoggedIn(req, res, next) {
 }
 
 function isTripOwner(req, res, next) {
-	const tripId = req.body.tripId || req.params.tripId
+	const tripId = req.body.tripId || req.params.tripId || req.body.trip.id
 	
 	Trip.findById(tripId)
 		.then((trip) => {

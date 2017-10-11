@@ -29,14 +29,16 @@ if (process.env.NODE_ENV === 'development') {
 
 router.post('/invite', isTripOwner, (req, res, next) => { //just using post because it allows request to have a body
 	const domain = (process.env.NODE_ENV === 'development') ? 'http://localhost:8080' : 'http://coordin-Eat.herokuapp.com'
-	const url = `${domain}/trip/${req.body.tripId}`
+	const url = `${domain}/trip/${req.body.trip.id}`
 	
 	User.findById(req.user.id)
 		.then(user => {
-			return Promise.map(req.body.invitees, inviteeId => {
+			//Won't send yourself an email.
+			let inviteesArray = req.body.invitees.filter(invitee => invitee !== req.user.id)
+			return Promise.map(inviteesArray, inviteeId => {
 				return User.findById(inviteeId)
 					.then(invitee => {
-						sendMail(url, user.name, invitee.email)
+						sendMail(url, user.name, invitee.email, req.body.trip)
 					})
 			})
 		})
@@ -44,13 +46,15 @@ router.post('/invite', isTripOwner, (req, res, next) => { //just using post beca
 		.catch(next)
 })
 
-function sendMail(url, senderName, recipient, callback) {
+function sendMail(url, senderName, recipient, trip, callback) {
 	transporter.sendMail({
 		from: 'coordinEat.noreply@gmail.com',
 		to: recipient,
-		subject: senderName + ' has invited you',
+		subject: senderName + ' has invited you!',
 		text: 'Use this link to accept or decline: ' + url,
-		html: `<p>Use this link to accept or decline: <a href="${url}">${url}</a></p>`
+		html: `${senderName} has invited you on their ${trip.name} trip!<br />
+		It's scheduled for ${trip.readableDate} at ${trip.time}.<br />
+		<p>Use this link to accept or decline: <a href="${url}">${url}</a></p>`
 	}, callback)
 }
 
