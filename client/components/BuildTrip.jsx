@@ -22,7 +22,8 @@ class BuildTrip extends React.Component {
 			friendCounter:0,
 			//date as a string
 			dateToGive: '',
-			isDateOpen: false
+			isDateOpen: false,
+			validName: true
 		}
 		this.handleDateClick = this.handleDateClick.bind(this)
 		this.handleDateCancel = this.handleDateCancel.bind(this)
@@ -30,6 +31,7 @@ class BuildTrip extends React.Component {
 		this.handleTimeClick = this.handleTimeClick.bind(this)
 		this.handleTimeCancel = this.handleTimeCancel.bind(this)
 		this.handleTimeSelect = this.handleTimeSelect.bind(this)
+		this.handleValidSubmit = this.handleValidSubmit.bind(this)
 	}
 
 	handleDateClick = () => {
@@ -55,6 +57,15 @@ class BuildTrip extends React.Component {
 	handleTimeSelect = (time) => {
 		this.setState({ time, isTimeOpen: false });
 	}
+
+	handleValidSubmit = (evt) => {
+		evt.preventDefault()
+		if(!evt.target.tripName.value){
+			this.setState({validName: false})
+		} else {
+			this.props.handleSubmit(evt, this.props.user.id, this.props.user.friend, this.state.time)
+		}
+	} 
 
 	render() {
 		let displayTime = this.state.time.toString()
@@ -112,8 +123,7 @@ class BuildTrip extends React.Component {
 
 					{//needto give this sythetic event onsubmit access to state props
 					}
-					<form onSubmit={(evt) => {this.props.handleSubmit(evt, this.props.user.id,
-						this.props.user.friend, this.state.time)}}>
+					<form onSubmit={this.handleValidSubmit}>
 						<FormGroup controlId="tripForm" id="tripForm">
 							<ControlLabel>Trip Name</ControlLabel>
 							<FormControl
@@ -136,7 +146,9 @@ class BuildTrip extends React.Component {
 								})
 							}
 						</FormGroup>
-
+						{
+							this.state.validName ? <div /> : <h5 className='marginLeft15'>Trips must have a name.</h5> 
+						}
 						<Button className='tripButton displayBlock marginLeft15' type='submit' >Make my trip!</Button>
 					</form>
 
@@ -167,7 +179,6 @@ const mapDispatch = (dispatch) => {
 			//reset the current trip state
 			dispatch(resetCurrentTrip())
 			dispatch(resetYelpList())
-
 			let theDate = theEventTime
 			let invitedIdArray = [+ownerId]
 			for(var i = 1; i <= friendCounter; i++){
