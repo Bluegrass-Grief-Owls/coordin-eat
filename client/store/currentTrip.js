@@ -112,7 +112,7 @@ export function postTrip(trip, invitedIdArray) {
 					return axios.post('/api/attendee', { tripId: newTrip.id, userId })
 				})
 					.then(() => { //once ALL posts have succeeded,
-						return axios.post('/api/email/invite', { tripId: newTrip.id, invitees: invitedIdArray })
+						return axios.post('/api/email/invite', { trip: newTrip, invitees: invitedIdArray })
 					})
 					.then(() => { //once invites have successfully been sent
 						dispatch(postTripAction())
