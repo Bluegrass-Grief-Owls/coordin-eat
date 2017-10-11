@@ -14,7 +14,6 @@ class UserHome extends Component {
 	}
 
 	render() {
-		console.log('my trips:', this.props.myTrips )
 		return (
 			<Row className=''>
 				<h3 className='noMargin welcomeUser'>Welcome, {this.props.user.name}!</h3>
