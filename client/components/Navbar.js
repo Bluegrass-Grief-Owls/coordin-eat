@@ -5,6 +5,7 @@ import { Link} from 'react-router-dom'
 export default class navbarInstance extends Component {
 	constructor(props) {
 		super(props)
+		console.log('props', props)
 		this.state = {
 			navToggle: false,
 			isLoggedIn: props.isLoggedIn,
@@ -37,6 +38,7 @@ export default class navbarInstance extends Component {
 
 	componentDidMount() {
 		document.addEventListener('mousedown', this.handleClickOutside)
+		console.log(props)
 	}
 
 	componentWillUnmount() {
