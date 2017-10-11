@@ -9,6 +9,7 @@ import {Col, FormGroup, FormControl, ControlLabel, Button, Checkbox, ButtonToolb
 import history from './../history'
 import MobileDatePicker from 'react-mobile-datepicker'
 import moment from 'moment'
+import { Link} from 'react-router-dom'
 
 
 let friendCounter = 0
@@ -64,6 +65,7 @@ class BuildTrip extends React.Component {
 		if(this.props.user.friend){
 			arrayOfFriends = this.props.user.friend
 		}
+		let hasFriends = arrayOfFriends.length ? true : false
 		if(this.props.user){
 			return (
 				<div>
@@ -122,8 +124,9 @@ class BuildTrip extends React.Component {
 							/>
 
 
-
-							<ControlLabel>Invite Your Friends!</ControlLabel>
+							{hasFriends ? <ControlLabel>Invite Your Friends!</ControlLabel>
+								: <Link to='/friends' ><Button className='tripButtonSmall displayBlock'>+ Friends</Button></Link>}
+	
 							{
 								arrayOfFriends.map(friend =>{
 									friendCounter++

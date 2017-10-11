@@ -1,6 +1,6 @@
 
 //Color Setup
-$colorArray: orange banana pear blueberry blackberry dragonfruit watermelon original;
+$colorArray: orange banana pear blueberry blackberry dragonfruit watermelon original new;
 $colorChoice: nth($colorArray, 8);
 //colorArray index starts at 1, not 0
 
@@ -49,6 +49,11 @@ $accentColorLight: null;
     $mainColorLight: #095092; //Dark gray
     $accentColor: #aa0813; //Red
     $accentColorLight: #aecfef; //light Blue
+  } @else if $colorChoice == new {
+    $mainColor: #aa0813;
+    $mainColorLight: #FCF4DD;
+    $accentColor: #EBD460;
+    $accentColorLight: #255F32;
   } @else {
     //this is a white and blue color pallet
     $mainColor: #FFFFFF;
