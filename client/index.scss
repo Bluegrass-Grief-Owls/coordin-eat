@@ -46,7 +46,7 @@ $accentColorLight: null;
     $accentColorLight: #33d65d;
   } @else if $colorChoice == original {
     $mainColor: white;
-    $mainColorLight: #63676b; //Dark gray
+    $mainColorLight: #095092; //Dark gray
     $accentColor: #aa0813; //Red
     $accentColorLight: #aecfef; //light Blue
   } @else {
