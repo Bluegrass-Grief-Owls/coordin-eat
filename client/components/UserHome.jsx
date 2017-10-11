@@ -27,7 +27,7 @@ class UserHome extends Component {
 									//TODO: if trip gets deleted need to specify that all associated attendences need to be deleted
 									return (
 										<div key={theTrip.id} className='noPaddingBottom myTripList' onClick={() => { history.push(`/trip/${theTrip.id}`) }}>
-											<h3 className='marginLeft15 marginTop10 fontMainColor'>{theTrip.name}</h3>
+											<h3 className='marginLeft15 marginTop10 fontMainColor'>{theTrip.name} <h5 style={{float: 'right', padding: 10}}>Status: {theTrip.status} </h5></h3>
 											<h5 className='marginLeft15 fontMainColor'>Date: {theTrip.readableDate}</h5>
 											<h5 className='marginLeft15 fontMainColor'>Time: {theTrip.time}</h5>
 										</div>
