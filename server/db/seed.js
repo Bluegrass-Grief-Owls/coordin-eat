@@ -29,8 +29,10 @@ db.sync({force: true})
 
 		//Fourteen random users
 		for (var i = 0; i < 14; i++) {
-			userName.push(chance.first())
-			userEmail.push(chance.email())
+			const first = chance.first()
+			const firstLower = first.toLowerCase()
+			userName.push(first)
+			userEmail.push(`${firstLower}@gmail.com`)
 			password.push('123')
 
 		}
@@ -47,59 +49,59 @@ db.sync({force: true})
 		const theUserID = 1, friendId = [2, 3, 4, 5]
 
 		//====================================== Trip seed ==============================================
-		const tripName = [], tripDate = [], tripOwner = [], meetups = []
+		// const tripName = [], tripDate = [], tripOwner = [], meetups = []
 
 		//Five random trips
-		for (var j = 0; j < 5; j++) {
-			tripName.push(chance.word())
-			tripDate.push(chance.date())
-			tripOwner.push(chance.integer({min: 1, max: 5}))
-			meetups.push([12.3334, 14.234234])
-		}
+		// for (var j = 0; j < 5; j++) {
+		// 	tripName.push(chance.word())
+		// 	tripDate.push(chance.date())
+		// 	tripOwner.push(chance.integer({min: 1, max: 5}))
+		// 	meetups.push([12.3334, 14.234234])
+		// }
 
-		tripName.map((val, idx) => {
-			promisesTrips.push(Trip.create({
-				name: val,
-				date: tripDate[idx],
-				ownerId: tripOwner[idx],
-				meetup: meetups[idx]
-			}))
-		})
+		// tripName.map((val, idx) => {
+		// 	promisesTrips.push(Trip.create({
+		// 		name: val,
+		// 		date: tripDate[idx],
+		// 		ownerId: tripOwner[idx],
+		// 		meetup: meetups[idx]
+		// 	}))
+		// })
 
 		//====================================== Location seed ==============================================
 
-		const locationName = [], xCoordinate = [], yCoordinate = [], userId = []
+		// const locationName = [], xCoordinate = [], yCoordinate = [], userId = []
 
-		const NW = [40.813765, -73.959703]
-		const SW = [40.748876, -74.006936]
-		const SE = [40.736821, -73.978567]
+		// const NW = [40.813765, -73.959703]
+		// const SW = [40.748876, -74.006936]
+		// const SE = [40.736821, -73.978567]
 
-		const addVect = (vec1, vec2, vec3) => {
-			return [vec1[0] + vec2[0] + vec3[0], vec1[1] + vec2[1] + vec3[1],]
-		}
+		// const addVect = (vec1, vec2, vec3) => {
+		// 	return [vec1[0] + vec2[0] + vec3[0], vec1[1] + vec2[1] + vec3[1],]
+		// }
 
-		const subVect = (vec1, vec2) => {
-			return [vec1[0] - vec2[0], vec1[1] - vec2[1]]
-		}
+		// const subVect = (vec1, vec2) => {
+		// 	return [vec1[0] - vec2[0], vec1[1] - vec2[1]]
+		// }
 
-		const scaleVect = (vec1, scale) => {
-			return [vec1[0] * scale, vec1[1] * scale]
-		}
+		// const scaleVect = (vec1, scale) => {
+		// 	return [vec1[0] * scale, vec1[1] * scale]
+		// }
 
-		const yVect = subVect(NW,SW)
-		const xVect = subVect(SE, SW)
+		// const yVect = subVect(NW,SW)
+		// const xVect = subVect(SE, SW)
 
-		const mapXYtoLatLng = (x, y) => { // x and y are real nums btwn 0 and 1
-			return addVect(SW, scaleVect(xVect, x), scaleVect(yVect, y))
-		}
+		// const mapXYtoLatLng = (x, y) => { // x and y are real nums btwn 0 and 1
+		// 	return addVect(SW, scaleVect(xVect, x), scaleVect(yVect, y))
+		// }
 
-		for (i = 1; i <= 5; i++) {
-			let push = mapXYtoLatLng (chance.floating({min: 0, max: 1 , fixed: 6}), chance.floating({min: 0, max: 1 , fixed: 6}))
-			locationName.push('Home')
-			xCoordinate.push(push[0].toFixed(6))
-			yCoordinate.push(push[1].toFixed(6))
-			userId.push(i)
-		}
+		// for (i = 1; i <= 5; i++) {
+		// 	let push = mapXYtoLatLng (chance.floating({min: 0, max: 1 , fixed: 6}), chance.floating({min: 0, max: 1 , fixed: 6}))
+		// 	locationName.push('Home')
+		// 	xCoordinate.push(push[0].toFixed(6))
+		// 	yCoordinate.push(push[1].toFixed(6))
+		// 	userId.push(i)
+		// }
 
 		// //====================================== Attendee seed ==============================================
 		// const origins = [], tripIds = [], userIds = []
@@ -125,20 +127,20 @@ db.sync({force: true})
 				})
 				return Promise.all(promisesFriends)
 			})
-			.then(() => {
-				locationName.map((val, idx) => {
-					promisesLocations.push(Location.create({
-						name: val,
-						xCoordinate: xCoordinate[idx],
-						yCoordinate: yCoordinate[idx],
-						userId: userId[idx]
-					}))
-				})
-				return Promise.all(promisesLocations)
-			})
-			.then(() => {
-				return Promise.all(promisesTrips)
-			})
+			// .then(() => {
+			// 	locationName.map((val, idx) => {
+			// 		promisesLocations.push(Location.create({
+			// 			name: val,
+			// 			xCoordinate: xCoordinate[idx],
+			// 			yCoordinate: yCoordinate[idx],
+			// 			userId: userId[idx]
+			// 		}))
+			// 	})
+			// 	return Promise.all(promisesLocations)
+			// })
+			// .then(() => {
+			// 	return Promise.all(promisesTrips)
+			// })
 			.then(() => {
 				console.log(chalk.green('seed success!'))
 				process.exit(0)
