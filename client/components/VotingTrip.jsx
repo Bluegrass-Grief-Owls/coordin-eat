@@ -84,7 +84,7 @@ class VotingTrip extends Component {
 																<li>Tags: {tagList}</li>
 																<li>Rating: {buissness.rating} | Price: {buissness.price}</li>
 																<li>Phone: {buissness.display_phone}</li>
-																<li>Link: <a className='fontAccentColor' href={buissness.url}>{buissness.name}</a></li>
+																<li>Link: <a className='fontAccentColor' target='_blank' href={buissness.url}>{buissness.name}</a></li>
 																<li>Reviews: {buissness.review_count}</li>
 															</ul>
 														</Col>

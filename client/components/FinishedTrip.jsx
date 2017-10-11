@@ -19,7 +19,7 @@ const TripDetails = (props) => {
 			</Col>
 			<Col xs={10} className='finishedContainer'>
 				<h2>{theTrip.name}</h2>
-				<h4>Destination: <a className='fontAccentColor' href={theYelp.url}>{theYelp.name}</a></h4>
+				<h4>Destination: <a className='fontAccentColor' target='_blank' href={theYelp.url}>{theYelp.name}</a></h4>
 				<h4>Date: {theTrip.readableDate} at {theTrip.time}</h4>
 				<h4>Attendees: {attendeeString}</h4>
 			</Col>
