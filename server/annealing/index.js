@@ -52,13 +52,31 @@ const createCandidates = (n, center, bound) => {
 }
 
 // ==================== API REQUESTS & STUFF ===================
+let counter = 900
 
-const client = require('@google/maps').createClient({
-	key: process.env.GOOGLE_DIRECTIONS_KEY,
-	Promise: Promise
+const keys = [
+	process.env.GOOGLE_DIRECTIONS_KEY_1,
+	process.env.GOOGLE_DIRECTIONS_KEY_2,
+	process.env.GOOGLE_DIRECTIONS_KEY_3,
+	process.env.GOOGLE_DIRECTIONS_KEY_4,
+	process.env.GOOGLE_DIRECTIONS_KEY_5,
+	process.env.GOOGLE_DIRECTIONS_KEY_6,
+	process.env.GOOGLE_DIRECTIONS_KEY_7,
+	process.env.GOOGLE_DIRECTIONS_KEY_8,
+	process.env.GOOGLE_DIRECTIONS_KEY_9,
+	process.env.GOOGLE_DIRECTIONS_KEY_10
+]
+
+const clients = keys.map(key => {
+	return require('@google/maps').createClient({
+		key: key,
+		Promise: Promise
+	})
 })
 
 const getTravelTime = (origin, dest, mode) => {
+	counter++
+	let client = clients[math.floor(counter/2400) % keys.length]
 	const query = {
 		origins: [origin],
 		destinations: [dest],
@@ -80,7 +98,7 @@ const locationPromiseAll = (loc, origins) => {
 	return Promise.all(locationsPromises)
 }
 
-const importance = .7 	
+const importance = .2 	
 // used for scaling the importance of 
 // similar travel times vs. total time traveled per group
 const locationScore = (loc, origins) => {
@@ -89,6 +107,7 @@ const locationScore = (loc, origins) => {
 			const sum = times.reduce((a, b) => a + b)
 			const std = math.std(times)
 			const score = sum * Math.pow(std, importance)
+			console.log('location', times, 'score', score)
 			return score
 		})
 		.catch(console.error.bind(console))
@@ -113,6 +132,7 @@ const anneal = (origins = [], center, lowScore = 9999, tighten = 1) => {
 			scores = scores.map(score => score ? score : 9999)
 			const indexOfMin = scores.indexOf(math.min(scores))	
 			const winner = lowScore < scores[indexOfMin] ? [centroid, lowScore] : [cands[indexOfMin], scores[indexOfMin]]
+			console.log(winner, counter)
 			return winner	
 		})
 		.catch(console.error.bind(console))
