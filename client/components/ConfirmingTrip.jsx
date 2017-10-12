@@ -53,7 +53,7 @@ const ConfirmTrip = (props) => {
 								}}
 								disabled={props.loading}
 							>
-								{props.loading ? 'Calculating results...' : 'Procced to Voting'}
+								{props.loading ? 'Calculating results...' : 'Proceed to Voting'}
 							</Button>) : ''
 					}
 				</Col>

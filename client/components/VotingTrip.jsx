@@ -45,7 +45,7 @@ class VotingTrip extends Component {
 							<Col xs={10}>
 								{
 									isTripOwner ? (<Button className='tripButton' onClick={() => {
-										this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Procced to Directions</Button>) : ''
+										this.props.moveToDirections(this.props.currentTrip, this.props.yelpList)}}>Proceed to Directions</Button>) : ''
 								}
 
 								<h3 className='displayInlineBlock'>Choices</h3>
