@@ -40,7 +40,7 @@ class ConfirmTripMap extends React.Component {
 					<div id='putMapHere' className='theMapBox'>
 						<img className='mapPin' src='../Pin.png'/>
 					</div>
-					<Button className='tripButton displayBlock' onClick={() => this.props.giveCoords(this.map, this.props.currentTrip.id, this.props.user.id)}>RVSP with this location</Button>
+					<Button className='tripButton displayBlock' onClick={() => this.props.giveCoords(this.map, this.props.currentTrip.id, this.props.user.id)}>RSVP with this location</Button>
 					{
 						isTripOwner ? <div /> : <Button className='tripButton displayBlock' onClick={() => this.props.removeSelf(this.props.currentTrip.id, this.props.user.id)}>I cannot attend</Button>
 					}
