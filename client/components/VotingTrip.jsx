@@ -110,7 +110,7 @@ class VotingTrip extends Component {
 					)
 				} else {
 					return (
-						<div className='marginLeft15'>We couldn't find anything at this location!</div>
+						<div className='marginLeft15'>We couldn't find anything within 25 miles!</div>
 					)
 				}
 
