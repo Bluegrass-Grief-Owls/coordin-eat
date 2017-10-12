@@ -7,7 +7,6 @@ import currentTrip from './currentTrip'
 import myTrips from './myTrips'
 import results from './results'
 import users from './users'
-//import friends from './friends'
 import currentLocation from './currentLocation'
 
 const reducer = combineReducers({
@@ -16,13 +15,19 @@ const reducer = combineReducers({
 	results, 
 	yelp,
 	users,
-	//friends,
 	myTrips,
 	currentLocation
 })
 
-const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
-const store = createStore(reducer, middleware)
+let store
+
+if (process.env.NODE_ENV === 'development') {	
+	const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
+	store = createStore(reducer, middleware)
+} else {
+	const middleware = applyMiddleware(thunkMiddleware)
+	store = createStore(reducer, middleware)
+}
 
 export default store
 export * from './user'
@@ -31,5 +36,4 @@ export * from './currentTrip'
 export * from './myTrips'
 export * from './results'
 export * from './users'
-//export * from './friends'
 export * from './currentLocation'
