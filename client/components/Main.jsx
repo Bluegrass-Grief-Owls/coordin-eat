@@ -14,7 +14,6 @@ import Navbar from './Navbar'
  */
 const Main = (props) => {
 	const {children, handleClick, isLoggedIn} = props
-
 	return (
 		<div>
 			<div className='backgroundAccentColor'>
