@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
-import { Link} from 'react-router-dom'
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 export default class navbarInstance extends Component {
 	constructor(props) {
@@ -13,29 +13,29 @@ export default class navbarInstance extends Component {
 
 		this.navExpand = this.navExpand.bind(this)
 		this.navClose = this.navClose.bind(this)
-		this.setWrapperRef = this.setWrapperRef.bind(this)         
+		this.setWrapperRef = this.setWrapperRef.bind(this)
 		this.handleAnyClick = this.handleAnyClick.bind(this)
 	}
 
-	navExpand (exp) {
-		this.setState({navToggle: exp})
+	navExpand(exp) {
+		this.setState({ navToggle: exp })
 	}
-	navClose () {
-		this.setState({navToggle: false})
+	navClose() {
+		this.setState({ navToggle: false })
 	}
 
-	setWrapperRef (node) {
+	setWrapperRef(node) {
 		this.wrapperRef = node
 	}
 
 	handleAnyClick() {
 		if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-			this.setState({navToggle: false})
+			this.setState({ navToggle: false })
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({isLoggedIn: nextProps.isLoggedIn})
+		this.setState({ isLoggedIn: nextProps.isLoggedIn })
 	}
 
 	componentDidMount() {
@@ -46,12 +46,12 @@ export default class navbarInstance extends Component {
 		document.removeEventListener('mousedown', this.handleAnyClick)
 	}
 
-	render () {
+	render() {
 		const isLoggedIn = this.state.isLoggedIn
 		const handleClick = this.state.handleClick
 
 		return (
-			<Navbar collapseOnSelect fixedTop={true} className="noMargin" 
+			<Navbar collapseOnSelect fixedTop={true} className="noMargin"
 				expanded={this.state.navToggle}
 				onToggle={this.navExpand}>
 				<Navbar.Header>
@@ -59,7 +59,7 @@ export default class navbarInstance extends Component {
 						<Link to="/home" className='navTitle'>Coordin-EAT</Link>
 					</Navbar.Brand>
 					<div ref={this.setWrapperRef}>
-						<Navbar.Toggle/>
+						<Navbar.Toggle />
 					</div>
 				</Navbar.Header>
 				{
@@ -67,6 +67,9 @@ export default class navbarInstance extends Component {
 						? <div>
 							<Navbar.Collapse className='noPadding'>
 								<Nav onSelect={this.navClose}>
+									<NavItem eventKey={1}>
+										<Link to='/about'><h4 className="fontMainColor displayInline">About Coordin-EAT</h4></Link>
+									</NavItem>
 									<NavItem eventKey={1}>
 										<Link to='/build_trip'><h4 className="fontMainColor displayInline">Build a Trip</h4></Link>
 									</NavItem>
@@ -78,7 +81,7 @@ export default class navbarInstance extends Component {
 									</NavItem>
 									<NavItem eventKey={4}>
 										<a href='#' onClick={handleClick}><h4 className="fontMainColor displayInline">Logout</h4></a>
-									</NavItem>															
+									</NavItem>
 								</Nav>
 							</Navbar.Collapse>
 						</div>
@@ -96,6 +99,6 @@ export default class navbarInstance extends Component {
 						</div>
 				}
 			</Navbar>
-		)	
+		)
 	}
 }
