@@ -70,16 +70,16 @@ export default class navbarInstance extends Component {
 									<NavItem eventKey={1}>
 										<Link to='/about'><h4 className="fontMainColor displayInline">About Coordin-EAT</h4></Link>
 									</NavItem>
-									<NavItem eventKey={1}>
+									<NavItem eventKey={2}>
 										<Link to='/build_trip'><h4 className="fontMainColor displayInline">Build a Trip</h4></Link>
 									</NavItem>
-									<NavItem eventKey={2}>
+									<NavItem eventKey={3}>
 										<Link to='/friends'><h4 className="fontMainColor displayInline">Friends</h4></Link>
 									</NavItem>
-									<NavItem eventKey={3}>
+									<NavItem eventKey={4}>
 										<Link to='/profile'><h4 className="fontMainColor displayInline">Profile</h4></Link>
 									</NavItem>
-									<NavItem eventKey={4}>
+									<NavItem eventKey={5}>
 										<a href='#' onClick={handleClick}><h4 className="fontMainColor displayInline">Logout</h4></a>
 									</NavItem>
 								</Nav>
@@ -89,9 +89,12 @@ export default class navbarInstance extends Component {
 							<Navbar.Collapse className='noPadding' onSelect={this.navClose}>
 								<Nav onSelect={this.navClose}>
 									<NavItem eventKey={1}>
-										<Link to='/login'><h4 className="fontMainColor displayInline">Login</h4></Link>
+										<Link to='/about'><h4 className="fontMainColor displayInline">About Coordin-EAT</h4></Link>
 									</NavItem>
 									<NavItem eventKey={2}>
+										<Link to='/login'><h4 className="fontMainColor displayInline">Login</h4></Link>
+									</NavItem>
+									<NavItem eventKey={3}>
 										<Link to='/signup'><h4 className="fontMainColor displayInline">Sign-up</h4></Link>
 									</NavItem>
 								</Nav>
