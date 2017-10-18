@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import React from 'react'
 import {Col, Row, Button, Table} from 'react-bootstrap'
-import {setCurrentCoords, declineInvitation} from './../store'
+import {setCurrentCoords, moveToVotingThunk} from './../store'
 import {ConfirmingTripMap} from './index.js'
 
 const ConfirmTrip = (props) => {
@@ -107,14 +107,15 @@ const mapDispatch = (dispatch) => {
 			dispatch(setCurrentCoords(coordArray))
 		},
 		moveToVoting(trip){
-			let originArray = []
-			trip.attendees.forEach(attendee => {
-				if(attendee.origin){
-					originArray.push(attendee.origin)
-				} else {
-					dispatch(declineInvitation(trip.id, attendee.userId))
-				}
-			})
+			dispatch(moveToVotingThunk(trip.id))
+			// let originArray = []
+			// trip.attendees.forEach(attendee => {
+			// 	if(attendee.origin){
+			// 		originArray.push(attendee.origin)
+			// 	} else {
+			// 		dispatch(declineInvitation(trip.id, attendee.userId))
+			// 	}
+			// })
 		}
 	}
 }

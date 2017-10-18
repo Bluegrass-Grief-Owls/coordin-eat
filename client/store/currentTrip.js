@@ -86,6 +86,7 @@ export function declineInvitation(tripId, userId) {
 						originArray.push(attendee.origin)
 					})
 					dispatch(loadingAction())
+					console.log('the array', originArray)
 					axios.post('/api/meetup', {origins: originArray})
 						.then((meetup) => {
 							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
@@ -129,6 +130,24 @@ export function fetchTrip(tripId) {
 			.then(res => res.data)
 			.then(trip => {
 				dispatch(fetchTripAction(trip))
+			})
+			.catch(console.error.bind(console))
+	}
+}
+
+export function moveToVotingThunk(tripId) {
+	return function thunk(dispatch) {
+		return axios.get(`/api/trip/${tripId}`)
+			.then(res => res.data)
+			.then(trip => {
+				let originArray = []
+				trip.attendees.forEach(attendee => {
+					if(attendee.origin){
+						originArray.push(attendee.origin)
+					} else {
+						dispatch(declineInvitation(trip.id, attendee.userId))
+					}
+				})
 			})
 			.catch(console.error.bind(console))
 	}
