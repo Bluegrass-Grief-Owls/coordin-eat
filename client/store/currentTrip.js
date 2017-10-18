@@ -86,7 +86,6 @@ export function declineInvitation(tripId, userId) {
 						originArray.push(attendee.origin)
 					})
 					dispatch(loadingAction())
-					console.log('the array', originArray)
 					axios.post('/api/meetup', {origins: originArray})
 						.then((meetup) => {
 							dispatch(updateTrip({status: 'voting', meetup: meetup.data}, theTrip.data.id))
