@@ -9,7 +9,7 @@ router.post('/', isTripOwner, (req, res, next) => {
 		.catch(next)
 })
 
-router.delete('/:tripId/:userId', isTripOwner, (req, res, next) => {
+router.delete('/:tripId/:userId', isTripOwner, (req, res, next) => { //should make a 'isOwnerOrSelf gatekeeper
 	Attendee.destroy({
 		where: {
 			tripId: req.params.tripId,

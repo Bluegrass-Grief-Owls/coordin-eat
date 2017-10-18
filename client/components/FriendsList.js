@@ -33,8 +33,6 @@ const FriendsList = (props) => {
 												onClick={() => handleClick(user.id)}>
 												+
 											</Button>
-											<br />
-											{user.email}
 										</li>
 									})
 									}
@@ -45,13 +43,6 @@ const FriendsList = (props) => {
 					{friends.map((friend, index) => {
 						return (
 							<Panel header={'\u25BC' + '   ' + friend.name} key={index} eventKey={friend.id}>
-								<Row>
-									<Col xs={12} sm={6} className='noPaddingLeft'>
-										<ul>
-											<li>Email: {friend.email}</li>
-										</ul>
-									</Col>
-								</Row>
 							</Panel>
 						)
 					})}
