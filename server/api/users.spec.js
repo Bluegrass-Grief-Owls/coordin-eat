@@ -7,27 +7,29 @@ const app = require('../index')
 const User = db.model('user')
 
 describe('User routes', () => {
-  beforeEach(() => {
-    return db.sync({force: true})
-  })
+	beforeEach(() => {
+		return db.sync({force: true})
+	})
 
-  describe('/api/users/', () => {
-    const codysEmail = 'cody@puppybook.com'
+	describe('/api/users/', () => {
+		const codysEmail = 'cody@puppybook.com'
+		const codysName = 'Cody'
 
-    beforeEach(() => {
-      return User.create({
-        email: codysEmail
-      })
-    })
+		beforeEach(() => {
+			return User.create({
+				name: codysName,
+				email: codysEmail
+			})
+		})
 
-    it('GET /api/users', () => {
-      return request(app)
-        .get('/api/users')
-        .expect(200)
-        .then(res => {
-          expect(res.body).to.be.an('array')
-          expect(res.body[0].email).to.be.equal(codysEmail)
-        })
-    })
-  }) // end describe('/api/users')
+		it('GET /api/users', () => {
+			return request(app)
+				.get('/api/users')
+				.expect(200)
+				.then(res => {
+					expect(res.body).to.be.an('array')
+					expect(res.body[0].email).to.be.equal(codysEmail)
+				})
+		})
+	}) // end describe('/api/users')
 }) // end describe('User routes')

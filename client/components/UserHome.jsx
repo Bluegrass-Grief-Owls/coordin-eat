@@ -8,7 +8,7 @@ import history from './../history'
 /**
  * COMPONENT
  */
-class UserHome extends Component {
+export class UserHome extends Component {
 	componentDidMount() {
 		this.props.loadInitialData()
 	}
