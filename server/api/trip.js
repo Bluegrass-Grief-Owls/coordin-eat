@@ -5,7 +5,7 @@ module.exports = router
 
 router.get('/:id', (req, res, next) => { //should use isAttendee, but there's a bug
 	Trip.findById(req.params.id, {
-		include: [ {model: Attendee, include: [User]} ]
+		include: [ {model: Attendee, include: [{model: User, attributes: ['id', 'name', 'favoriteFood']}]} ]
 	})
 		.then(trip => res.json(trip))
 		.catch(next)
@@ -19,7 +19,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
 
 router.put('/:tripId', isAttendee, (req, res, next) => { //would be isTripOwner, but last confirmation should change status to 'voting', etc. 
 	Trip.findById(req.params.tripId, {
-		include: [ {model: Attendee, include: [User]} ]
+		include: [ {model: Attendee}, {model: User, attributes: ['id', 'name', 'favoriteFood']}]
 	})
 		.then(trip => trip.update(req.body))
 		.then(updatedTrip => res.json(updatedTrip))
