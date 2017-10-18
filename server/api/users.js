@@ -15,7 +15,7 @@ router.get('/', isLoggedIn, (req, res, next) => {
 })
 
 router.put('/:userId', isLoggedIn, (req, res, next) => {
-	User.findById(req.params.userId)
+	User.findById(req.user.Id)
 		.then(user => user.update(req.body))
 		.then(updatedUser => res.json(updatedUser))
 		.catch(next)

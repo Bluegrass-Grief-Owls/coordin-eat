@@ -134,6 +134,24 @@ export function fetchTrip(tripId) {
 	}
 }
 
+export function moveToVotingThunk(tripId) {
+	return function thunk(dispatch) {
+		return axios.get(`/api/trip/${tripId}`)
+			.then(res => res.data)
+			.then(trip => {
+				let originArray = []
+				trip.attendees.forEach(attendee => {
+					if(attendee.origin){
+						originArray.push(attendee.origin)
+					} else {
+						dispatch(declineInvitation(trip.id, attendee.userId))
+					}
+				})
+			})
+			.catch(console.error.bind(console))
+	}
+}
+
 export function postVote(choiceIdx, trip, userId, yelpList){
 	return function thunk (dispatch) {
 		return axios.put('/api/attendee/' + trip.id, {vote: choiceIdx})
