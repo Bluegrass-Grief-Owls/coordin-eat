@@ -14,7 +14,7 @@
     "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
-    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/coordin-eat-test' mocha ./**/*.spec.js --compilers js:babel-register"
+    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/coordin-eat-test' mocha ./**/annealing.spec.js --compilers js:babel-register"
   },
   "author": "Bluegrass Grief Owls capstone team, consisting of: Sam Glass, David Berger, Jackson Sui, and Forrest Weiswolf",
   "license": "ISC",
@@ -68,6 +68,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
     "chai": "^3.5.0",
+    "chai-almost": "^1.0.1",
     "css-loader": "^0.26.1",
     "enzyme": "^2.8.2",
     "eslint": "^4.7.2",

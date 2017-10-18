@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const anneal = require('../annealing')
+const anneal = require('../annealing').anneal
 module.exports = router
 
 router.post('/', (req, res, next) => { //just using post because it allows request to have a body

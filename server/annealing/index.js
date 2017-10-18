@@ -52,7 +52,7 @@ const createCandidates = (n, center, bound) => {
 }
 
 // ==================== API REQUESTS & STUFF ===================
-let counter = 900
+let counter = 0
 
 const keys = [
 	process.env.GOOGLE_DIRECTIONS_KEY_1,
@@ -138,4 +138,13 @@ const anneal = (origins = [], center, lowScore = 9999, tighten = 1) => {
 		.catch(console.error.bind(console))
 }
 
-module.exports = anneal
+module.exports = {
+	anneal,
+	addVect,
+	scaleVect,
+	centerCoord,
+	maxDistanceFromCentroid,
+	createCandidates,
+	getTravelTime,
+	locationScore
+}
