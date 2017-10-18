@@ -51,21 +51,29 @@ const createCandidates = (n, center, bound) => {
 	return result
 }
 
-// ==================== API REQUESTS & STUFF ===================
+// ==================== API REQUESTS  =========================
 let counter = 0
 
-const keys = [
-	process.env.GOOGLE_DIRECTIONS_KEY_1,
-	process.env.GOOGLE_DIRECTIONS_KEY_2,
-	process.env.GOOGLE_DIRECTIONS_KEY_3,
-	process.env.GOOGLE_DIRECTIONS_KEY_4,
-	process.env.GOOGLE_DIRECTIONS_KEY_5,
-	process.env.GOOGLE_DIRECTIONS_KEY_6,
-	process.env.GOOGLE_DIRECTIONS_KEY_7,
-	process.env.GOOGLE_DIRECTIONS_KEY_8,
-	process.env.GOOGLE_DIRECTIONS_KEY_9,
-	process.env.GOOGLE_DIRECTIONS_KEY_10
-]
+let keys = []
+if (process.env.NODE_ENV === 'test'){
+	const test_key = require('../../secrets').test_map_key
+	for (let i =0; i < 10; i++){
+		keys.push(test_key)
+	}
+} else {
+	keys = [
+		process.env.GOOGLE_DIRECTIONS_KEY_1,
+		process.env.GOOGLE_DIRECTIONS_KEY_2,
+		process.env.GOOGLE_DIRECTIONS_KEY_3,
+		process.env.GOOGLE_DIRECTIONS_KEY_4,
+		process.env.GOOGLE_DIRECTIONS_KEY_5,
+		process.env.GOOGLE_DIRECTIONS_KEY_6,
+		process.env.GOOGLE_DIRECTIONS_KEY_7,
+		process.env.GOOGLE_DIRECTIONS_KEY_8,
+		process.env.GOOGLE_DIRECTIONS_KEY_9,
+		process.env.GOOGLE_DIRECTIONS_KEY_10
+	]
+}
 
 const clients = keys.map(key => {
 	return require('@google/maps').createClient({

@@ -1,7 +1,6 @@
 const chai = require('chai')
-const chaiAlmost = require('chai-almost')
-chai.use(chaiAlmost())		// almost is used to deal with floating point errors
-							// which in our case can be ignored
+const chaiAlmost = require('chai-almost') // almost is used to deal with floating point errors
+chai.use(chaiAlmost()) // which in our case are negligible
 
 const {expect} = require('chai')
 
@@ -17,10 +16,6 @@ const {
 } = require('../annealing')
 
 describe('meetup algorithm', () => {
-	beforeEach(() => {
-		return 1
-	})
-
 	describe('vector functions', () => {
 		describe('addVect', () => {
 			it('can add two 2D vectors', () => {
@@ -64,5 +59,31 @@ describe('meetup algorithm', () => {
 				expect(result).to.be.deep.almost([40.756519, -73.955371])
 			}) 
 		})
-	}) 
+		describe('maxDistanceFromCentroid', () => {
+			it('returns the max distance', () => {
+				const coord1 = [40.719560, -73.992460]
+				const coord2 = [40.812816, -73.954986]
+				const coord3 = [40.811393, -73.920687]
+				const coord4 = [40.682307, -73.953353]
+				const coordArr = [coord1, coord2, coord3, coord4]
+				const centroid = [40.756519, -73.955371]
+				const result = maxDistanceFromCentroid(centroid, coordArr)
+				expect(result).to.be.almost(.0742394)
+			}) 
+		})
+	})
+	describe('getTravelTime', () => {
+		beforeEach(() => {
+			return 1
+		})
+		
+		const origin = [40.719560, -73.992460]
+		const destination = [40.812816, -73.954986]
+		const mode = 'transit'
+		
+		it('returns a Promise', () => {
+			const result = getTravelTime(origin, destination, mode)
+			expect(result).to.be.a('Promise')
+		}) 
+	})
 }) 
