@@ -1,5 +1,5 @@
 const client = require('@google/maps').createClient({
-	key: process.env.GOOGLE_DIRECTIONS_KEY,
+	key: process.env.GOOGLE_DIRECTIONS_KEY_1,
 	Promise: Promise
 })
 

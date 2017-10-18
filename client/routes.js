@@ -14,7 +14,8 @@ import {
 	FriendsList,
 	InviteFriends,
 	UserProfile,
-	EditFavorites
+	EditFavorites,
+	AboutPage
 } from './components'
 import { me } from './store'
 
@@ -44,6 +45,7 @@ class Routes extends Component {
 						<Route path='/friends' component={FriendsList} />
 						<Route path='/profile' component={UserProfile} />
 						<Route path='/editFavorites' component={EditFavorites} />
+						<Route path='/about' component={AboutPage} />
 						<Redirect to='/home' />
 						<Redirect to='/login' />
 					</Switch>

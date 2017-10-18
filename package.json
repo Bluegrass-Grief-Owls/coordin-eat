@@ -19,8 +19,8 @@
   "author": "Bluegrass Grief Owls capstone team, consisting of: Sam Glass, David Berger, Jackson Sui, and Forrest Weiswolf",
   "license": "ISC",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/Bluegrass-Grief-Owls/coordin-eat"
+    "type": "git",
+    "url": "https://github.com/Bluegrass-Grief-Owls/coordin-eat"
   },
   "dependencies": {
     "@google/maps": "^0.4.3",
