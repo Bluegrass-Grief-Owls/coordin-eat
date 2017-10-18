@@ -26,14 +26,14 @@ describe('thunk creators', () => {
 	})
 
 	describe('me', () => {
-		it('eventually dispatches the GET USER action', () => {
-			const fakeUser = { email: 'Cody' }
+		it('eventually dispatches the GET ME action', () => {
+			const fakeUser = { name:'Cody' ,email: 'Cody@example.com' }
 			mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
 			return store.dispatch(me())
 				.then(() => {
 					const actions = store.getActions()
-					expect(actions[0].type).to.be.equal('GET_USER')
-					expect(actions[0].user).to.be.deep.equal(fakeUser)
+					expect(actions[0].type).to.be.equal('GET_ME')
+					expect(actions[0].myself).to.be.deep.equal(fakeUser)
 				})
 		})
 	})

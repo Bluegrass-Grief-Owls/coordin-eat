@@ -21,27 +21,28 @@ function promisedCookie() {
 	})
 }
 
-describe('User routes', () => {
+
+describe('Yelp routes', () => {
 	beforeEach(() => {
 		return db.sync({force: true})
 	})
 
-	describe('/api/users/', () => {
-
+	describe('/api/yelp/', () => {
+		const Xcoord = 40.750589
+		const Ycoord = -73.993512
 		beforeEach(() => {
 			return User.create({name: codysName, email: codysEmail, password: codysPassword})
 		})
 
-		it('GET /api/users', () => {
+		it('GET /api/yelp/Xcoord/Ycoord', () => {
 			return promisedCookie().then(cookie => {
-				console.log('cookie is called', cookie)
 				const req = request(app)
-					.get('/api/users')
+					.get(`/api/yelp/${Xcoord}/${Ycoord}`)
 					.set('cookie', cookie)
 					.expect(200)
 					.then(res => {
 						expect(res.body).to.be.an('array')
-						expect(res.body[0].email).to.be.equal(codysEmail)
+						expect(res.body.length).to.be.equal(5)
 					})
 				return req
 			})
