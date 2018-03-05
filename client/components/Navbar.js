@@ -28,7 +28,7 @@ export default class navbarInstance extends Component {
 		this.wrapperRef = node
 	}
 
-	handleAnyClick() {
+	handleAnyClick(event) {
 		if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
 			this.setState({ navToggle: false })
 		}
