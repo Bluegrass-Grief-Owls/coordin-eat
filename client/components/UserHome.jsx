@@ -15,7 +15,7 @@ export class UserHome extends Component {
 
 	render() {
 		return (
-			<Row className=''>
+			<Row>
 				<h3 className='noMargin welcomeUser'>Welcome, {this.props.user.name}!</h3>
 				<Row>
 					<Col xs={12} className='noPaddingLeft noPaddingRight'>
