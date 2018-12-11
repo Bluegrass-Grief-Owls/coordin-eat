@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Col, Row, Button, Table, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Col, Row, Button, Table } from 'react-bootstrap'
 import { fetchMyTrips, resetCurrentTrip, resetYelpList } from './../store'
 import { connect } from 'react-redux'
 import history from './../history'
