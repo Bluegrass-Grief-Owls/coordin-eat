@@ -1,15 +1,14 @@
 
 import React, { Component } from 'react'
-import DatePicker from 'react-mobile-datepicker'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import FriendForm from './FriendForm.jsx'
 import {postTrip, resetCurrentTrip, resetYelpList} from '../store'
-import {Col, FormGroup, FormControl, ControlLabel, Button, Checkbox, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
+import {FormGroup, FormControl, ControlLabel, Button, Checkbox, ButtonToolbar, ButtonGroup} from 'react-bootstrap'
 import history from './../history'
 import MobileDatePicker from 'react-mobile-datepicker'
 import moment from 'moment'
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 let friendCounter = 0

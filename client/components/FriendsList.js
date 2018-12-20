@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
-import { Col, Row, Accordion, Panel } from 'react-bootstrap'
-import { fetchUsers, postFriend, me } from '../store'
+import { Button, Col, Row, Accordion, Panel } from 'react-bootstrap'
+import { fetchUsers, postFriend } from '../store'
 
 /**
  * COMPONENT
