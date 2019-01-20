@@ -1,6 +1,13 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+/* Assosciations are defined in index.js, but for easier reference, here are the ones
+relating to this model:
+
+Trip.hasMany(Attendee)
+Attendee.belongsTo(Trip)
+ */
+
 const Location = db.define('location', {
 	name: {
 		type: Sequelize.STRING

@@ -2,6 +2,15 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+/* Assosciations are defined in index.js, but for easier reference, here are the ones
+relating to this model:
+
+User.hasMany(Location)
+Location.belongsTo(User, {foreignKey: { allowNull: false }, onDelete: 'CASCADE'})
+User.belongsToMany(User, {as: 'friend', through: 'friends'})
+User.hasMany(Attendee)
+Attendee.belongsTo(User)
+ */
 const User = db.define('user', {
 	name: {
 		type: Sequelize.STRING,
