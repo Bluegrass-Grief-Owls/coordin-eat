@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Col, Row, Button, Table, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
 import { fetchMyTrips, resetCurrentTrip, resetYelpList } from './../store'
 import { connect } from 'react-redux'
 import history from './../history'
@@ -15,7 +15,7 @@ export class UserHome extends Component {
 
 	render() {
 		return (
-			<Row className=''>
+			<Row>
 				<h3 className='noMargin welcomeUser'>Welcome, {this.props.user.name}!</h3>
 				<Row>
 					<Col xs={12} className='noPaddingLeft noPaddingRight'>

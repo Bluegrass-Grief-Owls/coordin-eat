@@ -145,7 +145,6 @@ const mapDispatch = (dispatch) => {
 				dispatch(getYelpList([coords[0].toFixed(6), coords[1].toFixed(6)]))
 			} else {
 				yelped = true
-				console.log('This is using the default coords [40.7061336, -74.0119549]')
 				dispatch(getYelpList(testCoords))
 			}
 		},
